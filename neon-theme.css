@@ -1,0 +1,21 @@
+:root{
+  --bg:#0b0b0b;
+  --fg:#e6ffe6;
+  --accent1:#00FF00; /* neon green */
+  --accent2:#00FFFF; /* neon cyan */
+  --muted: #9aa7a7;
+}
+body{background:var(--bg);color:var(--fg);font-family: 'Orbitron', sans-serif;}
+.neon-text{color:var(--accent1);text-shadow:0 0 8px rgba(0,255,0,0.5),0 0 16px rgba(0,255,255,0.08)}
+.neon-header{background:linear-gradient(90deg,#020202,rgba(0,255,255,0.03));}
+.card-neon{background:rgba(10,10,10,0.6);border:1px solid rgba(0,255,255,0.08);box-shadow:0 0 16px rgba(0,255,0,0.04)}
+.btn-neon{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#000;border:none}
+.btn-neon-outline{background:transparent;border:1px solid var(--accent1);color:var(--accent1)}
+.neon-progress .progress-bar{background:linear-gradient(90deg,var(--accent1),var(--accent2));box-shadow:0 0 16px rgba(0,255,255,0.2)}
+.glow{box-shadow:0 0 12px rgba(0,255,255,0.25),0 0 28px rgba(0,255,0,0.12)}
+/* utility */
+.text-neon{color:var(--accent2)}
+
+@media (prefers-color-scheme: light){
+  body.theme-light{background:#f8fafc;color:#041014}
+}
