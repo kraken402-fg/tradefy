@@ -1,23 +1,19 @@
 {
-  "name": "tradefy",
+  "name": "tradefy-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "liaison.js",
+  "description": "Backend for Tradefy marketplace",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "axios": "^1.13.1",
-    "bcrypt": "^6.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.19.2",
-    "morgan": "^1.10.1",
-    "nodemon": "^3.1.10"
-  }
+    "express": "^4.17.1",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "author": "Charbelus",
+  "license": "ISC"
 }
