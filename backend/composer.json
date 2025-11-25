@@ -1,0 +1,113 @@
+{
+    "name": "tradefy/tradefy-v3",
+    "description": "Tradefy v3 - Plateforme de marketplace avec système de commissions et gamification",
+    "version": "3.0.0",
+    "type": "project",
+    "keywords": ["marketplace", "ecommerce", "commissions", "gamification", "php", "postgresql"],
+    "homepage": "https://tradefy.com",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Tradefy Team",
+            "email": "dev@tradefy.com",
+            "homepage": "https://tradefy.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "support@tradefy.com",
+        "issues": "https://github.com/tradefy/tradefy-v3/issues",
+        "docs": "https://docs.tradefy.com"
+    },
+    "require": {
+        "php": "^8.1",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "ext-curl": "*",
+        "ext-openssl": "*",
+        "firebase/php-jwt": "^6.4",
+        "monolog/monolog": "^2.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.7",
+        "phpstan/phpstan": "^1.9",
+        "mockery/mockery": "^1.5",
+        "fakerphp/faker": "^1.20"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tradefy\\": "src/",
+            "Tradefy\\Tests\\": "tests/"
+        },
+        "files": [
+            "src/Config/Settings.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tradefy\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Tradefy\\Composer\\ScriptHandler::postAutoloadDump"
+        ],
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html coverage",
+        "lint": "phpcs --standard=PSR12 src/ tests/",
+        "lint-fix": "phpcbf --standard=PSR12 src/ tests/",
+        "analyze": "phpstan analyze src/ --level=7",
+        "migrate": "php migrations/migrate.php migrate",
+        "migrate-rollback": "php migrations/migrate.php rollback",
+        "migrate-status": "php migrations/migrate.php status",
+        "setup": [
+            "@composer install",
+            "@migrate",
+            "@test"
+        ],
+        "deploy": [
+            "@composer install --no-dev",
+            "@migrate"
+        ]
+    },
+    "scripts-descriptions": {
+        "test": "Run PHPUnit tests",
+        "test-coverage": "Generate test coverage report",
+        "lint": "Check code style against PSR-12",
+        "lint-fix": "Fix code style issues",
+        "analyze": "Run static analysis with PHPStan",
+        "migrate": "Run database migrations",
+        "migrate-rollback": "Rollback last migration",
+        "migrate-status": "Show migration status",
+        "setup": "Complete setup (install dependencies, run migrations, tests)",
+        "deploy": "Prepare for deployment (install prod dependencies, run migrations)"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "platform-check": false
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.packagist.org"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-main": "3.0.x-dev"
+        },
+        "tradefy": {
+            "version": "3.0.0",
+            "min-php": "8.1",
+            "required-extensions": ["pdo", "json", "curl", "openssl"]
+        }
+    }
+}

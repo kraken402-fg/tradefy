@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Événements - Tradefy</title>
+    
+    <!-- CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/colors.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-surface-1 border-bottom border-accent fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-accent" href=""> Tradefy</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Boutique</a></li>
+                    <li class="nav-item"><a class="nav-link" href="leaderboard.html">Classement</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="events.html">Événements</a></li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link" href="profile.html" id="profileLink" style="display: none;">
+                        <i class="fas fa-user"></i> Mon Profil
+                    </a>
+                    <a class="nav-link" href="login.html" id="authLink">
+                        <i class="fas fa-sign-in-alt"></i> Connexion
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- En-tête -->
+    <section class="events-header bg-surface-2 py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-5 fw-bold text-primary mb-3">⚡ Événements Commission Bonus</h1>
+                    <p class="lead text-muted mb-4">
+                        Compétitionnez pour remporter des commissions bonus temporaires et maximisez vos revenus.
+                    </p>
+                    
+                    <div class="events-stats d-flex gap-4 flex-wrap">
+                        <div class="stat">
+                            <span class="h4 text-accent mb-1" id="activeEvents">3</span>
+                            <small class="text-muted">Événements actifs</small>
+                        </div>
+                        <div class="stat">
+                            <span class="h4 text-success mb-1" id="totalParticipants">2,847</span>
+                            <small class="text-muted">Participants</small>
+                        </div>
+                        <div class="stat">
+                            <span class="h4 text-warning mb-1" id="totalBonus">+156K€</span>
+                            <small class="text-muted">Commissions bonus</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 text-center">
+                    <div class="events-illustration">
+                        <i class="fas fa-chart-line fa-6x text-accent"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtres et recherche -->
+    <section class="events-filters py-4 bg-surface-1 border-bottom border-surface-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="filter-tabs">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-accent active" data-filter="all">Tous</button>
+                            <button type="button" class="btn btn-outline-accent" data-filter="active">Actifs</button>
+                            <button type="button" class="btn btn-outline-accent" data-filter="upcoming">À venir</button>
+                            <button type="button" class="btn btn-outline-accent" data-filter="ended">Terminés</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="search-box position-relative">
+                        <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                        <input type="text" class="form-control ps-5" placeholder="Rechercher un événement...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Événements en cours -->
+    <section class="current-events py-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h3 class="mb-0">🎯 Événements Actifs</h3>
+                    <p class="text-muted">Participez à ces compétitions pour gagner des commissions bonus temporaires</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Roi de la Semaine -->
+                <div class="col-lg-4">
+                    <div class="event-card card bg-surface-1 border-warning h-100">
+                        <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
+                            <h5 class="text-muted mb-0">👑 Roi de la Semaine</h5>
+                            <span class="badge bg-dark">Actif</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="event-meta mb-3">
+                                <div class="d-flex justify-content-between text-sm mb-2">
+                                    <span class="text-muted">
+                                        <i class="fas fa-clock me-1"></i>
+                                        <span id="weeklyCountdown">4j 7h restantes</span>
+                                    </span>
+                                    <span class="text-muted">
+                                        <i class="fas fa-users me-1"></i>
+                                        847 participants
+                                    </span>
+                                </div>
+                                <div class="progress bg-surface-1" style="height: 6px;">
+                                    <div class="progress-bar bg-warning" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="commission-bonus mb-4">
+                                <h6 class="text-accent mb-2">💰 Commission Bonus</h6>
+                                <div class="bonus-display text-center p-3 rounded bg-surface-2">
+                                    <div class="h3 text-success mb-1">+3%</div>
+                                    <small class="text-muted">pendant 7 jours</small>
+                                </div>
+                            </div>
+                            
+                            <div class="current-leader mb-3">
+                                <h6 class="text-accent mb-2">🎯 Leader Actuel</h6>
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar-placeholder senior me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">S</div>
+                                    <div>
+                                        <span class="vendor-name senior fw-bold">Sarah_Pro</span>
+                                        <small class="text-muted d-block">142 ventes cette semaine</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="event-description">
+                                <p class="text-primary small mb-3">
+                                    Le vendeur avec le plus de ventes cette semaine remporte une commission bonus de +3% pendant 7 jours.
+                                </p>
+                            </div>
+                            
+                            <div class="event-actions">
+                                <button class="btn btn-warning w-100">
+                                    <i class="fas fa-trophy me-2"></i>Participer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Roi du Trimestre -->
+                <div class="col-lg-4">
+                    <div class="event-card card bg-surface-1 border-success h-100">
+                        <div class="card-header bg-success text-dark d-flex justify-content-between align-items-center">
+                            <h5 class="text-muted mb-0">🏆 Roi du Trimestre</h5>
+                            <span class="badge bg-dark">Actif</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="event-meta mb-3">
+                                <div class="d-flex justify-content-between text-sm mb-2">
+                                    <span class="text-muted">
+                                        <i class="fas fa-clock me-1"></i>
+                                        42j restants
+                                    </span>
+                                    <span class="text-muted">
+                                        <i class="fas fa-users me-1"></i>
+                                        1,247 participants
+                                    </span>
+                                </div>
+                                <div class="progress bg-surface-1" style="height: 6px;">
+                                    <div class="progress-bar bg-success" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="commission-bonus mb-4">
+                                <h6 class="text-accent mb-2">💰 Commission Bonus</h6>
+                                <div class="bonus-display text-center p-3 rounded bg-surface-2">
+                                    <div class="h3 text-success mb-1">+3%</div>
+                                    <small class="text-muted">pendant 21 jours</small>
+                                </div>
+                            </div>
+                            
+                            <div class="current-leader mb-3">
+                                <h6 class="text-accent mb-2">🎯 Top 3 Actuel</h6>
+                                <div class="leaderboard-mini">
+                                    <div class="leader-item d-flex justify-content-between align-items-center mb-2 p-2 rounded bg-surface-2">
+                                        <div class="d-flex align-items-center">
+                                            <span class="text-warning me-2">🥇</span>
+                                            <div class="avatar-placeholder senior me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">T</div>
+                                            <span class="vendor-name senior">Tech_Master</span>
+                                        </div>
+                                        <span class="text-success fw-bold">589 ventes</span>
+                                    </div>
+                                    <div class="leader-item d-flex justify-content-between align-items-center mb-2 p-2 rounded bg-surface-2">
+                                        <div class="d-flex align-items-center">
+                                            <span class="text-secondary me-2">🥈</span>
+                                            <div class="avatar-placeholder negociant me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">S</div>
+                                            <span class="vendor-name negociant">Style_Expert</span>
+                                        </div>
+                                        <span class="text-success fw-bold">542 ventes</span>
+                                    </div>
+                                    <div class="leader-item d-flex justify-content-between align-items-center p-2 rounded bg-surface-2">
+                                        <div class="d-flex align-items-center">
+                                            <span class="text-warning me-2">🥉</span>
+                                            <div class="avatar-placeholder courtier me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">G</div>
+                                            <span class="vendor-name courtier">Game_Pro</span>
+                                        </div>
+                                        <span class="text-success fw-bold">487 ventes</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="event-description">
+                                <p class="text-primary small mb-3">
+                                    Les 3 meilleurs vendeurs du trimestre remportent des commissions bonus. Le 1er gagne +3% pendant 21 jours.
+                                </p>
+                            </div>
+                            
+                            <div class="event-actions">
+                                <button class="btn btn-success w-100">
+                                    <i class="fas fa-trophy me-2"></i>Participer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Roi du Semestre -->
+                <div class="col-lg-4">
+                    <div class="event-card card bg-surface-1 border-info h-100">
+                        <div class="card-header bg-info text-dark d-flex justify-content-between align-items-center">
+                            <h5 class="text-muted mb-0">💎 Roi du Semestre</h5>
+                            <span class="badge bg-dark">Actif</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="event-meta mb-3">
+                                <div class="d-flex justify-content-between text-sm mb-2">
+                                    <span class="text-muted">
+                                        <i class="fas fa-clock me-1"></i>
+                                        132j restants
+                                    </span>
+                                    <span class="text-muted">
+                                        <i class="fas fa-users me-1"></i>
+                                        892 participants
+                                    </span>
+                                </div>
+                                <div class="progress bg-surface-2" style="height: 6px;">
+                                    <div class="progress-bar bg-info" style="width: 35%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="commission-bonus mb-4">
+                                <h6 class="text-accent mb-2">💰 Commission Bonus</h6>
+                                <div class="bonus-display text-center p-3 rounded bg-surface-2">
+                                    <div class="h3 text-success mb-1">+2.5%</div>
+                                    <small class="text-muted">pendant 45 jours</small>
+                                </div>
+                            </div>
+                            
+                            <div class="current-leader mb-3">
+                                <h6 class="text-accent mb-2">🎯 Top 3 Actuel</h6>
+                                <div class="leaderboard-mini">
+                                    <div class="leader-item d-flex justify-content-between align-items-center mb-2 p-2 rounded bg-surface-2">
+                                        <div class="d-flex align-items-center">
+                                            <span class="text-warning me-2">🥇</span>
+                                            <div class="avatar-placeholder senior me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">E</div>
+                                            <span class="vendor-name senior">Electro_King</span>
+                                        </div>
+                                        <span class="text-success fw-bold">1,247 ventes</span>
+                                    </div>
+                                    <div class="leader-item d-flex justify-content-between align-items-center mb-2 p-2 rounded bg-surface-2">
+                                        <div class="d-flex align-items-center">
+                                            <span class="text-secondary me-2">🥈</span>
+                                            <div class="avatar-placeholder senior me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">T</div>
+                                            <span class="vendor-name senior">Tech_Master</span>
+                                        </div>
+                                        <span class="text-success fw-bold">1,189 ventes</span>
+                                    </div>
+                                    <div class="leader-item d-flex justify-content-between align-items-center p-2 rounded bg-surface-2">
+                                        <div class="d-flex align-items-center">
+                                            <span class="text-warning me-2">🥉</span>
+                                            <div class="avatar-placeholder senior me-2" style="width: 30px; height: 30px; font-size: 0.8rem;">S</div>
+                                            <span class="vendor-name senior">Sarah_Pro</span>
+                                        </div>
+                                        <span class="text-success fw-bold">1,056 ventes</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="event-description">
+                                <p class="text-primary small mb-3">
+                                    Les 3 meilleurs vendeurs du semestre remportent des commissions bonus. Le 1er gagne +2.5% pendant 45 jours.
+                                </p>
+                            </div>
+                            
+                            <div class="event-actions">
+                                <button class="btn btn-info w-100">
+                                    <i class="fas fa-trophy me-2"></i>Participer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Comment ça marche -->
+    <section class="how-it-works bg-surface-2 py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h3>📈 Comment Fonctionnent les Commissions Bonus ?</h3>
+                    <p class="text-muted">Comprenez le système et maximisez vos chances de gagner</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="step-card text-center p-4 rounded bg-surface-1">
+                        <div class="step-number mb-3">1</div>
+                        <h5 class="text-accent mb-3">Vendez Normalement</h5>
+                        <p class="text-muted mb-0">
+                            Continuez vos ventes habituelles. Chaque vente compte automatiquement pour les événements.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="step-card text-center p-4 rounded bg-surface-1">
+                        <div class="step-number mb-3">2</div>
+                        <h5 class="text-accent mb-3">Montez en Classement</h5>
+                        <p class="text-muted mb-0">
+                            Votre position est mise à jour en temps réel. Plus vous vendez, plus vous progressez.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="step-card text-center p-4 rounded bg-surface-1">
+                        <div class="step-number mb-3">3</div>
+                        <h5 class="text-accent mb-3">Gagnez des Bonus</h5>
+                        <p class="text-muted mb-0">
+                            Les gagnants bénéficient automatiquement de commissions bonus sur toutes leurs ventes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Derniers gagnants -->
+    <section class="previous-winners py-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h3 class="mb-0">🏆 Derniers Gagnants</h3>
+                    <p class="text-muted">Les vendeurs qui ont récemment remporté des commissions bonus</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Gagnant Roi de la Semaine -->
+                <div class="col-md-4">
+                    <div class="winner-card card bg-surface-1 border-warning">
+                        <div class="card-header bg-surface-2">
+                            <h6 class="mb-0">👑 Semaine Passée</h6>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="winner-avatar mb-3">
+                                <div class="avatar-placeholder negociant mx-auto" style="width: 60px; height: 60px; font-size: 1.2rem;">M</div>
+                            </div>
+                            <h5 class="vendor-name negociant mb-2">Mobile_Expert</h5>
+                            <div class="winner-stats mb-3">
+                                <span class="badge bg-warning text-white me-2">+3% Commission</span>
+                                <span class="badge bg-success">127 ventes</span>
+                            </div>
+                            <p class="text-muted small mb-0">
+                                A gagné une commission bonus de +3% pour la semaine du 15-21 Oct 2025
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gagnant Roi du Trimestre -->
+                <div class="col-md-4">
+                    <div class="winner-card card bg-surface-1 border-success">
+                        <div class="card-header bg-surface-2">
+                            <h6 class="mb-0">🏆 Trimestre Précédent</h6>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="winner-avatar mb-3">
+                                <div class="avatar-placeholder senior mx-auto" style="width: 60px; height: 60px; font-size: 1.2rem;">S</div>
+                            </div>
+                            <h5 class="vendor-name senior mb-2">Sarah_Pro</h5>
+                            <div class="winner-stats mb-3">
+                                <span class="badge bg-success me-2">+3% Commission</span>
+                                <span class="badge bg-accent text-white">2,847 ventes</span>
+                            </div>
+                            <p class="text-muted small mb-0">
+                                A dominé le trimestre avec 2,847 ventes et bénéficie de +3% pendant 21 jours
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gagnant Roi du Semestre -->
+                <div class="col-md-4">
+                    <div class="winner-card card bg-surface-1 border-info">
+                        <div class="card-header bg-surface-2">
+                            <h6 class="mb-0">💎 Semestre Précédent</h6>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="winner-avatar mb-3">
+                                <div class="avatar-placeholder senior mx-auto" style="width: 60px; height: 60px; font-size: 1.2rem;">T</div>
+                            </div>
+                            <h5 class="vendor-name senior mb-2">Tech_Master</h5>
+                            <div class="winner-stats mb-3">
+                                <span class="badge bg-info me-2">+2.5% Commission</span>
+                                <span class="badge bg-warning text-white">5,421 ventes</span>
+                            </div>
+                            <p class="text-muted small mb-0">
+                                Performance exceptionnelle avec 5,421 ventes sur le semestre
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section FAQ -->
+    <section class="faq-section bg-surface-1 py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h3>❓ Questions Fréquentes</h3>
+                    <p class="text-muted">Tout ce que vous devez savoir sur les événements</p>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="eventsFAQ">
+                        <div class="accordion-item bg-surface-2 border-surface-3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button bg-surface-2 text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Comment participer aux événements ?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#eventsFAQ">
+                                <div class="accordion-body text-muted">
+                                    La participation est automatique ! Toutes vos ventes comptent pour les événements en cours. Aucune inscription supplémentaire n'est nécessaire.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item bg-surface-2 border-surface-3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed bg-surface-2 text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Quand les commissions bonus sont-elles appliquées ?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#eventsFAQ">
+                                <div class="accordion-body text-muted">
+                                    Les commissions bonus sont appliquées automatiquement dès l'annonce des résultats et pour toute la durée indiquée dans les règles de l'événement.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item bg-surface-2 border-surface-3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed bg-surface-2 text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Puis-je gagner plusieurs événements en même temps ?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#eventsFAQ">
+                                <div class="accordion-body text-muted">
+                                    Oui ! Vous pouvez cumuler les commissions bonus de plusieurs événements. Par exemple, si vous gagnez le Roi de la Semaine et le Roi du Trimestre, vous bénéficierez des deux bonus simultanément.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-3 text-secondary py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 <strong class="text-accent">By Charbelus</strong></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            updateWeeklyCountdown();
+            checkAuthStatus();
+            initEventFilters();
+            initParticipationButtons();
+        });
+
+        // Mettre à jour le compte à rebours du Roi de la Semaine
+        function updateWeeklyCountdown() {
+            const now = new Date();
+            const endOfWeek = new Date(now);
+            endOfWeek.setDate(now.getDate() + (7 - now.getDay()));
+            endOfWeek.setHours(23, 59, 59, 999);
+            
+            const diff = endOfWeek - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            document.getElementById('weeklyCountdown').textContent = `${days}j ${hours}h restantes`;
+        }
+
+        function checkAuthStatus() {
+            const token = localStorage.getItem('auth_token');
+            if (token) {
+                document.getElementById('profileLink').style.display = 'block';
+                document.getElementById('authLink').innerHTML = '<i class="fas fa-sign-out-alt"></i> Déconnexion';
+                document.getElementById('authLink').onclick = () => {
+                    localStorage.removeItem('auth_token');
+                    window.location.href = '/';
+                };
+            }
+        }
+
+        // Système de filtrage des événements
+        function initEventFilters() {
+            const filterButtons = document.querySelectorAll('[data-filter]');
+            const eventCards = document.querySelectorAll('.event-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Retirer la classe active de tous les boutons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Ajouter la classe active au bouton cliqué
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    eventCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.style.display = 'block';
+                        } else {
+                            // Dans une vraie implémentation, on filtrerait par statut
+                            // Pour l'instant, on affiche tout
+                            card.style.display = 'block';
+                        }
+                    });
+                });
+            });
+        }
+
+        // Boutons de participation
+        function initParticipationButtons() {
+            const participateButtons = document.querySelectorAll('.event-actions .btn');
+            
+            participateButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const eventTitle = this.closest('.event-card').querySelector('.card-header h5').textContent;
+                    
+                    // Vérifier si l'utilisateur est connecté
+                    const token = localStorage.getItem('auth_token');
+                    if (!token) {
+                        alert('Veuillez vous connecter pour participer aux événements.');
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    
+                    // Animation de confirmation
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check me-2"></i>Inscrit !';
+                    this.classList.remove('btn-warning', 'btn-success', 'btn-info');
+                    this.classList.add('btn-outline-accent');
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.classList.remove('btn-outline-accent');
+                        if (eventTitle.includes('Semaine')) {
+                            this.classList.add('btn-warning');
+                        } else if (eventTitle.includes('Trimestre')) {
+                            this.classList.add('btn-success');
+                        } else {
+                            this.classList.add('btn-info');
+                        }
+                    }, 2000);
+                });
+            });
+        }
+
+        // Actualiser le compte à rebours toutes les heures
+        setInterval(updateWeeklyCountdown, 3600000);
+    </script>
+
+    <style>
+        .events-header {
+            background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-1) 100%);
+        }
+        
+        .events-stats .stat {
+            text-align: center;
+        }
+        
+        /* Cartes d'événements */
+        .event-card {
+            transition: all 0.3s ease;
+            border: 2px solid;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .commission-bonus .bonus-display {
+            border: 2px dashed var(--success);
+        }
+        
+        .event-meta .progress {
+            border-radius: 3px;
+        }
+        
+        .avatar-placeholder {
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--bg-primary);
+        }
+        
+        /* Comment ça marche */
+        .step-card {
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: var(--accent-gold);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--bg-primary);
+            margin: 0 auto;
+        }
+        
+        /* Cartes des gagnants */
+        .winner-card {
+            transition: all 0.3s ease;
+        }
+        
+        .winner-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .winner-avatar .avatar-placeholder {
+            width: 60px;
+            height: 60px;
+            font-size: 1.2rem;
+        }
+        
+        /* Filtres */
+        .events-filters {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .filter-tabs .btn {
+            border-radius: 20px;
+            padding: 0.5rem 1.5rem;
+        }
+        
+        /* Leaderboard mini */
+        .leaderboard-mini .leader-item {
+            transition: all 0.2s ease;
+        }
+        
+        .leaderboard-mini .leader-item:hover {
+            background-color: var(--surface-3) !important;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .events-stats {
+                justify-content: center;
+                gap: 2rem;
+            }
+            
+            .filter-tabs {
+                text-align: center;
+            }
+            
+            .filter-tabs .btn-group {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</body>
+</html>

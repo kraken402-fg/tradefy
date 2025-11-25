@@ -1,0 +1,861 @@
+/*!
+ * Tradefy v3 - Colors CSS
+ * Système complet de couleurs par rang et palette design
+ * By Charbelus
+ */
+
+/* ===== VARIABLES DE COULEUR PRINCIPALES ===== */
+:root {
+    /* Couleurs de base du thème sombre */
+    --bg-primary: #0F1115;
+    --surface-1: #1A1C22;
+    --surface-2: #222326;
+    --surface-3: #2A2D35;
+    --surface-4: #32353E;
+    
+    /* Texte et contenu */
+    --text-primary: #EAEAEA;
+    --text-secondary: #B0B0B0;
+    --text-muted: #8A8A8A;
+    --text-disabled: #666666;
+    
+    /* Bordures et séparateurs */
+    --border: #3A3D45;
+    --border-light: #454853;
+    --border-dark: #2F323A;
+    
+    /* Accent principal - Or Tradefy */
+    --accent-gold: #C8A951;
+    --accent-gold-light: #D4B96A;
+    --accent-gold-dark: #B39742;
+    --accent-gold-muted: rgba(200, 169, 81, 0.15);
+    
+    /* Dégradés d'accentuation */
+    --accent-gradient: linear-gradient(135deg, var(--accent-gold), #FFD700);
+    --accent-gradient-subtle: linear-gradient(135deg, rgba(200, 169, 81, 0.1), rgba(255, 215, 0, 0.05));
+    
+    /* États et feedback */
+    --success: #75B798;
+    --success-light: #8FC8A9;
+    --success-dark: #5A9A7A;
+    --success-muted: rgba(117, 183, 152, 0.15);
+    
+    --warning: #FFDA6A;
+    --warning-light: #FFE48C;
+    --warning-dark: #E6C34F;
+    --warning-muted: rgba(255, 218, 106, 0.15);
+    
+    --danger: #EA868F;
+    --danger-light: #F4A0A8;
+    --danger-dark: #D06C76;
+    --danger-muted: rgba(234, 134, 143, 0.15);
+    
+    --info: #6EDFF6;
+    --info-light: #8AE9FF;
+    --info-dark: #52C5E0;
+    --info-muted: rgba(110, 223, 246, 0.15);
+    
+    /* Couleurs neutres */
+    --neutral-100: #FFFFFF;
+    --neutral-200: #F8F9FA;
+    --neutral-300: #E9ECEF;
+    --neutral-400: #DEE2E6;
+    --neutral-500: #ADB5BD;
+    --neutral-600: #6C757D;
+    --neutral-700: #495057;
+    --neutral-800: #343A40;
+    --neutral-900: #212529;
+}
+
+/* ===== PALETTE COMPLÈTE DES RANGS ===== */
+
+/* Rang 1: Profane - Bleu Violet Mystique */
+:root {
+    --profane-color: #4E56B4;
+    --profane-color-light: #6A72D0;
+    --profane-color-dark: #3A3F8F;
+    --profane-color-muted: rgba(78, 86, 180, 0.15);
+    --profane-gradient: linear-gradient(135deg, #3A3F8F, #4E56B4);
+    --profane-gradient-subtle: linear-gradient(135deg, rgba(58, 63, 143, 0.2), rgba(78, 86, 180, 0.1));
+}
+
+/* Rang 2: Débutant - Bleu Céleste */
+:root {
+    --debutant-color: #5F8FE0;
+    --debutant-color-light: #7BA5F0;
+    --debutant-color-dark: #3E6DB1;
+    --debutant-color-muted: rgba(95, 143, 224, 0.15);
+    --debutant-gradient: linear-gradient(135deg, #3E6DB1, #5F8FE0);
+    --debutant-gradient-subtle: linear-gradient(135deg, rgba(62, 109, 177, 0.2), rgba(95, 143, 224, 0.1));
+}
+
+/* Rang 3: Marchand - Bleu Azur */
+:root {
+    --marchand-color: #86C8FF;
+    --marchand-color-light: #A2DCFF;
+    --marchand-color-dark: #5EA2E6;
+    --marchand-color-muted: rgba(134, 200, 255, 0.15);
+    --marchand-gradient: linear-gradient(135deg, #5EA2E6, #86C8FF);
+    --marchand-gradient-subtle: linear-gradient(135deg, rgba(94, 162, 230, 0.2), rgba(134, 200, 255, 0.1));
+}
+
+/* Rang 4: Négociant - Rouge Écarlate */
+:root {
+    --negociant-color: #E53935;
+    --negociant-color-light: #FF5252;
+    --negociant-color-dark: #B32424;
+    --negociant-color-muted: rgba(229, 57, 53, 0.15);
+    --negociant-gradient: linear-gradient(135deg, #B32424, #E53935);
+    --negociant-gradient-subtle: linear-gradient(135deg, rgba(179, 36, 36, 0.2), rgba(229, 57, 53, 0.1));
+}
+
+/* Rang 5: Courtier - Orange Vif */
+:root {
+    --courtier-color: #F76B47;
+    --courtier-color-light: #FF8A65;
+    --courtier-color-dark: #D14228;
+    --courtier-color-muted: rgba(247, 107, 71, 0.15);
+    --courtier-gradient: linear-gradient(135deg, #D14228, #F76B47);
+    --courtier-gradient-subtle: linear-gradient(135deg, rgba(209, 66, 40, 0.2), rgba(247, 107, 71, 0.1));
+}
+
+/* Rang 6: Magnat - Argent Métallique */
+:root {
+    --magnat-color: #E0E0E0;
+    --magnat-color-light: #F5F5F5;
+    --magnat-color-dark: #C0C0C0;
+    --magnat-color-muted: rgba(224, 224, 224, 0.15);
+    --magnat-gradient: linear-gradient(135deg, #C0C0C0, #E0E0E0);
+    --magnat-gradient-subtle: linear-gradient(135deg, rgba(192, 192, 192, 0.2), rgba(224, 224, 224, 0.1));
+}
+
+/* Rang 7: Senior - Or Lumineux */
+:root {
+    --senior-color: #FFD580;
+    --senior-color-light: #FFE4A8;
+    --senior-color-dark: #F59E0B;
+    --senior-color-muted: rgba(255, 213, 128, 0.15);
+    --senior-gradient: linear-gradient(135deg, #F59E0B, #FFD580);
+    --senior-gradient-subtle: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(255, 213, 128, 0.1));
+}
+
+/* ===== CLASSES DES RANGS POUR LES VENDEURS ===== */
+
+/* Noms de vendeurs colorés */
+.vendor-name.profane {
+    color: var(--profane-color);
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(78, 86, 180, 0.3);
+}
+
+.vendor-name.debutant {
+    color: var(--debutant-color);
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(95, 143, 224, 0.3);
+}
+
+.vendor-name.marchand {
+    color: var(--marchand-color);
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(134, 200, 255, 0.3);
+}
+
+.vendor-name.negociant {
+    color: var(--negociant-color);
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(229, 57, 53, 0.3);
+}
+
+.vendor-name.courtier {
+    color: var(--courtier-color);
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(247, 107, 71, 0.3);
+}
+
+.vendor-name.magnat {
+    color: var(--magnat-color);
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(224, 224, 224, 0.3);
+}
+
+.vendor-name.senior {
+    color: var(--senior-color);
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(255, 213, 128, 0.3);
+}
+
+/* Badges de rang */
+.rank-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: var(--bg-primary);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.rank-badge.profane {
+    background: var(--profane-gradient);
+    border-color: var(--profane-color-light);
+}
+
+.rank-badge.debutant {
+    background: var(--debutant-gradient);
+    border-color: var(--debutant-color-light);
+}
+
+.rank-badge.marchand {
+    background: var(--marchand-gradient);
+    border-color: var(--marchand-color-light);
+}
+
+.rank-badge.negociant {
+    background: var(--negociant-gradient);
+    border-color: var(--negociant-color-light);
+}
+
+.rank-badge.courtier {
+    background: var(--courtier-gradient);
+    border-color: var(--courtier-color-light);
+}
+
+.rank-badge.magnat {
+    background: var(--magnat-gradient);
+    border-color: var(--magnat-color-light);
+}
+
+.rank-badge.senior {
+    background: var(--senior-gradient);
+    border-color: var(--senior-color-light);
+}
+
+.rank-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Avatars de rang */
+.avatar-placeholder {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--bg-primary);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+.avatar-placeholder.profane {
+    background: var(--profane-gradient);
+    border-color: var(--profane-color-light);
+}
+
+.avatar-placeholder.debutant {
+    background: var(--debutant-gradient);
+    border-color: var(--debutant-color-light);
+}
+
+.avatar-placeholder.marchand {
+    background: var(--marchand-gradient);
+    border-color: var(--marchand-color-light);
+}
+
+.avatar-placeholder.negociant {
+    background: var(--negociant-gradient);
+    border-color: var(--negociant-color-light);
+}
+
+.avatar-placeholder.courtier {
+    background: var(--courtier-gradient);
+    border-color: var(--courtier-color-light);
+}
+
+.avatar-placeholder.magnat {
+    background: var(--magnat-gradient);
+    border-color: var(--magnat-color-light);
+}
+
+.avatar-placeholder.senior {
+    background: var(--senior-gradient);
+    border-color: var(--senior-color-light);
+}
+
+/* ===== CARDS ET CONTAINERS PAR RANG ===== */
+
+/* Cartes de rang */
+.rank-card.profane {
+    border-left: 4px solid var(--profane-color);
+    background: var(--profane-gradient-subtle);
+}
+
+.rank-card.debutant {
+    border-left: 4px solid var(--debutant-color);
+    background: var(--debutant-gradient-subtle);
+}
+
+.rank-card.marchand {
+    border-left: 4px solid var(--marchand-color);
+    background: var(--marchand-gradient-subtle);
+}
+
+.rank-card.negociant {
+    border-left: 4px solid var(--negociant-color);
+    background: var(--negociant-gradient-subtle);
+}
+
+.rank-card.courtier {
+    border-left: 4px solid var(--courtier-color);
+    background: var(--courtier-gradient-subtle);
+}
+
+.rank-card.magnat {
+    border-left: 4px solid var(--magnat-color);
+    background: var(--magnat-gradient-subtle);
+}
+
+.rank-card.senior {
+    border-left: 4px solid var(--senior-color);
+    background: var(--senior-gradient-subtle);
+}
+
+/* Backgrounds de rang */
+.bg-rank-profane { background: var(--profane-gradient-subtle) !important; }
+.bg-rank-debutant { background: var(--debutant-gradient-subtle) !important; }
+.bg-rank-marchand { background: var(--marchand-gradient-subtle) !important; }
+.bg-rank-negociant { background: var(--negociant-gradient-subtle) !important; }
+.bg-rank-courtier { background: var(--courtier-gradient-subtle) !important; }
+.bg-rank-magnat { background: var(--magnat-gradient-subtle) !important; }
+.bg-rank-senior { background: var(--senior-gradient-subtle) !important; }
+
+/* Bordures de rang */
+.border-rank-profane { border-color: var(--profane-color) !important; }
+.border-rank-debutant { border-color: var(--debutant-color) !important; }
+.border-rank-marchand { border-color: var(--marchand-color) !important; }
+.border-rank-negociant { border-color: var(--negociant-color) !important; }
+.border-rank-courtier { border-color: var(--courtier-color) !important; }
+.border-rank-magnat { border-color: var(--magnat-color) !important; }
+.border-rank-senior { border-color: var(--senior-color) !important; }
+
+/* ===== PROGRESSION DES RANGS ===== */
+
+/* Barre de progression des rangs */
+.rank-progression-bar {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--surface-3);
+    overflow: hidden;
+    position: relative;
+}
+
+.rank-progression-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.rank-progression-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.rank-progression-fill.profane { background: var(--profane-gradient); }
+.rank-progression-fill.debutant { background: var(--debutant-gradient); }
+.rank-progression-fill.marchand { background: var(--marchand-gradient); }
+.rank-progression-fill.negociant { background: var(--negociant-gradient); }
+.rank-progression-fill.courtier { background: var(--courtier-gradient); }
+.rank-progression-fill.magnat { background: var(--magnat-gradient); }
+.rank-progression-fill.senior { background: var(--senior-gradient); }
+
+/* Indicateurs de palier */
+.rank-milestone {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--surface-1);
+    border: 3px solid var(--border);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.rank-milestone.achieved {
+    border-color: var(--accent-gold);
+    background: var(--accent-gold);
+    box-shadow: 0 0 0 4px rgba(200, 169, 81, 0.3);
+}
+
+.rank-milestone.next {
+    border-color: var(--accent-gold);
+    background: var(--surface-1);
+}
+
+/* ===== ÉTATS ET STATUTS ===== */
+
+/* Couleurs de statut */
+.status-active { color: var(--success); }
+.status-pending { color: var(--warning); }
+.status-inactive { color: var(--text-muted); }
+.status-error { color: var(--danger); }
+
+/* Badges de statut */
+.badge-status {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-status.active {
+    background: var(--success-muted);
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.badge-status.pending {
+    background: var(--warning-muted);
+    color: var(--warning);
+    border: 1px solid var(--warning);
+}
+
+.badge-status.inactive {
+    background: var(--text-muted);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+.badge-status.error {
+    background: var(--danger-muted);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+/* ===== GRADIENTS ET EFFETS SPÉCIAUX ===== */
+
+/* Gradients de fond */
+.gradient-primary {
+    background: linear-gradient(135deg, var(--surface-2), var(--surface-1));
+}
+
+.gradient-accent {
+    background: var(--accent-gradient);
+}
+
+.gradient-success {
+    background: linear-gradient(135deg, var(--success-dark), var(--success));
+}
+
+.gradient-warning {
+    background: linear-gradient(135deg, var(--warning-dark), var(--warning));
+}
+
+.gradient-danger {
+    background: linear-gradient(135deg, var(--danger-dark), var(--danger));
+}
+
+/* Effets de brillance */
+.glow-profane { box-shadow: 0 0 20px rgba(78, 86, 180, 0.4); }
+.glow-debutant { box-shadow: 0 0 20px rgba(95, 143, 224, 0.4); }
+.glow-marchand { box-shadow: 0 0 20px rgba(134, 200, 255, 0.4); }
+.glow-negociant { box-shadow: 0 0 20px rgba(229, 57, 53, 0.4); }
+.glow-courtier { box-shadow: 0 0 20px rgba(247, 107, 71, 0.4); }
+.glow-magnat { box-shadow: 0 0 20px rgba(224, 224, 224, 0.4); }
+.glow-senior { box-shadow: 0 0 20px rgba(255, 213, 128, 0.4); }
+
+.glow-accent {
+    box-shadow: 0 0 30px rgba(200, 169, 81, 0.5);
+}
+
+/* ===== TEXTES ET ICÔNES ===== */
+
+/* Couleurs de texte */
+.text-profane { color: var(--profane-color) !important; }
+.text-debutant { color: var(--debutant-color) !important; }
+.text-marchand { color: var(--marchand-color) !important; }
+.text-negociant { color: var(--negociant-color) !important; }
+.text-courtier { color: var(--courtier-color) !important; }
+.text-magnat { color: var(--magnat-color) !important; }
+.text-senior { color: var(--senior-color) !important; }
+
+.text-accent { color: var(--accent-gold) !important; }
+.text-success { color: var(--success) !important; }
+.text-warning { color: var(--warning) !important; }
+.text-danger { color: var(--danger) !important; }
+.text-info { color: var(--info) !important; }
+
+/* Arrière-plans de texte */
+.bg-text-profane { 
+    background: var(--profane-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-text-debutant { 
+    background: var(--debutant-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-text-marchand { 
+    background: var(--marchand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-text-negociant { 
+    background: var(--negociant-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-text-courtier { 
+    background: var(--courtier-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-text-magnat { 
+    background: var(--magnat-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-text-senior { 
+    background: var(--senior-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Icônes colorées */
+.icon-rank {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.icon-rank.profane { background: var(--profane-color-muted); color: var(--profane-color); }
+.icon-rank.debutant { background: var(--debutant-color-muted); color: var(--debutant-color); }
+.icon-rank.marchand { background: var(--marchand-color-muted); color: var(--marchand-color); }
+.icon-rank.negociant { background: var(--negociant-color-muted); color: var(--negociant-color); }
+.icon-rank.courtier { background: var(--courtier-color-muted); color: var(--courtier-color); }
+.icon-rank.magnat { background: var(--magnat-color-muted); color: var(--magnat-color); }
+.icon-rank.senior { background: var(--senior-color-muted); color: var(--senior-color); }
+
+/* ===== BOUTONS PAR RANG ===== */
+
+.btn-rank {
+    border: 2px solid transparent;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-rank::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-rank:hover::before {
+    left: 100%;
+}
+
+.btn-rank.profane {
+    background: var(--profane-gradient);
+    color: var(--bg-primary);
+}
+
+.btn-rank.debutant {
+    background: var(--debutant-gradient);
+    color: var(--bg-primary);
+}
+
+.btn-rank.marchand {
+    background: var(--marchand-gradient);
+    color: var(--bg-primary);
+}
+
+.btn-rank.negociant {
+    background: var(--negociant-gradient);
+    color: var(--bg-primary);
+}
+
+.btn-rank.courtier {
+    background: var(--courtier-gradient);
+    color: var(--bg-primary);
+}
+
+.btn-rank.magnat {
+    background: var(--magnat-gradient);
+    color: var(--bg-primary);
+}
+
+.btn-rank.senior {
+    background: var(--senior-gradient);
+    color: var(--bg-primary);
+}
+
+.btn-rank:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== TABLEAUX ET LISTES ===== */
+
+/* Lignes de tableau colorées par rang */
+.table-row-rank.profane {
+    border-left: 4px solid var(--profane-color);
+    background: var(--profane-gradient-subtle);
+}
+
+.table-row-rank.debutant {
+    border-left: 4px solid var(--debutant-color);
+    background: var(--debutant-gradient-subtle);
+}
+
+.table-row-rank.marchand {
+    border-left: 4px solid var(--marchand-color);
+    background: var(--marchand-gradient-subtle);
+}
+
+.table-row-rank.negociant {
+    border-left: 4px solid var(--negociant-color);
+    background: var(--negociant-gradient-subtle);
+}
+
+.table-row-rank.courtier {
+    border-left: 4px solid var(--courtier-color);
+    background: var(--courtier-gradient-subtle);
+}
+
+.table-row-rank.magnat {
+    border-left: 4px solid var(--magnat-color);
+    background: var(--magnat-gradient-subtle);
+}
+
+.table-row-rank.senior {
+    border-left: 4px solid var(--senior-color);
+    background: var(--senior-gradient-subtle);
+}
+
+/* Items de liste */
+.list-item-rank {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.list-item-rank.profane { border-left-color: var(--profane-color); }
+.list-item-rank.debutant { border-left-color: var(--debutant-color); }
+.list-item-rank.marchand { border-left-color: var(--marchand-color); }
+.list-item-rank.negociant { border-left-color: var(--negociant-color); }
+.list-item-rank.courtier { border-left-color: var(--courtier-color); }
+.list-item-rank.magnat { border-left-color: var(--magnat-color); }
+.list-item-rank.senior { border-left-color: var(--senior-color); }
+
+.list-item-rank:hover {
+    background: var(--surface-2);
+    transform: translateX(4px);
+}
+
+/* ===== ACCESSIBILITÉ ET CONTRASTE ===== */
+
+/* Support high contrast */
+@media (prefers-contrast: high) {
+    .vendor-name.profane { color: #4A52FF !important; }
+    .vendor-name.debutant { color: #2A7FFF !important; }
+    .vendor-name.marchand { color: #00A8FF !important; }
+    .vendor-name.negociant { color: #FF2A2A !important; }
+    .vendor-name.courtier { color: #FF6B2A !important; }
+    .vendor-name.magnat { color: #E0E0E0 !important; }
+    .vendor-name.senior { color: #FFD700 !important; }
+    
+    .rank-badge {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Support reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .rank-badge,
+    .avatar-placeholder,
+    .btn-rank,
+    .list-item-rank {
+        transition: none;
+    }
+    
+    .rank-progression-fill::after {
+        animation: none;
+    }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .rank-badge {
+        padding: 3px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .vendor-name {
+        font-size: 0.9rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .vendor-name.profane { color: #4E56B4 !important; }
+    .vendor-name.debutant { color: #5F8FE0 !important; }
+    .vendor-name.marchand { color: #86C8FF !important; }
+    .vendor-name.negociant { color: #E53935 !important; }
+    .vendor-name.courtier { color: #F76B47 !important; }
+    .vendor-name.magnat { color: #666666 !important; }
+    .vendor-name.senior { color: #B39742 !important; }
+    
+    .rank-badge {
+        background: #f8f9fa !important;
+        color: #000 !important;
+        border: 1px solid #000 !important;
+    }
+}
+
+/* ===== UTILITAIRES DE COULEUR ===== */
+
+/* Opacité */
+.opacity-10 { opacity: 0.1; }
+.opacity-20 { opacity: 0.2; }
+.opacity-30 { opacity: 0.3; }
+.opacity-40 { opacity: 0.4; }
+.opacity-50 { opacity: 0.5; }
+.opacity-60 { opacity: 0.6; }
+.opacity-70 { opacity: 0.7; }
+.opacity-80 { opacity: 0.8; }
+.opacity-90 { opacity: 0.9; }
+
+/* Background utilities */
+.bg-muted { background-color: var(--text-muted) !important; }
+.bg-disabled { background-color: var(--text-disabled) !important; }
+
+/* Border utilities */
+.border-muted { border-color: var(--text-muted) !important; }
+.border-disabled { border-color: var(--text-disabled) !important; }
+
+/* Text color utilities */
+.text-disabled { color: var(--text-disabled) !important; }
+.text-muted { color: var(--text-muted) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-primary { color: var(--text-primary) !important; }
+
+/* === NOUVEAUX STYLES POUR PAGES SIMPLIFIÉES === */
+
+/* Variables pour les nouvelles sections */
+:root {
+    /* Couleurs des nouvelles sections */
+    --cta-bg: var(--surface-1);
+    --cta-border: var(--border);
+    --feature-card-bg: var(--surface-2);
+    
+    /* Icônes */
+    --discord-color: #5865F2;
+    --whatsapp-color: #25D366;
+}
+
+/* Styles pour les pages CTA */
+.cta-page {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.discord-cta, .whatsapp-cta {
+    background: var(--cta-bg);
+    border: 1px solid var(--cta-border);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    margin: 2rem 0;
+}
+
+.discord-icon, .whatsapp-icon {
+    margin-bottom: 2rem;
+}
+
+.discord-icon span {
+    color: var(--discord-color);
+}
+
+.whatsapp-icon span {
+    color: var(--whatsapp-color);
+}
+
+.cta-actions {
+    margin: 2rem 0;
+}
+
+.feature-item, .info-card {
+    background: var(--feature-card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover, .info-card:hover {
+    border-color: var(--accent-gold);
+    transform: translateY(-2px);
+}
+
+.feature-item h5 {
+    color: var(--accent-gold);
+    margin-bottom: 0.5rem;
+}
+
+.info-card {
+    background: linear-gradient(135deg, var(--surface-2), var(--surface-1));
+    border-left: 4px solid var(--accent-gold);
+}

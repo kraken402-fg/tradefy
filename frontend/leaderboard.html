@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classement - Tradefy</title>
+    
+    <!-- CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/colors.css" rel="stylesheet">
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="Classement Tradefy - Découvrez les meilleurs vendeurs et suivez votre progression dans la communauté">
+</head>
+<body class="dark-theme">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-surface-1 border-bottom border-accent fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-accent" href="">
+                 Tradefy
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Boutique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="leaderboard.html">Classement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Événements</a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link" href="profile.html" id="profileLink" style="display: none;">
+                        <i class="fas fa-user"></i> Mon Profil
+                    </a>
+                    <a class="nav-link" href="login.html" id="authLink">
+                        <i class="fas fa-sign-in-alt"></i> Connexion
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- En-tête -->
+    <section class="leaderboard-header bg-surface-2 py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-5 fw-bold text-primary mb-3">
+                        🏆 Classement des Vendeurs
+                    </h1>
+                    <p class="lead text-muted mb-4">
+                        Montez dans les classements, atteignez de nouveaux rangs et devenez une légende Tradefy. 
+                        Chaque vente vous rapproche de la gloire !
+                    </p>
+                    
+                    <!-- Statistiques globales -->
+                    <div class="global-stats d-flex gap-4 flex-wrap">
+                        <div class="stat">
+                            <span class="h4 text-accent mb-1" id="totalVendors">0</span>
+                            <small class="text-muted">Vendeurs actifs</small>
+                        </div>
+                        <div class="stat">
+                            <span class="h4 text-success mb-1" id="totalSales">0</span>
+                            <small class="text-muted">Ventes totales</small>
+                        </div>
+                        <div class="stat">
+                            <span class="h4 text-info mb-1" id="activeQuests">0</span>
+                            <small class="text-muted">Quêtes actives</small>
+                        </div>
+                        <div class="stat">
+                            <span class="h4 text-warning mb-1" id="totalRevenue">0€</span>
+                            <small class="text-muted">Volume d'affaires</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 text-center">
+                    <div class="trophy-illustration">
+                        <i class="fas fa-trophy fa-6x text-accent"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="storytelling-block">
+  <div class="story-container">
+    <h2 class="story-title">La Chambre des Marchés</h2>
+
+    <p class="story-text">
+      On n'entre pas ici par hasard.  
+      Chaque vente est un pas, chaque progression un rite,  
+      chaque niveau une porte qui ne s’ouvre qu’aux vendeurs capables de tenir.
+    </p>
+
+    <p class="story-text">
+      De Profane à Senior, chaque rang vous façonne.  
+      La Chambre ne récompense pas les plus bruyants,  
+      mais ceux qui avancent malgré tout.
+    </p>
+
+    <p class="story-text">
+      Ici, vous ne jouez pas contre les autres.  
+      Vous jouez contre l’immobilité.  
+      La seule question est simple : <strong>oserez-vous franchir le prochain seuil ?</strong>
+    </p>
+  </div>
+</section>
+
+<style>
+  .storytelling-block {
+    width: 100%;
+    padding: 80px 20px;
+    background: #0d0f12; /* noir charbon élégant */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .story-container {
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .story-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #ffc700; /* Jaune or */
+    letter-spacing: 1px;
+  }
+
+  .story-text {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    color: #d5d5d5; /* gris clair luxe */
+    opacity: 0.9;
+  }
+
+  /* Animation élégante et non agressive */
+  .storytelling-block {
+    animation: fadeUp 0.9s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .story-title {
+      font-size: 1.8rem;
+    }
+    .story-text {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+
+    <!-- Navigation des classements -->
+    <section class="leaderboard-nav bg-surface-1 border-bottom border-border">
+        <div class="container">
+            <ul class="nav nav-pills nav-fill" id="leaderboardTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="global-tab" data-bs-toggle="tab" 
+                            data-bs-target="#global" type="button" role="tab">
+                        🌍 Global
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="monthly-tab" data-bs-toggle="tab" 
+                            data-bs-target="#monthly" type="button" role="tab">
+                        📅 Mensuel
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="category-tab" data-bs-toggle="tab" 
+                            data-bs-target="#category" type="button" role="tab">
+                        🏷️ Par Catégorie
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="regional-tab" data-bs-toggle="tab" 
+                            data-bs-target="#regional" type="button" role="tab">
+                        🗺️ Régional
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="rising-tab" data-bs-toggle="tab" 
+                            data-bs-target="#rising" type="button" role="tab">
+                        ⭐ Étoiles Montantes
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contenu des classements -->
+    <section class="leaderboard-content py-5">
+        <div class="container">
+            <div class="tab-content" id="leaderboardTabContent">
+                
+                <!-- Classement Global -->
+                <div class="tab-pane fade show active" id="global" role="tabpanel">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="mb-0">🏆 Classement Global</h3>
+                                <div class="d-flex gap-2">
+                                    <select class="form-select form-select-sm bg-surface-2 border-border text-primary" 
+                                            style="width: auto;" id="globalSort">
+                                        <option value="sales">Par ventes</option>
+                                        <option value="revenue">Par revenus</option>
+                                        <option value="rating">Par évaluation</option>
+                                        <option value="progress">Par progression</option>
+                                    </select>
+                                    <button class="btn btn-outline-accent btn-sm" onclick="refreshLeaderboard('global')">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="text-muted mt-2">
+                                Classement général basé sur le nombre total de ventes et l'activité globale
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Top 3 Podium -->
+                    <div class="row mb-5">
+                        <div class="col-md-4">
+                            <div class="podium-card second-place text-center">
+                                <div class="podium-position">
+                                    <div class="medal">🥈</div>
+                                    <div class="position-number">2</div>
+                                </div>
+                                <div class="vendor-avatar mb-3">
+                                    <div class="avatar-placeholder negociant" id="podium2Avatar">
+                                        <!-- Chargé dynamiquement -->
+                                    </div>
+                                </div>
+                                <h5 class="vendor-name negociant mb-2" id="podium2Name">-</h5>
+                                <div class="vendor-stats">
+                                    <span class="rank-badge negociant mb-2" id="podium2Rank">Négociant</span>
+                                    <div class="sales-count text-accent fw-bold" id="podium2Sales">0 ventes</div>
+                                    <div class="revenue text-success" id="podium2Revenue">0€</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="podium-card first-place text-center">
+                                <div class="podium-position">
+                                    <div class="medal">🥇</div>
+                                    <div class="position-number">1</div>
+                                </div>
+                                <div class="vendor-avatar mb-3">
+                                    <div class="avatar-placeholder senior" id="podium1Avatar">
+                                        <!-- Chargé dynamiquement -->
+                                    </div>
+                                </div>
+                                <h4 class="vendor-name senior mb-2" id="podium1Name">-</h4>
+                                <div class="vendor-stats">
+                                    <span class="rank-badge senior mb-2" id="podium1Rank">Senior</span>
+                                    <div class="sales-count text-accent fw-bold" id="podium1Sales">0 ventes</div>
+                                    <div class="revenue text-success" id="podium1Revenue">0€</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="podium-card third-place text-center">
+                                <div class="podium-position">
+                                    <div class="medal">🥉</div>
+                                    <div class="position-number">3</div>
+                                </div>
+                                <div class="vendor-avatar mb-3">
+                                    <div class="avatar-placeholder courtier" id="podium3Avatar">
+                                        <!-- Chargé dynamiquement -->
+                                    </div>
+                                </div>
+                                <h5 class="vendor-name courtier mb-2" id="podium3Name">-</h5>
+                                <div class="vendor-stats">
+                                    <span class="rank-badge courtier mb-2" id="podium3Rank">Courtier</span>
+                                    <div class="sales-count text-accent fw-bold" id="podium3Sales">0 ventes</div>
+                                    <div class="revenue text-success" id="podium3Revenue">0€</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Liste du classement -->
+                    <div class="leaderboard-list">
+                        <div class="card bg-surface-1 border-border">
+                            <div class="card-header bg-surface-2">
+                                <div class="row align-items-center">
+                                    <div class="col-1 text-center">
+                                        <small class="text-muted">#</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <small class="text-muted">Vendeur</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Rang</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Ventes</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Revenus</small>
+                                    </div>
+                                    <div class="col-1 text-center">
+                                        <small class="text-muted">Score</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div id="globalLeaderboardList">
+                                    <!-- Chargé dynamiquement -->
+                                    <div class="text-center py-5">
+                                        <div class="spinner-border text-accent" role="status">
+                                            <span class="visually-hidden">Chargement du classement...</span>
+                                        </div>
+                                        <p class="text-muted mt-3">Chargement du classement...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Position de l'utilisateur -->
+                    <div class="user-position-card mt-4" id="userPositionGlobal" style="display: none;">
+                        <div class="card bg-surface-1 border-accent">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <div class="d-flex align-items-center">
+                                            <div class="position-badge me-3">
+                                                <span class="badge bg-accent text-dark" id="userGlobalPosition">#0</span>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-1" id="userGlobalName">Votre position</h6>
+                                                <small class="text-muted" id="userGlobalStats">0 ventes • 0€ de revenus</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 text-md-end">
+                                        <span class="rank-badge" id="userGlobalRank">Profane</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classement Mensuel -->
+                <div class="tab-pane fade" id="monthly" role="tabpanel">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0">📅 Classement du Mois</h3>
+                                    <p class="text-muted mb-0" id="currentMonth">
+                                        <!-- Mois actuel -->
+                                    </p>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <select class="form-select form-select-sm bg-surface-2 border-border text-primary" 
+                                            style="width: auto;" id="monthlySort">
+                                        <option value="sales">Par ventes</option>
+                                        <option value="revenue">Par revenus</option>
+                                        <option value="growth">Par croissance</option>
+                                    </select>
+                                    <button class="btn btn-outline-accent btn-sm" onclick="refreshLeaderboard('monthly')">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-list">
+                        <div class="card bg-surface-1 border-border">
+                            <div class="card-header bg-surface-2">
+                                <div class="row align-items-center">
+                                    <div class="col-1 text-center">
+                                        <small class="text-muted">#</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <small class="text-muted">Vendeur</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Rang</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Ventes/mois</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Croissance</small>
+                                    </div>
+                                    <div class="col-1 text-center">
+                                        <small class="text-muted">Score</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div id="monthlyLeaderboardList">
+                                    <!-- Chargé dynamiquement -->
+                                    <div class="text-center py-5">
+                                        <div class="spinner-border text-accent" role="status">
+                                            <span class="visually-hidden">Chargement du classement...</span>
+                                        </div>
+                                        <p class="text-muted mt-3">Chargement du classement mensuel...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classement par Catégorie -->
+                <div class="tab-pane fade" id="category" role="tabpanel">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h3 class="mb-3">🏷️ Classement par Catégorie</h3>
+                            
+                            <!-- Sélecteur de catégorie -->
+                            <div class="category-selector mb-4">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-outline-accent active" data-category="all">
+                                        Toutes catégories
+                                    </button>
+                                    <button type="button" class="btn btn-outline-accent" data-category="electronics">
+                                        Électronique
+                                    </button>
+                                    <button type="button" class="btn btn-outline-accent" data-category="fashion">
+                                        Mode
+                                    </button>
+                                    <button type="button" class="btn btn-outline-accent" data-category="home">
+                                        Maison
+                                    </button>
+                                    <button type="button" class="btn btn-outline-accent" data-category="sports">
+                                        Sports
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-list">
+                        <div class="card bg-surface-1 border-border">
+                            <div class="card-header bg-surface-2">
+                                <div class="row align-items-center">
+                                    <div class="col-1 text-center">
+                                        <small class="text-muted">#</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <small class="text-muted">Vendeur</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Rang</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Ventes catégorie</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Part de marché</small>
+                                    </div>
+                                    <div class="col-1 text-center">
+                                        <small class="text-muted">Score</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div id="categoryLeaderboardList">
+                                    <!-- Chargé dynamiquement -->
+                                    <div class="text-center py-5">
+                                        <div class="spinner-border text-accent" role="status">
+                                            <span class="visually-hidden">Chargement du classement...</span>
+                                        </div>
+                                        <p class="text-muted mt-3">Sélectionnez une catégorie...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Classement Régional -->
+                <div class="tab-pane fade" id="regional" role="tabpanel">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h3 class="mb-3">🗺️ Classement Régional</h3>
+                            
+                            <!-- Sélecteur de région -->
+                            <div class="region-selector mb-4">
+                                <select class="form-select bg-surface-2 border-border text-primary" 
+                                        style="width: auto; display: inline-block;" id="regionSelect">
+                                    <option value="world">Monde</option>
+                                    <option value="africa">Afrique</option>
+                                    <option value="north-america">Amérique du Nord</option>
+                                    <option value="south-america">Amérique du Sud</option>
+                                    <option value="asia">Asie</option>
+                                    <option value="europe">Europe</option>
+                                    <option value="usa">États-Unis</option>
+                                    <option value="uk">Royaume-Uni</option>
+                                    <option value="russia">Russie</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-list">
+                        <div class="card bg-surface-1 border-border">
+                            <div class="card-header bg-surface-2">
+                                <div class="row align-items-center">
+                                    <div class="col-1 text-center">
+                                        <small class="text-muted">#</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <small class="text-muted">Vendeur</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Région</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Ventes régionales</small>
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <small class="text-muted">Influence</small>
+                                    </div>
+                                    <div class="col-1 text-center">
+                                        <small class="text-muted">Score</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div id="regionalLeaderboardList">
+                                    <!-- Chargé dynamiquement -->
+                                    <div class="text-center py-5">
+                                        <div class="spinner-border text-accent" role="status">
+                                            <span class="visually-hidden">Chargement du classement...</span>
+                                        </div>
+                                        <p class="text-muted mt-3">Sélectionnez une région...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Étoiles Montantes -->
+                <div class="tab-pane fade" id="rising" role="tabpanel">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h3 class="mb-0">⭐ Étoiles Montantes</h3>
+                            <p class="text-muted">
+                                Découvrez les vendeurs qui progressent le plus rapidement cette semaine
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="rising-stars-grid">
+                        <div class="row g-4" id="risingStarsList">
+                            <!-- Chargé dynamiquement -->
+                            <div class="col-12 text-center py-5">
+                                <div class="spinner-border text-accent" role="status">
+                                    <span class="visually-hidden">Chargement des étoiles montantes...</span>
+                                </div>
+                                <p class="text-muted mt-3">Chargement des étoiles montantes...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Statistiques Avancées -->
+    <section class="advanced-stats bg-surface-2 py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h3>📈 Statistiques Avancées</h3>
+                    <p class="text-muted">Analysez les tendances et performances de la communauté</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="stat-card text-center p-4 rounded bg-surface-1">
+                        <div class="stat-icon mb-3">
+                            <i class="fas fa-chart-line fa-2x text-success"></i>
+                        </div>
+                        <h4 class="text-accent mb-2" id="avgMonthlyGrowth">0%</h4>
+                        <p class="text-muted mb-0">Croissance mensuelle moyenne</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="stat-card text-center p-4 rounded bg-surface-1">
+                        <div class="stat-icon mb-3">
+                            <i class="fas fa-users fa-2x text-info"></i>
+                        </div>
+                        <h4 class="text-accent mb-2" id="newVendorsMonth">0</h4>
+                        <p class="text-muted mb-0">Nouveaux vendeurs ce mois</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="stat-card text-center p-4 rounded bg-surface-1">
+                        <div class="stat-icon mb-3">
+                            <i class="fas fa-trophy fa-2x text-warning"></i>
+                        </div>
+                        <h4 class="text-accent mb-2" id="rankUpsMonth">0</h4>
+                        <p class="text-muted mb-0">Changements de rang ce mois</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="stat-card text-center p-4 rounded bg-surface-1">
+                        <div class="stat-icon mb-3">
+                            <i class="fas fa-bolt fa-2x text-accent"></i>
+                        </div>
+                        <h4 class="text-accent mb-2" id="activeQuestsCount">0</h4>
+                        <p class="text-muted mb-0">Quêtes de passage actives</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Distribution des Rangs -->
+    <section class="rank-distribution py-5 bg-surface-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card bg-surface-1 border-border">
+                        <div class="card-header bg-surface-2">
+                            <h5 class="mb-0">📊 Distribution des Rangs</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container" style="height: 300px;">
+                                <canvas id="rankDistributionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="rank-stats-card card bg-surface-1 border-border h-100">
+                        <div class="card-header bg-surface-2">
+                            <h5 class="mb-0">🎯 Votre Progression</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="userProgressStats">
+                                <!-- Chargé dynamiquement -->
+                                <div class="text-center py-4">
+                                    <div class="spinner-border text-accent spinner-border-sm" role="status">
+                                        <span class="visually-hidden">Chargement...</span>
+                                    </div>
+                                    <p class="text-muted mt-2 small">Chargement de votre progression...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-3 text-secondary py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">
+                        &copy; 2025 <strong class="text-accent">By Charbelus</strong>. Conçu avec passion pour votre succès.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="integrations.html" class="text-secondary text-decoration-none me-3">
+                        <i class="fas fa-cog"></i> Intégrations
+                    </a>
+                    <a href="../frontend/support/help.html" class="text-secondary text-decoration-none">
+                        <i class="fas fa-question-circle"></i> Aide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/chart.min.js"></script>
+    <script src="assets/js/gamification/rankColors.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        // Variables globales
+        let currentLeaderboard = 'global';
+        let rankDistributionChart = null;
+
+        // Initialisation de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLeaderboardData('global');
+            loadAdvancedStats();
+            setupEventListeners();
+            checkAuthStatus();
+            updateCurrentMonth();
+        });
+
+        // Charger les données du classement
+        async function loadLeaderboardData(type) {
+            try {
+                showLoadingState(type);
+                currentLeaderboard = type;
+                
+                const response = await fetch(`/api/gamification/leaderboard/${type}`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayLeaderboardData(type, data.data);
+                    if (type === 'global') {
+                        displayPodium(data.data.slice(0, 3));
+                    }
+                } else {
+                    throw new Error('Erreur de chargement du classement');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                showErrorState(type, 'Impossible de charger le classement');
+            }
+        }
+
+        // Afficher les données du classement
+        function displayLeaderboardData(type, data) {
+            const containerId = `${type}LeaderboardList`;
+            const container = document.getElementById(containerId);
+            
+            if (!data || data.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">Aucune donnée disponible</h4>
+                        <p class="text-muted">Revenez plus tard pour voir le classement</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let leaderboardHTML = '';
+            data.forEach((vendor, index) => {
+                const position = index + 1;
+                const isTop3 = position <= 3;
+                const positionClass = isTop3 ? 'top-position' : '';
+                const medal = position === 1 ? '🥇' : position === 2 ? '🥈' : position === 3 ? '🥉' : position;
+                
+                leaderboardHTML += `
+                    <div class="leaderboard-item ${positionClass} p-3 border-bottom border-border">
+                        <div class="row align-items-center">
+                            <div class="col-1 text-center">
+                                <span class="position-number fw-bold text-accent">${medal}</span>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="vendor-avatar me-3">
+                                        <div class="avatar-placeholder ${vendor.rank_class}">
+                                            ${vendor.username.charAt(0).toUpperCase()}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a href="/user/${vendor.username}" class="vendor-name ${vendor.rank_class} text-decoration-none fw-bold">
+                                            ${vendor.username}
+                                        </a>
+                                        <div class="vendor-location small text-muted">
+                                            ${vendor.location || 'Non spécifié'}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <span class="rank-badge ${vendor.rank_class}">${vendor.rank_name}</span>
+                            </div>
+                            <div class="col-2 text-center">
+                                <span class="fw-bold text-primary">${vendor.sales_count?.toLocaleString() || '0'}</span>
+                                <div class="small text-muted">ventes</div>
+                            </div>
+                            <div class="col-2 text-center">
+                                <span class="fw-bold text-success">${vendor.revenue ? vendor.revenue + '€' : '0€'}</span>
+                                <div class="small text-muted">${type === 'monthly' ? 'ce mois' : 'total'}</div>
+                            </div>
+                            <div class="col-1 text-center">
+                                <span class="badge bg-surface-2 text-primary">${vendor.score || '0'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = leaderboardHTML;
+            
+            // Afficher la position de l'utilisateur si connecté
+            if (type === 'global') {
+                displayUserPosition(data);
+            }
+        }
+
+        // Afficher le podium (Top 3)
+        function displayPodium(top3) {
+            if (top3.length >= 3) {
+                // Premier
+                document.getElementById('podium1Avatar').textContent = top3[0].username.charAt(0).toUpperCase();
+                document.getElementById('podium1Avatar').className = `avatar-placeholder ${top3[0].rank_class}`;
+                document.getElementById('podium1Name').textContent = top3[0].username;
+                document.getElementById('podium1Name').className = `vendor-name ${top3[0].rank_class}`;
+                document.getElementById('podium1Rank').textContent = top3[0].rank_name;
+                document.getElementById('podium1Rank').className = `rank-badge ${top3[0].rank_class}`;
+                document.getElementById('podium1Sales').textContent = `${top3[0].sales_count?.toLocaleString() || '0'} ventes`;
+                document.getElementById('podium1Revenue').textContent = `${top3[0].revenue || '0'}€`;
+                
+                // Deuxième
+                document.getElementById('podium2Avatar').textContent = top3[1].username.charAt(0).toUpperCase();
+                document.getElementById('podium2Avatar').className = `avatar-placeholder ${top3[1].rank_class}`;
+                document.getElementById('podium2Name').textContent = top3[1].username;
+                document.getElementById('podium2Name').className = `vendor-name ${top3[1].rank_class}`;
+                document.getElementById('podium2Rank').textContent = top3[1].rank_name;
+                document.getElementById('podium2Rank').className = `rank-badge ${top3[1].rank_class}`;
+                document.getElementById('podium2Sales').textContent = `${top3[1].sales_count?.toLocaleString() || '0'} ventes`;
+                document.getElementById('podium2Revenue').textContent = `${top3[1].revenue || '0'}€`;
+                
+                // Troisième
+                document.getElementById('podium3Avatar').textContent = top3[2].username.charAt(0).toUpperCase();
+                document.getElementById('podium3Avatar').className = `avatar-placeholder ${top3[2].rank_class}`;
+                document.getElementById('podium3Name').textContent = top3[2].username;
+                document.getElementById('podium3Name').className = `vendor-name ${top3[2].rank_class}`;
+                document.getElementById('podium3Rank').textContent = top3[2].rank_name;
+                document.getElementById('podium3Rank').className = `rank-badge ${top3[2].rank_class}`;
+                document.getElementById('podium3Sales').textContent = `${top3[2].sales_count?.toLocaleString() || '0'} ventes`;
+                document.getElementById('podium3Revenue').textContent = `${top3[2].revenue || '0'}€`;
+            }
+        }
+
+        // Afficher la position de l'utilisateur
+        function displayUserPosition(leaderboardData) {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                document.getElementById('userPositionGlobal').style.display = 'none';
+                return;
+            }
+
+            // Simulation - en réalité, on récupérerait l'ID utilisateur et on chercherait sa position
+            const userPosition = Math.floor(Math.random() * 50) + 4; // Position aléatoire entre 4 et 53
+            const userSales = Math.floor(Math.random() * 1000) + 50;
+            const userRevenue = Math.floor(Math.random() * 50000) + 1000;
+            const userRank = 'debutant';
+            
+            document.getElementById('userGlobalPosition').textContent = `#${userPosition}`;
+            document.getElementById('userGlobalName').textContent = 'Votre position';
+            document.getElementById('userGlobalStats').textContent = `${userSales} ventes • ${userRevenue}€ de revenus`;
+            document.getElementById('userGlobalRank').textContent = 'Débutant';
+            document.getElementById('userGlobalRank').className = `rank-badge ${userRank}`;
+            document.getElementById('userPositionGlobal').style.display = 'block';
+        }
+
+        // Charger les statistiques avancées
+        async function loadAdvancedStats() {
+            try {
+                const response = await fetch('/api/gamification/stats');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayAdvancedStats(data.data);
+                    initializeRankDistributionChart(data.data.rank_distribution);
+                }
+            } catch (error) {
+                console.error('Erreur chargement stats avancées:', error);
+                loadDemoStats();
+            }
+        }
+
+        // Afficher les statistiques avancées
+        function displayAdvancedStats(stats) {
+            document.getElementById('totalVendors').textContent = stats.total_vendors?.toLocaleString() || '12,847';
+            document.getElementById('totalSales').textContent = stats.total_sales?.toLocaleString() || '489,256';
+            document.getElementById('activeQuests').textContent = stats.active_quests?.toLocaleString() || '3,421';
+            document.getElementById('totalRevenue').textContent = `${stats.total_revenue?.toLocaleString() || '15,842,190'}€`;
+            
+            document.getElementById('avgMonthlyGrowth').textContent = stats.avg_monthly_growth || '12.5%';
+            document.getElementById('newVendorsMonth').textContent = stats.new_vendors_month?.toLocaleString() || '347';
+            document.getElementById('rankUpsMonth').textContent = stats.rank_ups_month?.toLocaleString() || '128';
+            document.getElementById('activeQuestsCount').textContent = stats.active_quests_count?.toLocaleString() || '3,421';
+        }
+
+        // Initialiser le graphique de distribution des rangs
+        function initializeRankDistributionChart(distributionData) {
+            const ctx = document.getElementById('rankDistributionChart').getContext('2d');
+            
+            if (rankDistributionChart) {
+                rankDistributionChart.destroy();
+            }
+            
+            const labels = ['Profane', 'Débutant', 'Marchand', 'Négociant', 'Courtier', 'Magnat', 'Senior'];
+            const data = distributionData || [45, 25, 15, 8, 4, 2, 1];
+            const backgroundColors = [
+                'rgba(78, 86, 180, 0.8)',
+                'rgba(95, 143, 224, 0.8)',
+                'rgba(134, 200, 255, 0.8)',
+                'rgba(229, 57, 53, 0.8)',
+                'rgba(247, 107, 71, 0.8)',
+                'rgba(224, 224, 224, 0.8)',
+                'rgba(255, 213, 128, 0.8)'
+            ];
+            
+            rankDistributionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Nombre de vendeurs',
+                        data: data,
+                        backgroundColor: backgroundColors,
+                        borderColor: backgroundColors.map(color => color.replace('0.8', '1')),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.parsed.y}% des vendeurs`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255,255,255,0.1)'
+                            },
+                            ticks: {
+                                color: '#B0B0B0',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#B0B0B0'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Charger les étoiles montantes
+        async function loadRisingStars() {
+            try {
+                const response = await fetch('/api/gamification/leaderboard/rising');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayRisingStars(data.data);
+                }
+            } catch (error) {
+                console.error('Erreur chargement étoiles montantes:', error);
+            }
+        }
+
+        // Afficher les étoiles montantes
+        function displayRisingStars(stars) {
+            const container = document.getElementById('risingStarsList');
+            
+            if (!stars || stars.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-star fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">Aucune étoile montante cette semaine</h4>
+                        <p class="text-muted">Revenez la semaine prochaine pour découvrir les nouvelles progressions</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let starsHTML = '';
+            stars.forEach(star => {
+                const growth = star.growth_percentage || 0;
+                const growthClass = growth > 0 ? 'text-success' : 'text-danger';
+                const growthIcon = growth > 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+                
+                starsHTML += `
+                    <div class="col-md-6 col-lg-4">
+                        <div class="rising-star-card card bg-surface-1 border-border h-100">
+                            <div class="card-body text-center">
+                                <div class="star-avatar mb-3">
+                                    <div class="avatar-placeholder ${star.rank_class}">
+                                        ${star.username.charAt(0).toUpperCase()}
+                                    </div>
+                                    <div class="growth-badge ${growthClass}">
+                                        <i class="fas ${growthIcon} me-1"></i>
+                                        ${Math.abs(growth)}%
+                                    </div>
+                                </div>
+                                <h5 class="vendor-name ${star.rank_class} mb-2">${star.username}</h5>
+                                <span class="rank-badge ${star.rank_class} mb-3">${star.rank_name}</span>
+                                <div class="star-stats">
+                                    <div class="stat mb-2">
+                                        <span class="text-accent fw-bold">${star.sales_count?.toLocaleString() || '0'}</span>
+                                        <small class="text-muted d-block">ventes cette semaine</small>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="text-success fw-bold">${star.revenue || '0'}€</span>
+                                        <small class="text-muted d-block">chiffre d'affaires</small>
+                                    </div>
+                                </div>
+                                <a href="/user/${star.username}" class="btn btn-outline-accent btn-sm mt-3">
+                                    Voir le profil
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = starsHTML;
+        }
+
+        // Charger les données de démonstration
+        function loadDemoStats() {
+            document.getElementById('totalVendors').textContent = '12,847';
+            document.getElementById('totalSales').textContent = '489,256';
+            document.getElementById('activeQuests').textContent = '3,421';
+            document.getElementById('totalRevenue').textContent = '15,842,190€';
+            
+            document.getElementById('avgMonthlyGrowth').textContent = '12.5%';
+            document.getElementById('newVendorsMonth').textContent = '347';
+            document.getElementById('rankUpsMonth').textContent = '128';
+            document.getElementById('activeQuestsCount').textContent = '3,421';
+        }
+
+        // Configuration des écouteurs d'événements
+        function setupEventListeners() {
+            // Changement d'onglet
+            document.getElementById('leaderboardTabs').addEventListener('shown.bs.tab', function(event) {
+                const target = event.target.getAttribute('data-bs-target');
+                const type = target.replace('#', '');
+                
+                if (type === 'rising') {
+                    loadRisingStars();
+                } else {
+                    loadLeaderboardData(type);
+                }
+            });
+            
+            // Sélecteur de catégorie
+            document.querySelectorAll('[data-category]').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('[data-category]').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    loadLeaderboardData('category');
+                });
+            });
+            
+            // Sélecteur de région
+            document.getElementById('regionSelect').addEventListener('change', function() {
+                loadLeaderboardData('regional');
+            });
+            
+            // Tri des classements
+            document.getElementById('globalSort').addEventListener('change', function() {
+                loadLeaderboardData('global');
+            });
+            
+            document.getElementById('monthlySort').addEventListener('change', function() {
+                loadLeaderboardData('monthly');
+            });
+        }
+
+        // Fonctions utilitaires
+        function refreshLeaderboard(type) {
+            loadLeaderboardData(type);
+            showNotification('Classement actualisé!', 'success');
+        }
+
+        function updateCurrentMonth() {
+            const now = new Date();
+            const month = now.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+            document.getElementById('currentMonth').textContent = month.charAt(0).toUpperCase() + month.slice(1);
+        }
+
+        function showLoadingState(type) {
+            const container = document.getElementById(`${type}LeaderboardList`);
+            if (container) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-accent" role="status">
+                            <span class="visually-hidden">Chargement...</span>
+                        </div>
+                        <p class="text-muted mt-3">Chargement du classement...</p>
+                    </div>
+                `;
+            }
+        }
+
+        function showErrorState(type, message) {
+            const container = document.getElementById(`${type}LeaderboardList`);
+            if (container) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                        <h4 class="text-muted">Erreur de chargement</h4>
+                        <p class="text-muted">${message}</p>
+                        <button class="btn btn-accent mt-2" onclick="loadLeaderboardData('${type}')">
+                            <i class="fas fa-redo me-2"></i> Réessayer
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} position-fixed top-0 end-0 m-3`;
+            notification.style.zIndex = '1060';
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check' : 'info'}-circle me-2"></i>
+                ${message}
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function checkAuthStatus() {
+            const token = localStorage.getItem('auth_token');
+            if (token) {
+                document.getElementById('profileLink').style.display = 'block';
+                document.getElementById('authLink').innerHTML = '<i class="fas fa-sign-out-alt"></i> Déconnexion';
+                document.getElementById('authLink').onclick = logout;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('refresh_token');
+            window.location.href = '/';
+        }
+    </script>
+
+    <style>
+        .leaderboard-header {
+            background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-1) 100%);
+        }
+        
+        .global-stats .stat {
+            text-align: center;
+        }
+        
+        .trophy-illustration {
+            opacity: 0.8;
+        }
+        
+        .nav-pills .nav-link.active {
+            background: var(--accent-gradient);
+            border: none;
+            color: var(--bg-primary);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            margin: 0 2px;
+        }
+        
+        .nav-pills .nav-link:hover {
+            background: var(--surface-2);
+            border-color: var(--accent-gold);
+        }
+        
+        /* Podium */
+        .podium-card {
+            padding: 2rem 1rem;
+            border-radius: 15px;
+            background: var(--surface-1);
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .podium-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .first-place {
+            border-color: var(--accent-gold);
+            background: linear-gradient(135deg, var(--surface-1) 0%, var(--surface-2) 100%);
+            transform: scale(1.05);
+        }
+        
+        .second-place {
+            border-color: var(--marchand-color);
+        }
+        
+        .third-place {
+            border-color: var(--courtier-color);
+        }
+        
+        .podium-position {
+            margin-bottom: 1rem;
+        }
+        
+        .medal {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .position-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+        
+        .avatar-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--bg-primary);
+            margin: 0 auto;
+        }
+        
+        /* Liste du classement */
+        .leaderboard-item {
+            transition: all 0.3s ease;
+        }
+        
+        .leaderboard-item:hover {
+            background: var(--surface-2);
+        }
+        
+        .leaderboard-item.top-position {
+            background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-1) 100%);
+        }
+        
+        .position-number {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        
+        .vendor-avatar .avatar-placeholder {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
+        
+        /* Étoiles montantes */
+        .rising-star-card {
+            transition: all 0.3s ease;
+        }
+        
+        .rising-star-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: var(--accent-gold);
+        }
+        
+        .star-avatar {
+            position: relative;
+        }
+        
+        .growth-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--surface-3);
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        
+        /* Cartes de statistiques */
+        .stat-card {
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: var(--accent-gold);
+        }
+        
+        .stat-icon {
+            opacity: 0.9;
+        }
+        
+        /* User position */
+        .user-position-card {
+            border-left: 4px solid var(--accent-gold);
+        }
+        
+        .position-badge .badge {
+            font-size: 1.1rem;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .podium-card {
+                margin-bottom: 1rem;
+            }
+            
+            .first-place {
+                transform: none;
+                order: -1;
+            }
+            
+            .global-stats {
+                justify-content: center;
+                gap: 2rem;
+            }
+            
+            .leaderboard-item .row > div {
+                margin-bottom: 0.5rem;
+            }
+            
+            .category-selector .btn-group {
+                flex-wrap: wrap;
+            }
+            
+            .category-selector .btn {
+                margin-bottom: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .leaderboard-item .row {
+                text-align: center;
+            }
+            
+            .vendor-avatar {
+                margin: 0 auto 0.5rem !important;
+            }
+            
+            .leaderboard-item .row > div {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</body>
+</html>

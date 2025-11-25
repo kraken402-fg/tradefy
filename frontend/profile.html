@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil - Tradefy</title>
+    
+    <!-- CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/colors.css" rel="stylesheet">
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="Gérez votre profil Tradefy - Suivez votre progression, vos quêtes et vos statistiques">
+</head>
+<body class="dark-theme">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-surface-1 border-bottom border-accent fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-accent" href="">
+                 Tradefy
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Boutique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="leaderboard.html">Classement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Événements</a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link active" href="profile.html" id="profileLink">
+                        <i class="fas fa-user"></i> Mon Profil
+                    </a>
+                    <a class="nav-link" href="logout.html" id="logoutLink">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Vérification authentification -->
+    <div id="authRequired" style="display: none;">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <i class="fas fa-lock fa-4x text-muted mb-4"></i>
+                    <h3 class="text-muted mb-3">Accès requis</h3>
+                    <p class="text-muted mb-4">Vous devez être connecté pour accéder à votre profil.</p>
+                    <a href="login.html" class="btn btn-accent btn-lg">
+                        <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenu du profil (visible seulement si connecté) -->
+    <div id="profileContent" style="display: none;">
+        <!-- En-tête du profil -->
+        <section class="profile-header bg-surface-2 py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="profile-avatar me-4">
+                                <div id="userAvatar" class="avatar-placeholder">
+                                    <!-- Chargé dynamiquement -->
+                                </div>
+                                <button class="btn-avatar-edit" data-bs-toggle="modal" data-bs-target="#avatarModal">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <h1 class="profile-name h2 mb-1" id="userName">
+                                    <!-- Chargé dynamiquement -->
+                                </h1>
+                                <div class="d-flex align-items-center gap-3 flex-wrap">
+                                    <span id="userRankBadge" class="rank-badge">
+                                        <!-- Chargé dynamiquement -->
+                                    </span>
+                                    <span class="text-muted" id="memberSince">
+                                        <!-- Chargé dynamiquement -->
+                                    </span>
+                                    <div class="online-status">
+                                        <i class="fas fa-circle text-success me-1"></i>
+                                        <small class="text-muted">En ligne</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="lead text-muted mb-3" id="userDescription">
+                            <!-- Chargé dynamiquement -->
+                        </p>
+                        
+                        <div class="profile-actions">
+                            <button class="btn btn-outline-accent btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                                <i class="fas fa-edit me-1"></i>Modifier le profil
+                            </button>
+                            <button class="btn btn-outline-accent btn-sm me-2" onclick="shareProfile()">
+                                <i class="fas fa-share-alt me-1"></i>Partager
+                            </button>
+                            <a href="/user/${currentUser?.username}" class="btn btn-outline-accent btn-sm" target="_blank">
+                                <i class="fas fa-eye me-1"></i>Voir mon profil public
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="quick-stats-card card bg-surface-1 border-accent">
+                            <div class="card-body">
+                                <h5 class="card-title text-accent mb-4">📊 Aperçu rapide</h5>
+                                <div class="row g-3">
+                                    <div class="col-6">
+                                        <div class="stat-item text-center">
+                                            <div class="stat-number text-primary fw-bold h5" id="quickSales">0</div>
+                                            <div class="stat-label text-muted small">Ventes totales</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-item text-center">
+                                            <div class="stat-number text-success fw-bold h5" id="quickRevenue">0€</div>
+                                            <div class="stat-label text-muted small">Revenus</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-item text-center">
+                                            <div class="stat-number text-info fw-bold h5" id="quickProducts">0</div>
+                                            <div class="stat-label text-muted small">Produits</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-item text-center">
+                                            <div class="stat-number text-warning fw-bold h5" id="quickRating">0.0</div>
+                                            <div class="stat-label text-muted small">Évaluation</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation secondaire -->
+        <section class="profile-nav bg-surface-1 border-bottom border-border">
+            <div class="container">
+                <ul class="nav nav-pills nav-fill" id="profileTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" 
+                                data-bs-target="#overview" type="button" role="tab">
+                            🏠 Vue d'ensemble
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="quests-tab" data-bs-toggle="tab" 
+                                data-bs-target="#quests" type="button" role="tab">
+                            🎯 Quêtes & Progression
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="products-tab" data-bs-toggle="tab" 
+                                data-bs-target="#products" type="button" role="tab">
+                            🛍️ Mes Produits
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="stats-tab" data-bs-toggle="tab" 
+                                data-bs-target="#stats" type="button" role="tab">
+                            📈 Statistiques
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="settings-tab" data-bs-toggle="tab" 
+                                data-bs-target="#settings" type="button" role="tab">
+                            ⚙️ Paramètres
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contenu des onglets -->
+        <section class="profile-content py-5">
+            <div class="container">
+                <div class="tab-content" id="profileTabContent">
+                    
+                    <!-- Onglet Vue d'ensemble -->
+                    <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                        <div class="row">
+                            <!-- Colonne de gauche -->
+                            <div class="col-lg-8">
+                                <!-- Progression du rang -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🚀 Progression du rang</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="rank-progression">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <div>
+                                                    <h4 class="vendor-name mb-1" id="currentRankName">Chargement...</h4>
+                                                    <p class="text-muted mb-0" id="rankDescription">Votre niveau actuel</p>
+                                                </div>
+                                                <div class="text-end">
+                                                    <div class="h4 text-accent mb-1" id="currentSalesCount">0</div>
+                                                    <small class="text-muted">Ventes réalisées</small>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="progress-container mb-3">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span class="small text-muted">Progression vers le prochain rang</span>
+                                                    <span class="small text-muted" id="rankProgressText">0/0</span>
+                                                </div>
+                                                <div class="progress bg-surface-2" style="height: 12px;">
+                                                    <div class="progress-bar" id="rankProgressBar" 
+                                                         style="width: 0%; background: var(--accent-gradient);"></div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="next-rank-info text-center p-3 rounded bg-surface-2">
+                                                <h6 class="text-accent mb-2">🎯 Prochain objectif</h6>
+                                                <p class="mb-2" id="nextRankGoal">Atteindre <strong id="nextRankThreshold">0</strong> ventes pour devenir <strong id="nextRankName">-</strong></p>
+                                                <small class="text-muted" id="salesNeeded">Il vous reste 0 ventes à réaliser</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quête de passage active -->
+                                <div class="card bg-surface-1 border-border mb-4" id="levelQuestCard" style="display: none;">
+                                    <div class="card-header bg-warning text-dark">
+                                        <h5 class="mb-0">⚡ Quête de passage active !</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="activeLevelQuest">
+                                            <!-- Chargé dynamiquement -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Activité récente -->
+                                <div class="card bg-surface-1 border-border">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">📅 Activité récente</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="recentActivity">
+                                            <!-- Chargé dynamiquement -->
+                                            <div class="text-center py-3">
+                                                <div class="spinner-border text-accent" role="status">
+                                                    <span class="visually-hidden">Chargement...</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Colonne de droite -->
+                            <div class="col-lg-4">
+                                <!-- Badges récents -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🏆 Badges récents</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="recentBadges">
+                                            <!-- Chargé dynamiquement -->
+                                            <div class="text-center py-3">
+                                                <div class="spinner-border text-accent spinner-border-sm" role="status">
+                                                    <span class="visually-hidden">Chargement...</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <a href="leaderboard.html" class="btn btn-outline-accent btn-sm" onclick="switchToTab('quests')">
+                                                Voir tous les badges
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Statistiques rapides -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">⚡ Performance du mois</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="performance-stats">
+                                            <div class="performance-item d-flex justify-content-between align-items-center mb-3">
+                                                <div>
+                                                    <span class="text-primary">Ventes ce mois</span>
+                                                </div>
+                                                <span class="fw-bold text-success" id="monthlySales">0</span>
+                                            </div>
+                                            <div class="performance-item d-flex justify-content-between align-items-center mb-3">
+                                                <div>
+                                                    <span class="text-primary">Revenus mensuels</span>
+                                                </div>
+                                                <span class="fw-bold text-accent" id="monthlyRevenue">0€</span>
+                                            </div>
+                                            <div class="performance-item d-flex justify-content-between align-items-center mb-3">
+                                                <div>
+                                                    <span class="text-primary">Taux de croissance</span>
+                                                </div>
+                                                <span class="fw-bold text-info" id="growthRate">0%</span>
+                                            </div>
+                                            <div class="performance-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <span class="text-primary">Classement mensuel</span>
+                                                </div>
+                                                <span class="fw-bold text-warning" id="monthlyRank">#0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Conseils personnalisés -->
+                                <div class="card bg-surface-1 border-border">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">💡 Conseils pour progresser</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="personalizedTips">
+                                            <!-- Chargé dynamiquement -->
+                                            <div class="tip-item mb-3">
+                                                <div class="d-flex align-items-start">
+                                                    <i class="fas fa-lightbulb text-warning me-2 mt-1"></i>
+                                                    <div>
+                                                        <small class="text-primary">Ajoutez plus de photos à vos produits pour augmenter vos ventes de 30%</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tip-item mb-3">
+                                                <div class="d-flex align-items-start">
+                                                    <i class="fas fa-lightbulb text-warning me-2 mt-1"></i>
+                                                    <div>
+                                                        <small class="text-primary">Répondez rapidement aux messages pour améliorer votre taux de conversion</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tip-item">
+                                                <div class="d-flex align-items-start">
+                                                    <i class="fas fa-lightbulb text-warning me-2 mt-1"></i>
+                                                    <div>
+                                                        <small class="text-primary">Partagez votre profil sur les réseaux sociaux pour attirer plus d'acheteurs</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Quêtes & Progression -->
+                    <div class="tab-pane fade" id="quests" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <!-- Quêtes de passage -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🎯 Quêtes de passage</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="levelQuests">
+                                            <!-- Chargé dynamiquement -->
+                                            <div class="text-center py-4">
+                                                <div class="spinner-border text-accent" role="status">
+                                                    <span class="visually-hidden">Chargement...</span>
+                                                </div>
+                                                <p class="text-muted mt-3">Chargement des quêtes...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Quêtes d'événements -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🏆 Événements en cours</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="eventQuests">
+                                            <!-- Chargé dynamiquement -->
+                                            <div class="text-center py-4">
+                                                <div class="spinner-border text-accent" role="status">
+                                                    <span class="visually-hidden">Chargement...</span>
+                                                </div>
+                                                <p class="text-muted mt-3">Chargement des événements...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <!-- Badges et récompenses -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🏅 Vos badges</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="achievementsList">
+                                            <!-- Chargé dynamiquement -->
+                                            <div class="text-center py-3">
+                                                <div class="spinner-border text-accent spinner-border-sm" role="status">
+                                                    <span class="visually-hidden">Chargement...</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Historique des quêtes -->
+                                <div class="card bg-surface-1 border-border">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">📜 Historique des quêtes</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="questHistory">
+                                            <!-- Chargé dynamiquement -->
+                                            <div class="text-center py-3">
+                                                <div class="spinner-border text-accent spinner-border-sm" role="status">
+                                                    <span class="visually-hidden">Chargement...</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Mes Produits -->
+                    <div class="tab-pane fade" id="products" role="tabpanel">
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3 class="mb-0">Mes produits en vente</h3>
+                                    <button class="btn btn-accent" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                                        <i class="fas fa-plus me-2"></i>Ajouter un produit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="products-management">
+                                    <!-- Filtres produits -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-surface-2 border-border text-primary" 
+                                                       placeholder="Rechercher un produit..." id="productSearch">
+                                                <button class="btn btn-outline-accent" type="button">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex gap-2 justify-content-md-end">
+                                                <select class="form-select bg-surface-2 border-border text-primary" 
+                                                        style="width: auto;" id="productStatusFilter">
+                                                    <option value="all">Tous les statuts</option>
+                                                    <option value="active">Actifs</option>
+                                                    <option value="draft">Brouillons</option>
+                                                    <option value="sold_out">Rupture</option>
+                                                    <option value="archived">Archivés</option>
+                                                </select>
+                                                <select class="form-select bg-surface-2 border-border text-primary" 
+                                                        style="width: auto;" id="productSort">
+                                                    <option value="newest">Plus récents</option>
+                                                    <option value="popular">Plus populaires</option>
+                                                    <option value="price">Prix</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Liste des produits -->
+                                    <div id="userProductsList">
+                                        <!-- Chargé dynamiquement -->
+                                        <div class="text-center py-5">
+                                            <div class="spinner-border text-accent" role="status">
+                                                <span class="visually-hidden">Chargement...</span>
+                                            </div>
+                                            <p class="text-muted mt-3">Chargement de vos produits...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Statistiques -->
+                    <div class="tab-pane fade" id="stats" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <!-- Graphique des performances -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">📈 Performances des ventes</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="chart-container" style="height: 300px;">
+                                            <canvas id="performanceChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Statistiques détaillées -->
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card bg-surface-1 border-border h-100">
+                                            <div class="card-body">
+                                                <h6 class="text-accent mb-3">🎯 Conversion</h6>
+                                                <div class="conversion-stats">
+                                                    <div class="conversion-item d-flex justify-content-between mb-3">
+                                                        <span>Taux de conversion</span>
+                                                        <span class="fw-bold text-success" id="conversionRate">0%</span>
+                                                    </div>
+                                                    <div class="conversion-item d-flex justify-content-between mb-3">
+                                                        <span>Vues moyennes</span>
+                                                        <span class="fw-bold text-info" id="averageViews">0</span>
+                                                    </div>
+                                                    <div class="conversion-item d-flex justify-content-between">
+                                                        <span>Temps avant vente</span>
+                                                        <span class="fw-bold text-warning" id="timeToSell">0j</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card bg-surface-1 border-border h-100">
+                                            <div class="card-body">
+                                                <h6 class="text-accent mb-3">💰 Revenus</h6>
+                                                <div class="revenue-stats">
+                                                    <div class="revenue-item d-flex justify-content-between mb-3">
+                                                        <span>Revenu total</span>
+                                                        <span class="fw-bold text-accent" id="totalRevenue">0€</span>
+                                                    </div>
+                                                    <div class="revenue-item d-flex justify-content-between mb-3">
+                                                        <span>Panier moyen</span>
+                                                        <span class="fw-bold text-primary" id="averageOrderValue">0€</span>
+                                                    </div>
+                                                    <div class="revenue-item d-flex justify-content-between">
+                                                        <span>Commission moyenne</span>
+                                                        <span class="fw-bold text-success" id="averageCommission">0%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <!-- Classements -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🏆 Vos classements</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="ranking-stats">
+                                            <div class="ranking-item mb-3 p-3 rounded bg-surface-2">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="mb-1">🌍 Global</h6>
+                                                        <small class="text-muted">Classement général</small>
+                                                    </div>
+                                                    <span class="badge bg-accent text-dark" id="globalRank">#0</span>
+                                                </div>
+                                            </div>
+                                            <div class="ranking-item mb-3 p-3 rounded bg-surface-2">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="mb-1">📅 Mensuel</h6>
+                                                        <small class="text-muted">Ce mois</small>
+                                                    </div>
+                                                    <span class="badge bg-accent text-dark" id="monthlyStatsRank">#0</span>
+                                                </div>
+                                            </div>
+                                            <div class="ranking-item p-3 rounded bg-surface-2">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h6 class="mb-1">⭐ Catégorie</h6>
+                                                        <small class="text-muted" id="topCategory">Votre meilleure catégorie</small>
+                                                    </div>
+                                                    <span class="badge bg-accent text-dark" id="categoryRank">#0</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Objectifs -->
+                                <div class="card bg-surface-1 border-border">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🎯 Objectifs mensuels</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="monthlyGoals">
+                                            <!-- Chargé dynamiquement -->
+                                            <div class="goal-item mb-3">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span class="small">Ventes mensuelles</span>
+                                                    <span class="small fw-bold">0/50</span>
+                                                </div>
+                                                <div class="progress bg-surface-2" style="height: 6px;">
+                                                    <div class="progress-bar bg-success" style="width: 0%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="goal-item mb-3">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span class="small">Revenus mensuels</span>
+                                                    <span class="small fw-bold">0€/1000€</span>
+                                                </div>
+                                                <div class="progress bg-surface-2" style="height: 6px;">
+                                                    <div class="progress-bar bg-accent" style="width: 0%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="goal-item">
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <span class="small">Nouveaux produits</span>
+                                                    <span class="small fw-bold">0/5</span>
+                                                </div>
+                                                <div class="progress bg-surface-2" style="height: 6px;">
+                                                    <div class="progress-bar bg-info" style="width: 0%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Paramètres -->
+                    <div class="tab-pane fade" id="settings" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <!-- Paramètres du compte -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">👤 Paramètres du compte</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="accountSettingsForm">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label text-primary">Nom d'utilisateur</label>
+                                                    <input type="text" class="form-control bg-surface-2 border-border text-primary" 
+                                                           id="username" value="" readonly>
+                                                    <small class="text-muted">Votre nom d'utilisateur ne peut pas être modifié</small>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label text-primary">Email</label>
+                                                    <input type="email" class="form-control bg-surface-2 border-border text-primary" 
+                                                           id="email" value="">
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label text-primary">Description du profil</label>
+                                                    <textarea class="form-control bg-surface-2 border-border text-primary" 
+                                                              id="profileDescription" rows="3" placeholder="Décrivez-vous et vos produits..."></textarea>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label text-primary">Localisation</label>
+                                                    <input type="text" class="form-control bg-surface-2 border-border text-primary" 
+                                                           id="location" placeholder="Ville, Pays">
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-accent">
+                                                        <i class="fas fa-save me-2"></i>Enregistrer les modifications
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <!-- Paramètres de notification -->
+                                <div class="card bg-surface-1 border-border">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🔔 Paramètres de notification</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="notificationSettingsForm">
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" id="notifSales" checked>
+                                                <label class="form-check-label text-primary" for="notifSales">
+                                                    Nouvelles ventes
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" id="notifMessages" checked>
+                                                <label class="form-check-label text-primary" for="notifMessages">
+                                                    Messages des acheteurs
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" id="notifQuests" checked>
+                                                <label class="form-check-label text-primary" for="notifQuests">
+                                                    Progression des quêtes
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-switch mb-3">
+                                                <input class="form-check-input" type="checkbox" id="notifRank" checked>
+                                                <label class="form-check-label text-primary" for="notifRank">
+                                                    Changements de rang
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="notifNewsletter">
+                                                <label class="form-check-label text-primary" for="notifNewsletter">
+                                                    Newsletter Tradefy
+                                                </label>
+                                            </div>
+                                            <div class="mt-4">
+                                                <button type="submit" class="btn btn-accent">
+                                                    <i class="fas fa-bell me-2"></i>Enregistrer les préférences
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <!-- Sécurité -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🔒 Sécurité</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="security-actions">
+                                            <button class="btn btn-outline-accent w-100 mb-3" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                                                <i class="fas fa-key me-2"></i>Changer le mot de passe
+                                            </button>
+                                            <button class="btn btn-outline-accent w-100 mb-3" onclick="setupTwoFactorAuth()">
+                                                <i class="fas fa-shield-alt me-2"></i>Authentification à deux facteurs
+                                            </button>
+                                            <button class="btn btn-outline-warning w-100" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                                                <i class="fas fa-exclamation-triangle me-2"></i>Supprimer le compte
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Intégrations -->
+                                <div class="card bg-surface-1 border-border">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🔗 Intégrations</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="integrations-list">
+                                            <div class="integration-item d-flex justify-content-between align-items-center mb-3">
+                                                <div>
+                                                    <i class="fab fa-paypal text-primary me-2"></i>
+                                                    <span class="text-primary">PayPal</span>
+                                                </div>
+                                                <span class="badge bg-success">Connecté</span>
+                                            </div>
+                                            <div class="integration-item d-flex justify-content-between align-items-center mb-3">
+                                                <div>
+                                                    <i class="fas fa-wallet text-primary me-2"></i>
+                                                    <span class="text-primary">Moneroo</span>
+                                                </div>
+                                                <span class="badge bg-success">Connecté</span>
+                                            </div>
+                                            <div class="integration-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <i class="fab fa-stripe text-primary me-2"></i>
+                                                    <span class="text-primary">Stripe</span>
+                                                </div>
+                                                <span class="badge bg-secondary">Non connecté</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <a href="integrations.html" class="btn btn-outline-accent btn-sm">
+                                                Gérer les intégrations
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-surface-3 text-secondary py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">
+                        &copy; 2025 <strong class="text-accent">By Charbelus</strong>. Conçu avec passion pour votre succès.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="integrations.html" class="text-secondary text-decoration-none me-3">
+                        <i class="fas fa-cog"></i> Intégrations
+                    </a>
+                    <a href="../frontend/support/help.html" class="text-secondary text-decoration-none">
+                        <i class="fas fa-question-circle"></i> Aide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Modal Édition du profil -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-surface-1 border-border">
+                <div class="modal-header bg-surface-2">
+                    <h5 class="modal-title text-primary">✏️ Modifier le profil</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label text-primary">Prénom</label>
+                                <input type="text" class="form-control bg-surface-2 border-border text-primary" id="editFirstName">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-primary">Nom</label>
+                                <input type="text" class="form-control bg-surface-2 border-border text-primary" id="editLastName">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label text-primary">Description</label>
+                                <textarea class="form-control bg-surface-2 border-border text-primary" id="editDescription" rows="3"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label text-primary">Localisation</label>
+                                <input type="text" class="form-control bg-surface-2 border-border text-primary" id="editLocation">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label text-primary">Site web</label>
+                                <input type="url" class="form-control bg-surface-2 border-border text-primary" id="editWebsite" placeholder="https://...">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-accent" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-accent" onclick="saveProfileChanges()">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/chart.min.js"></script>
+    <script src="assets/js/gamification/rankColors.js"></script>
+    <script src="assets/js/gamification/quests.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        // Variables globales
+        let currentUser = null;
+        let performanceChart = null;
+
+        // Initialisation de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+            setupEventListeners();
+        });
+
+        // Vérifier l'authentification
+        function checkAuthentication() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                document.getElementById('authRequired').style.display = 'block';
+                document.getElementById('profileContent').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('authRequired').style.display = 'none';
+            document.getElementById('profileContent').style.display = 'block';
+            loadUserProfile();
+        }
+
+        // Charger le profil utilisateur
+        async function loadUserProfile() {
+            try {
+                const token = localStorage.getItem('auth_token');
+                const response = await fetch('/api/auth/me', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    currentUser = data.data;
+                    displayUserProfile();
+                    loadUserStats();
+                    loadUserQuests();
+                    loadUserProducts();
+                    loadUserAchievements();
+                } else {
+                    throw new Error('Erreur de chargement du profil');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                showNotification('Erreur de chargement du profil', 'error');
+            }
+        }
+
+        // Afficher le profil utilisateur
+        function displayUserProfile() {
+            if (!currentUser) return;
+
+            // Informations de base
+            document.getElementById('userName').textContent = currentUser.username;
+            document.getElementById('userName').className = `profile-name h2 mb-1 ${currentUser.rank_class}`;
+            
+            // Avatar
+            const avatar = document.getElementById('userAvatar');
+            avatar.textContent = currentUser.username.charAt(0).toUpperCase();
+            avatar.className = `avatar-placeholder ${currentUser.rank_class}`;
+            
+            // Badge de rang
+            const rankBadge = document.getElementById('userRankBadge');
+            rankBadge.textContent = currentUser.rank_name;
+            rankBadge.className = `rank-badge ${currentUser.rank_class}`;
+            
+            // Date d'inscription
+            const joinDate = new Date(currentUser.created_at).toLocaleDateString('fr-FR');
+            document.getElementById('memberSince').textContent = `Membre depuis ${joinDate}`;
+            
+            // Description
+            document.getElementById('userDescription').textContent = 
+                currentUser.description || 'Ajoutez une description à votre profil pour attirer plus d\'acheteurs.';
+            
+            // Remplir le formulaire d'édition
+            document.getElementById('editFirstName').value = currentUser.first_name || '';
+            document.getElementById('editLastName').value = currentUser.last_name || '';
+            document.getElementById('editDescription').value = currentUser.description || '';
+            document.getElementById('editLocation').value = currentUser.location || '';
+            document.getElementById('editWebsite').value = currentUser.website || '';
+            
+            // Remplir les paramètres
+            document.getElementById('username').value = currentUser.username;
+            document.getElementById('email').value = currentUser.email;
+            document.getElementById('profileDescription').value = currentUser.description || '';
+            document.getElementById('location').value = currentUser.location || '';
+        }
+
+        // Charger les statistiques utilisateur
+        async function loadUserStats() {
+            try {
+                const token = localStorage.getItem('auth_token');
+                const response = await fetch('/api/user/stats', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayUserStats(data.data);
+                    initializePerformanceChart(data.data.performance_data);
+                }
+            } catch (error) {
+                console.error('Erreur chargement statistiques:', error);
+            }
+        }
+
+        // Afficher les statistiques utilisateur
+        function displayUserStats(stats) {
+            if (!stats) return;
+
+            // Aperçu rapide
+            document.getElementById('quickSales').textContent = stats.total_sales?.toLocaleString() || '0';
+            document.getElementById('quickRevenue').textContent = `${stats.total_revenue || '0'}€`;
+            document.getElementById('quickProducts').textContent = stats.total_products || '0';
+            document.getElementById('quickRating').textContent = stats.average_rating?.toFixed(1) || '0.0';
+
+            // Progression du rang
+            document.getElementById('currentRankName').textContent = currentUser.rank_name;
+            document.getElementById('currentSalesCount').textContent = currentUser.sales_count.toLocaleString();
+            
+            const progress = (currentUser.sales_count / stats.next_rank_threshold) * 100;
+            document.getElementById('rankProgressBar').style.width = `${Math.min(progress, 100)}%`;
+            document.getElementById('rankProgressText').textContent = 
+                `${currentUser.sales_count}/${stats.next_rank_threshold}`;
+            
+            document.getElementById('nextRankThreshold').textContent = stats.next_rank_threshold.toLocaleString();
+            document.getElementById('nextRankName').textContent = stats.next_rank_name;
+            document.getElementById('salesNeeded').textContent = 
+                `Il vous reste ${stats.next_rank_threshold - currentUser.sales_count} ventes à réaliser`;
+
+            // Performance du mois
+            document.getElementById('monthlySales').textContent = stats.monthly_sales || '0';
+            document.getElementById('monthlyRevenue').textContent = `${stats.monthly_revenue || '0'}€`;
+            document.getElementById('growthRate').textContent = stats.growth_rate || '0%';
+            document.getElementById('monthlyRank').textContent = `#${stats.monthly_rank || '0'}`;
+
+            // Statistiques détaillées
+            document.getElementById('conversionRate').textContent = stats.conversion_rate || '0%';
+            document.getElementById('averageViews').textContent = stats.average_views || '0';
+            document.getElementById('timeToSell').textContent = stats.time_to_sell || '0j';
+            document.getElementById('totalRevenue').textContent = `${stats.total_revenue || '0'}€`;
+            document.getElementById('averageOrderValue').textContent = `${stats.average_order_value || '0'}€`;
+            document.getElementById('averageCommission').textContent = stats.average_commission || '0%';
+
+            // Classements
+            document.getElementById('globalRank').textContent = `#${stats.global_rank || '0'}`;
+            document.getElementById('monthlyStatsRank').textContent = `#${stats.monthly_rank || '0'}`;
+            document.getElementById('categoryRank').textContent = `#${stats.category_rank || '0'}`;
+            document.getElementById('topCategory').textContent = stats.top_category || 'Votre meilleure catégorie';
+        }
+
+        // Initialiser le graphique de performance
+        function initializePerformanceChart(performanceData) {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            if (performanceChart) {
+                performanceChart.destroy();
+            }
+            
+            const labels = performanceData?.labels || ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun'];
+            const salesData = performanceData?.sales || [0, 0, 0, 0, 0, 0];
+            const revenueData = performanceData?.revenue || [0, 0, 0, 0, 0, 0];
+            
+            performanceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Ventes',
+                            data: salesData,
+                            borderColor: '#C8A951',
+                            backgroundColor: 'rgba(200, 169, 81, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Revenus (€)',
+                            data: revenueData,
+                            borderColor: '#10B981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#B0B0B0'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255,255,255,0.1)'
+                            },
+                            ticks: {
+                                color: '#B0B0B0'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255,255,255,0.1)'
+                            },
+                            ticks: {
+                                color: '#B0B0B0'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Charger les quêtes utilisateur
+        async function loadUserQuests() {
+            try {
+                const token = localStorage.getItem('auth_token');
+                const response = await fetch('/api/gamification/level-quest', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayUserQuests(data.data);
+                }
+            } catch (error) {
+                console.error('Erreur chargement quêtes:', error);
+            }
+        }
+
+        // Afficher les quêtes utilisateur
+        function displayUserQuests(quests) {
+            // Quête de passage active
+            const levelQuestCard = document.getElementById('levelQuestCard');
+            const activeLevelQuest = document.getElementById('activeLevelQuest');
+            
+            if (quests.active_level_quest) {
+                const quest = quests.active_level_quest;
+                const progress = (quest.current_progress / quest.required_progress) * 100;
+                
+                levelQuestCard.style.display = 'block';
+                activeLevelQuest.innerHTML = `
+                    <div class="level-quest-info">
+                        <h6 class="text-primary mb-3">${quest.title}</h6>
+                        <p class="text-muted mb-3">${quest.description}</p>
+                        
+                        <div class="quest-progress mb-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="small text-muted">Progression</span>
+                                <span class="small text-muted">${quest.current_progress}/${quest.required_progress}</span>
+                            </div>
+                            <div class="progress bg-surface-2" style="height: 10px;">
+                                <div class="progress-bar bg-warning" style="width: ${progress}%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="quest-rewards">
+                            <div class="reward-item d-flex align-items-center">
+                                <i class="fas fa-gift text-warning me-2"></i>
+                                <span class="small text-primary">Commission bonus: <strong>${quest.bonus_commission}%</strong></span>
+                            </div>
+                            <div class="reward-item d-flex align-items-center mt-1">
+                                <i class="fas fa-clock text-warning me-2"></i>
+                                <span class="small text-primary">Durée: <strong>${quest.duration_days} jours</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                levelQuestCard.style.display = 'none';
+            }
+
+            // Quêtes de niveau
+            const levelQuests = document.getElementById('levelQuests');
+            if (quests.level_quests && quests.level_quests.length > 0) {
+                let questsHTML = '';
+                quests.level_quests.forEach(quest => {
+                    const progress = (quest.current_progress / quest.required_progress) * 100;
+                    const isActive = quest.status === 'active';
+                    
+                    questsHTML += `
+                        <div class="quest-item mb-3 p-3 rounded bg-surface-2 ${isActive ? 'border-accent' : ''}">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-primary mb-0">${quest.title}</h6>
+                                <span class="badge ${isActive ? 'bg-warning' : 'bg-secondary'}">${quest.status_text}</span>
+                            </div>
+                            <p class="text-muted small mb-3">${quest.description}</p>
+                            <div class="quest-progress">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span>Progression</span>
+                                    <span>${quest.current_progress}/${quest.required_progress}</span>
+                                </div>
+                                <div class="progress bg-surface-1" style="height: 8px;">
+                                    <div class="progress-bar ${isActive ? 'bg-success' : 'bg-secondary'}" style="width: ${progress}%"></div>
+                                </div>
+                            </div>
+                            ${isActive ? `
+                                <div class="quest-reward mt-2">
+                                    <small class="text-warning">
+                                        <i class="fas fa-gift me-1"></i>
+                                        Récompense: ${quest.reward}
+                                    </small>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+                levelQuests.innerHTML = questsHTML;
+            }
+
+            // Quêtes d'événements
+            const eventQuests = document.getElementById('eventQuests');
+            if (quests.event_quests && quests.event_quests.length > 0) {
+                let eventsHTML = '';
+                quests.event_quests.forEach(event => {
+                    eventsHTML += `
+                        <div class="event-quest-item mb-3 p-3 rounded bg-surface-2">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-primary mb-0">${event.title}</h6>
+                                <span class="badge bg-info">${event.days_remaining} jours</span>
+                            </div>
+                            <p class="text-muted small mb-2">${event.description}</p>
+                            <div class="event-rewards">
+                                <small class="text-success">
+                                    <i class="fas fa-trophy me-1"></i>
+                                    ${event.reward}
+                                </small>
+                            </div>
+                        </div>
+                    `;
+                });
+                eventQuests.innerHTML = eventsHTML;
+            } else {
+                eventQuests.innerHTML = `
+                    <div class="text-center py-4">
+                        <i class="fas fa-calendar fa-2x text-muted mb-3"></i>
+                        <p class="text-muted">Aucun événement en cours pour le moment</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Charger les produits utilisateur
+        async function loadUserProducts() {
+            try {
+                const token = localStorage.getItem('auth_token');
+                const response = await fetch('/api/user/products', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayUserProducts(data.data);
+                }
+            } catch (error) {
+                console.error('Erreur chargement produits:', error);
+            }
+        }
+
+        // Afficher les produits utilisateur
+        function displayUserProducts(products) {
+            const productsList = document.getElementById('userProductsList');
+            
+            if (!products || products.length === 0) {
+                productsList.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">Aucun produit en vente</h4>
+                        <p class="text-muted mb-4">Commencez par ajouter votre premier produit</p>
+                        <button class="btn btn-accent" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                            <i class="fas fa-plus me-2"></i>Ajouter mon premier produit
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            let productsHTML = '<div class="row g-3">';
+            products.forEach(product => {
+                const price = (product.price_cents / 100).toFixed(2);
+                const inStock = product.stock > 0;
+                const stockClass = inStock ? 'text-success' : 'text-danger';
+                const stockText = inStock ? `${product.stock} en stock` : 'Rupture';
+                
+                productsHTML += `
+                    <div class="col-md-6 col-lg-4">
+                        <div class="product-management-card card bg-surface-1 border-border h-100">
+                            <div class="card-body">
+                                <div class="product-image mb-3">
+                                    <img src="${product.image_url || '/assets/images/placeholder-product.jpg'}" 
+                                         class="img-fluid rounded" alt="${product.title}"
+                                         style="height: 120px; width: 100%; object-fit: cover;">
+                                </div>
+                                <h6 class="text-primary mb-2">${product.title}</h6>
+                                <p class="text-muted small mb-3">${product.description.substring(0, 80)}...</p>
+                                <div class="product-meta">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="text-accent fw-bold">${price}€</span>
+                                        <span class="small ${stockClass}">${stockText}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">${product.sales_count || 0} ventes</small>
+                                        <div class="product-actions">
+                                            <button class="btn btn-outline-accent btn-sm" onclick="editProduct(${product.id})">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            productsHTML += '</div>';
+            
+            productsList.innerHTML = productsHTML;
+        }
+
+        // Charger les réussites utilisateur
+        async function loadUserAchievements() {
+            try {
+                const token = localStorage.getItem('auth_token');
+                const response = await fetch('/api/user/achievements', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayUserAchievements(data.data);
+                }
+            } catch (error) {
+                console.error('Erreur chargement réussites:', error);
+            }
+        }
+
+        // Afficher les réussites utilisateur
+        function displayUserAchievements(achievements) {
+            // Badges récents
+            const recentBadges = document.getElementById('recentBadges');
+            if (achievements.recent_badges && achievements.recent_badges.length > 0) {
+                let badgesHTML = '';
+                achievements.recent_badges.slice(0, 3).forEach(badge => {
+                    badgesHTML += `
+                        <div class="badge-item mb-3 text-center">
+                            <div class="badge-icon ${badge.rarity} mb-2" style="font-size: 2rem;">
+                                ${badge.icon || '🏆'}
+                            </div>
+                            <h6 class="text-primary small mb-1">${badge.name}</h6>
+                            <small class="text-muted">${new Date(badge.awarded_at).toLocaleDateString('fr-FR')}</small>
+                        </div>
+                    `;
+                });
+                recentBadges.innerHTML = badgesHTML;
+            }
+
+            // Liste complète des badges
+            const achievementsList = document.getElementById('achievementsList');
+            if (achievements.all_badges && achievements.all_badges.length > 0) {
+                let badgesHTML = '<div class="row g-2">';
+                achievements.all_badges.forEach(badge => {
+                    badgesHTML += `
+                        <div class="col-6">
+                            <div class="achievement-badge text-center p-2 rounded bg-surface-2">
+                                <div class="badge-icon ${badge.rarity} mb-1" style="font-size: 1.5rem;">
+                                    ${badge.icon || '🏆'}
+                                </div>
+                                <small class="text-primary">${badge.name}</small>
+                            </div>
+                        </div>
+                    `;
+                });
+                badgesHTML += '</div>';
+                achievementsList.innerHTML = badgesHTML;
+            }
+        }
+
+        // Configuration des écouteurs d'événements
+        function setupEventListeners() {
+            // Déconnexion
+            document.getElementById('logoutLink').addEventListener('click', logout);
+            
+            // Formulaires
+            document.getElementById('accountSettingsForm').addEventListener('submit', saveAccountSettings);
+            document.getElementById('notificationSettingsForm').addEventListener('submit', saveNotificationSettings);
+            
+            // Recherche produits
+            document.getElementById('productSearch').addEventListener('input', filterUserProducts);
+            document.getElementById('productStatusFilter').addEventListener('change', filterUserProducts);
+            document.getElementById('productSort').addEventListener('change', filterUserProducts);
+        }
+
+        // Fonctions utilitaires
+        function switchToTab(tabName) {
+            const tab = document.querySelector(`[data-bs-target="#${tabName}"]`);
+            if (tab) {
+                new bootstrap.Tab(tab).show();
+            }
+        }
+
+        function shareProfile() {
+            if (navigator.share) {
+                navigator.share({
+                    title: `Profil de ${currentUser.username} sur Tradefy`,
+                    text: `Découvrez le profil de ${currentUser.username} sur Tradefy - ${currentUser.rank_name}`,
+                    url: `${window.location.origin}/user/${currentUser.username}`
+                });
+            } else {
+                // Fallback pour les navigateurs qui ne supportent pas l'API Share
+                const url = `${window.location.origin}/user/${currentUser.username}`;
+                navigator.clipboard.writeText(url).then(() => {
+                    showNotification('Lien copié dans le presse-papier!', 'success');
+                });
+            }
+        }
+
+        function saveProfileChanges() {
+            // Implémentation de la sauvegarde des modifications du profil
+            showNotification('Profil mis à jour avec succès!', 'success');
+            bootstrap.Modal.getInstance(document.getElementById('editProfileModal')).hide();
+        }
+
+        function saveAccountSettings(e) {
+            e.preventDefault();
+            showNotification('Paramètres du compte mis à jour!', 'success');
+        }
+
+        function saveNotificationSettings(e) {
+            e.preventDefault();
+            showNotification('Préférences de notification sauvegardées!', 'success');
+        }
+
+        function filterUserProducts() {
+            // Implémentation du filtrage des produits
+            console.log('Filtrage des produits...');
+        }
+
+        function editProduct(productId) {
+            // Implémentation de l'édition de produit
+            console.log('Édition du produit:', productId);
+        }
+
+        function setupTwoFactorAuth() {
+            showNotification('Fonctionnalité bientôt disponible!', 'info');
+        }
+
+        function logout() {
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('refresh_token');
+            window.location.href = '/';
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} position-fixed top-0 end-0 m-3`;
+            notification.style.zIndex = '1060';
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check' : 'info'}-circle me-2"></i>
+                ${message}
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+
+    <style>
+        .profile-header {
+            background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-1) 100%);
+        }
+        
+        .profile-avatar {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .avatar-placeholder {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--bg-primary);
+        }
+        
+        .btn-avatar-edit {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            border: none;
+            color: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .quick-stats-card {
+            border: 2px solid var(--accent-gold);
+        }
+        
+        .nav-pills .nav-link.active {
+            background: var(--accent-gradient);
+            border: none;
+            color: var(--bg-primary);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            margin: 0 2px;
+        }
+        
+        .nav-pills .nav-link:hover {
+            background: var(--surface-2);
+            border-color: var(--accent-gold);
+        }
+        
+        .next-rank-info {
+            border-left: 4px solid var(--accent-gold);
+        }
+        
+        .progress-container .progress {
+            border-radius: 10px;
+        }
+        
+        .progress-bar {
+            border-radius: 10px;
+        }
+        
+        .performance-stats .performance-item {
+            border-bottom: 1px solid var(--border-light);
+            padding: 0.5rem 0;
+        }
+        
+        .performance-stats .performance-item:last-child {
+            border-bottom: none;
+        }
+        
+        .badge-icon.rare { color: var(--accent-gold); }
+        .badge-icon.epic { color: var(--negociant-color); }
+        .badge-icon.legendary { color: var(--senior-color); }
+        .badge-icon.common { color: var(--profane-color); }
+        
+        .product-management-card {
+            transition: all 0.3s ease;
+        }
+        
+        .product-management-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: var(--accent-gold);
+        }
+        
+        .ranking-item, .goal-item {
+            transition: all 0.3s ease;
+        }
+        
+        .ranking-item:hover, .goal-item:hover {
+            background: var(--surface-1) !important;
+            transform: translateX(3px);
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+        
+        .integration-item {
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .integration-item:hover {
+            background: var(--surface-2);
+        }
+        
+        .security-actions .btn {
+            transition: all 0.3s ease;
+        }
+        
+        .security-actions .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-header .row {
+                text-align: center;
+            }
+            
+            .profile-avatar {
+                margin: 0 auto 1rem !important;
+            }
+            
+            .avatar-placeholder {
+                width: 80px;
+                height: 80px;
+                font-size: 1.5rem;
+            }
+            
+            .profile-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .profile-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</body>
+</html>

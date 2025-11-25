@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique - Tradefy</title>
+    
+    <!-- CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/colors.css" rel="stylesheet">
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="Découvrez les produits exclusifs sur Tradefy - Marketplace gamifiée avec les meilleurs vendeurs">
+    <meta property="og:title" content="Boutique - Tradefy">
+    <meta property="og:description" content="Parcourez notre sélection de produits et trouvez les meilleures offres">
+</head>
+<body class="dark-theme">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-surface-1 border-bottom border-accent fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-accent" href="">
+                 Tradefy
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="products.html">Boutique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="leaderboard.html">Classement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Événements</a>
+                    </li>
+                </ul>
+                
+                <!-- Barre de recherche -->
+                <div class="d-flex me-3">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control bg-surface-2 border-border text-primary" 
+                               placeholder="Rechercher un produit..." id="searchInput">
+                        <button class="btn btn-accent" type="button" id="searchButton">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link" href="profile.html" id="profileLink" style="display: none;">
+                        <i class="fas fa-user"></i> Mon Profil
+                    </a>
+                    <a class="nav-link" href="login.html" id="authLink">
+                        <i class="fas fa-sign-in-alt"></i> Connexion
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- En-tête de page -->
+    <section class="page-header bg-surface-2 py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="h2 mb-2">🛍️ Notre Boutique</h1>
+                    <p class="text-muted mb-0">
+                        Découvrez des produits exceptionnels vendus par notre communauté d'experts
+                    </p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-accent btn-sm active" data-sort="newest">
+                            <i class="fas fa-clock"></i> Récents
+                        </button>
+                        <button type="button" class="btn btn-outline-accent btn-sm" data-sort="popular">
+                            <i class="fas fa-fire"></i> Populaires
+                        </button>
+                        <button type="button" class="btn btn-outline-accent btn-sm" data-sort="price">
+                            <i class="fas fa-euro-sign"></i> Prix
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtres et produits -->
+    <section class="products-section py-4">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar Filtres -->
+                <div class="col-lg-3 mb-4">
+                    <div class="filters-card card bg-surface-1 border-border">
+                        <div class="card-header bg-surface-2">
+                            <h5 class="mb-0">🔍 Filtres</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Filtre Catégorie -->
+                            <div class="filter-group mb-4">
+                                <h6 class="text-accent mb-3">📂 Catégories</h6>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input category-filter" type="checkbox" value="electronics" id="cat-electronics">
+                                    <label class="form-check-label text-primary small" for="cat-electronics">
+                                        Électronique
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input category-filter" type="checkbox" value="fashion" id="cat-fashion">
+                                    <label class="form-check-label text-primary small" for="cat-fashion">
+                                        Mode & Accessoires
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input category-filter" type="checkbox" value="home" id="cat-home">
+                                    <label class="form-check-label text-primary small" for="cat-home">
+                                        Maison & Jardin
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input category-filter" type="checkbox" value="sports" id="cat-sports">
+                                    <label class="form-check-label text-primary small" for="cat-sports">
+                                        Sports & Loisirs
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input category-filter" type="checkbox" value="digital" id="cat-digital">
+                                    <label class="form-check-label text-primary small" for="cat-digital">
+                                        Produits Digitaux
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Filtre Rang Vendeur -->
+                            <div class="filter-group mb-4">
+                                <h6 class="text-accent mb-3">🎯 Rang du Vendeur</h6>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input rank-filter" type="checkbox" value="senior" id="rank-senior">
+                                    <label class="form-check-label text-primary small" for="rank-senior">
+                                        <span class="rank-badge senior">Senior</span>
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input rank-filter" type="checkbox" value="magnat" id="rank-magnat">
+                                    <label class="form-check-label text-primary small" for="rank-magnat">
+                                        <span class="rank-badge magnat">Magnat</span>
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input rank-filter" type="checkbox" value="courtier" id="rank-courtier">
+                                    <label class="form-check-label text-primary small" for="rank-courtier">
+                                        <span class="rank-badge courtier">Courtier</span>
+                                    </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input rank-filter" type="checkbox" value="negociant" id="rank-negociant">
+                                    <label class="form-check-label text-primary small" for="rank-negociant">
+                                        <span class="rank-badge negociant">Négociant</span>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input rank-filter" type="checkbox" value="all" id="rank-all" checked>
+                                    <label class="form-check-label text-primary small" for="rank-all">
+                                        Tous les rangs
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Filtre Prix -->
+                            <div class="filter-group mb-4">
+                                <h6 class="text-accent mb-3">💰 Prix</h6>
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <input type="number" class="form-control form-control-sm bg-surface-2 border-border text-primary" 
+                                               placeholder="Min" id="priceMin">
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="number" class="form-control form-control-sm bg-surface-2 border-border text-primary" 
+                                               placeholder="Max" id="priceMax">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Filtre Stock -->
+                            <div class="filter-group">
+                                <h6 class="text-accent mb-3">📦 Disponibilité</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input stock-filter" type="checkbox" value="in_stock" id="stock-available" checked>
+                                    <label class="form-check-label text-primary small" for="stock-available">
+                                        En stock uniquement
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Boutons Filtres -->
+                            <div class="d-grid gap-2 mt-4">
+                                <button class="btn btn-accent btn-sm" id="applyFilters">
+                                    <i class="fas fa-filter"></i> Appliquer
+                                </button>
+                                <button class="btn btn-outline-accent btn-sm" id="resetFilters">
+                                    <i class="fas fa-redo"></i> Réinitialiser
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vendeurs en Vedette -->
+                    <div class="featured-vendors card bg-surface-1 border-border mt-4">
+                        <div class="card-header bg-surface-2">
+                            <h6 class="mb-0">⭐ Vendeurs Stars</h6>
+                        </div>
+                        <div class="card-body">
+                            <div id="featuredVendorsList">
+                                <!-- Chargé dynamiquement -->
+                                <div class="text-center py-3">
+                                    <div class="spinner-border text-accent spinner-border-sm" role="status">
+                                        <span class="visually-hidden">Chargement...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Liste des Produits -->
+                <div class="col-lg-9">
+                    <!-- En-tête produits -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <span class="text-muted" id="productsCount">Chargement des produits...</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <select class="form-select form-select-sm bg-surface-2 border-border text-primary" 
+                                    style="width: auto;" id="itemsPerPage">
+                                <option value="12">12 produits</option>
+                                <option value="24">24 produits</option>
+                                <option value="48">48 produits</option>
+                            </select>
+                            <div class="view-toggle btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-outline-accent active" data-view="grid">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-accent" data-view="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grille des produits -->
+                    <div class="row g-4" id="productsGrid">
+                        <!-- Produits chargés dynamiquement -->
+                        <div class="col-12 text-center py-5">
+                            <div class="spinner-border text-accent" role="status">
+                                <span class="visually-hidden">Chargement des produits...</span>
+                            </div>
+                            <p class="text-muted mt-3">Chargement des produits...</p>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav aria-label="Pagination produits" class="mt-5">
+                        <ul class="pagination justify-content-center" id="productsPagination">
+                            <!-- Pagination générée dynamiquement -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Vendeurs Recommandés -->
+    <section class="recommended-vendors bg-surface-2 py-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <h3>🏆 Vendeurs d'Exception</h3>
+                    <p class="text-muted">Découvrez nos vendeurs les plus réputés et leurs produits</p>
+                </div>
+            </div>
+            <div class="row" id="recommendedVendors">
+                <!-- Chargé dynamiquement -->
+                <div class="col-12 text-center py-3">
+                    <div class="spinner-border text-accent" role="status">
+                        <span class="visually-hidden">Chargement...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-3 text-secondary py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">
+                        &copy; 2025 <strong class="text-accent">By Charbelus</strong>. Conçu avec passion pour votre succès.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="integrations.html" class="text-secondary text-decoration-none me-3">
+                        <i class="fas fa-cog"></i> Intégrations
+                    </a>
+                    <a href="#" class="text-secondary text-decoration-none">
+                        <i class="fas fa-question-circle"></i> Aide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/gamification/rankColors.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        // Variables globales
+        let currentProducts = [];
+        let filteredProducts = [];
+        let currentPage = 1;
+        let itemsPerPage = 12;
+        let currentSort = 'newest';
+        let currentView = 'grid';
+
+        // Initialisation de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            loadFeaturedVendors();
+            loadRecommendedVendors();
+            setupEventListeners();
+            checkAuthStatus();
+        });
+
+        // Charger les produits
+        async function loadProducts() {
+            try {
+                showLoadingState();
+                
+                const response = await fetch('/api/products');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    currentProducts = data.data;
+                    applyFilters();
+                } else {
+                    throw new Error('Erreur de chargement des produits');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                showErrorState('Impossible de charger les produits');
+            }
+        }
+
+        // Appliquer les filtres
+        function applyFilters() {
+            let filtered = [...currentProducts];
+            
+            // Filtre par catégorie
+            const selectedCategories = getSelectedCheckboxes('category-filter');
+            if (selectedCategories.length > 0) {
+                filtered = filtered.filter(product => 
+                    selectedCategories.includes(product.category)
+                );
+            }
+            
+            // Filtre par rang
+            const selectedRanks = getSelectedCheckboxes('rank-filter');
+            if (selectedRanks.length > 0 && !selectedRanks.includes('all')) {
+                filtered = filtered.filter(product => 
+                    selectedRanks.includes(product.vendor_rank)
+                );
+            }
+            
+            // Filtre par prix
+            const priceMin = document.getElementById('priceMin').value;
+            const priceMax = document.getElementById('priceMax').value;
+            
+            if (priceMin) {
+                filtered = filtered.filter(product => product.price_cents >= priceMin * 100);
+            }
+            if (priceMax) {
+                filtered = filtered.filter(product => product.price_cents <= priceMax * 100);
+            }
+            
+            // Filtre par stock
+            const inStockOnly = document.getElementById('stock-available').checked;
+            if (inStockOnly) {
+                filtered = filtered.filter(product => product.stock > 0);
+            }
+            
+            // Recherche texte
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (searchTerm) {
+                filtered = filtered.filter(product => 
+                    product.title.toLowerCase().includes(searchTerm) ||
+                    product.description.toLowerCase().includes(searchTerm) ||
+                    product.vendor_name.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // Tri
+            sortProducts(filtered);
+            
+            filteredProducts = filtered;
+            currentPage = 1;
+            displayProducts();
+        }
+
+        // Trier les produits
+        function sortProducts(products) {
+            switch(currentSort) {
+                case 'newest':
+                    products.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                    break;
+                case 'popular':
+                    products.sort((a, b) => b.sales_count - a.sales_count);
+                    break;
+                case 'price':
+                    products.sort((a, b) => a.price_cents - b.price_cents);
+                    break;
+            }
+        }
+
+        // Afficher les produits
+        function displayProducts() {
+            const grid = document.getElementById('productsGrid');
+            const pagination = document.getElementById('productsPagination');
+            const countElement = document.getElementById('productsCount');
+            
+            if (filteredProducts.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">Aucun produit trouvé</h4>
+                        <p class="text-muted">Essayez de modifier vos critères de recherche</p>
+                        <button class="btn btn-accent mt-2" onclick="resetFiltersAndSearch()">
+                            <i class="fas fa-redo"></i> Réinitialiser les filtres
+                        </button>
+                    </div>
+                `;
+                pagination.innerHTML = '';
+                countElement.textContent = '0 produit trouvé';
+                return;
+            }
+            
+            // Calcul de la pagination
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageProducts = filteredProducts.slice(startIndex, endIndex);
+            
+            // Affichage des produits
+            let productsHTML = '';
+            pageProducts.forEach(product => {
+                productsHTML += createProductCard(product);
+            });
+            
+            grid.innerHTML = productsHTML;
+            
+            // Mise à jour du compteur
+            countElement.textContent = `${filteredProducts.length} produit${filteredProducts.length > 1 ? 's' : ''} trouvé${filteredProducts.length > 1 ? 's' : ''}`;
+            
+            // Génération de la pagination
+            generatePagination(totalPages);
+        }
+
+        // Créer une carte produit
+        function createProductCard(product) {
+            const price = (product.price_cents / 100).toFixed(2);
+            const inStock = product.stock > 0;
+            const stockClass = inStock ? 'text-success' : 'text-danger';
+            const stockText = inStock ? `${product.stock} en stock` : 'Rupture';
+            
+            if (currentView === 'grid') {
+                return `
+                    <div class="col-md-6 col-xl-4">
+                        <div class="product-card card bg-surface-1 border-border h-100">
+                            <div class="product-badges position-absolute top-0 start-0 p-2">
+                                ${product.vendor_badge ? `<span class="badge bg-warning text-dark me-1">${product.vendor_badge}</span>` : ''}
+                                ${!inStock ? '<span class="badge bg-danger">Rupture</span>' : ''}
+                            </div>
+                            <img src="${product.image_url || '/assets/images/placeholder-product.jpg'}" 
+                                 class="card-img-top product-image" alt="${product.title}"
+                                 style="height: 200px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column">
+                                <div class="vendor-info mb-2">
+                                    <small class="text-muted">Vendeur:</small>
+                                    <a href="/user/${product.vendor_username}" class="vendor-name ${product.vendor_rank} text-decoration-none">
+                                        ${product.vendor_name}
+                                    </a>
+                                    <span class="rank-badge ${product.vendor_rank} ms-1">${product.vendor_rank_display}</span>
+                                </div>
+                                <h6 class="card-title text-primary mb-2">${product.title}</h6>
+                                <p class="card-text text-muted small flex-grow-1">${product.description.substring(0, 100)}...</p>
+                                <div class="product-meta d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <span class="text-accent fw-bold h5 mb-0">${price}€</span>
+                                        <small class="d-block ${stockClass}">${stockText}</small>
+                                    </div>
+                                    <button class="btn btn-accent btn-sm" ${!inStock ? 'disabled' : ''} 
+                                            onclick="addToCart(${product.id})">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Vue liste
+                return `
+                    <div class="col-12">
+                        <div class="product-card card bg-surface-1 border-border mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-3">
+                                    <img src="${product.image_url || '/assets/images/placeholder-product.jpg'}" 
+                                         class="img-fluid h-100 product-image" alt="${product.title}"
+                                         style="object-fit: cover;">
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6">
+                                                <div class="vendor-info mb-2">
+                                                    <small class="text-muted">Vendeur:</small>
+                                                    <a href="/user/${product.vendor_username}" class="vendor-name ${product.vendor_rank} text-decoration-none">
+                                                        ${product.vendor_name}
+                                                    </a>
+                                                    <span class="rank-badge ${product.vendor_rank} ms-1">${product.vendor_rank_display}</span>
+                                                </div>
+                                                <h5 class="card-title text-primary mb-2">${product.title}</h5>
+                                                <p class="card-text text-muted">${product.description}</p>
+                                            </div>
+                                            <div class="col-md-3 text-center">
+                                                <div class="mb-2">
+                                                    <span class="text-accent fw-bold h4">${price}€</span>
+                                                </div>
+                                                <small class="${stockClass}">${stockText}</small>
+                                            </div>
+                                            <div class="col-md-3 text-center">
+                                                <button class="btn btn-accent mb-2" ${!inStock ? 'disabled' : ''}
+                                                        onclick="addToCart(${product.id})">
+                                                    <i class="fas fa-cart-plus me-2"></i>Ajouter
+                                                </button>
+                                                <br>
+                                                <a href="/product/${product.id}" class="btn btn-outline-accent btn-sm">
+                                                    Voir détails
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Générer la pagination
+        function generatePagination(totalPages) {
+            const pagination = document.getElementById('productsPagination');
+            let paginationHTML = '';
+            
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            // Bouton précédent
+            paginationHTML += `
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                    <a class="page-link bg-surface-2 border-border text-primary" href="#" 
+                       onclick="changePage(${currentPage - 1})">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </li>
+            `;
+            
+            // Pages
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    paginationHTML += `
+                        <li class="page-item ${i === currentPage ? 'active' : ''}">
+                            <a class="page-link bg-surface-2 border-border text-primary" href="#" 
+                               onclick="changePage(${i})">${i}</a>
+                        </li>
+                    `;
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    paginationHTML += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+                }
+            }
+            
+            // Bouton suivant
+            paginationHTML += `
+                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                    <a class="page-link bg-surface-2 border-border text-primary" href="#" 
+                       onclick="changePage(${currentPage + 1})">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            `;
+            
+            pagination.innerHTML = paginationHTML;
+        }
+
+        // Charger les vendeurs en vedette
+        async function loadFeaturedVendors() {
+            try {
+                const response = await fetch('/api/gamification/leaderboard/monthly?limit=5');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    let vendorsHTML = '';
+                    data.data.forEach(vendor => {
+                        vendorsHTML += `
+                            <div class="featured-vendor mb-3 p-3 rounded bg-surface-2">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <a href="/user/${vendor.username}" class="vendor-name ${vendor.rank_class} text-decoration-none fw-bold">
+                                        ${vendor.username}
+                                    </a>
+                                    <span class="rank-badge ${vendor.rank_class}">${vendor.rank_name}</span>
+                                </div>
+                                <div class="vendor-stats small text-muted">
+                                    <div>${vendor.sales_count} ventes</div>
+                                    <div class="text-success">${vendor.rating || '5.0'} ★</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    document.getElementById('featuredVendorsList').innerHTML = vendorsHTML;
+                }
+            } catch (error) {
+                console.error('Erreur chargement vendeurs vedette:', error);
+            }
+        }
+
+        // Charger les vendeurs recommandés
+        async function loadRecommendedVendors() {
+            try {
+                const response = await fetch('/api/gamification/leaderboard/global?limit=6');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    let vendorsHTML = '';
+                    data.data.forEach(vendor => {
+                        vendorsHTML += `
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="recommended-vendor card bg-surface-1 border-border text-center h-100">
+                                    <div class="card-body">
+                                        <div class="vendor-avatar mb-3">
+                                            <div class="avatar-placeholder ${vendor.rank_class}">
+                                                ${vendor.username.charAt(0).toUpperCase()}
+                                            </div>
+                                        </div>
+                                        <h6 class="vendor-name ${vendor.rank_class} mb-2">${vendor.username}</h6>
+                                        <span class="rank-badge ${vendor.rank_class} mb-3">${vendor.rank_name}</span>
+                                        <div class="vendor-stats small text-muted mb-3">
+                                            <div class="mb-1">${vendor.sales_count} ventes totales</div>
+                                            <div class="text-success">${vendor.rating || '5.0'} ★ Évaluation</div>
+                                        </div>
+                                        <a href="/user/${vendor.username}" class="btn btn-outline-accent btn-sm">
+                                            Voir boutique
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    document.getElementById('recommendedVendors').innerHTML = vendorsHTML;
+                }
+            } catch (error) {
+                console.error('Erreur chargement vendeurs recommandés:', error);
+            }
+        }
+
+        // Configuration des écouteurs d'événements
+        function setupEventListeners() {
+            // Recherche
+            document.getElementById('searchButton').addEventListener('click', applyFilters);
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') applyFilters();
+            });
+            
+            // Filtres
+            document.getElementById('applyFilters').addEventListener('click', applyFilters);
+            document.getElementById('resetFilters').addEventListener('click', resetFilters);
+            
+            // Tri
+            document.querySelectorAll('[data-sort]').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('[data-sort]').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentSort = this.dataset.sort;
+                    applyFilters();
+                });
+            });
+            
+            // Vue
+            document.querySelectorAll('[data-view]').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('[data-view]').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    currentView = this.dataset.view;
+                    displayProducts();
+                });
+            });
+            
+            // Items par page
+            document.getElementById('itemsPerPage').addEventListener('change', function() {
+                itemsPerPage = parseInt(this.value);
+                currentPage = 1;
+                displayProducts();
+            });
+        }
+
+        // Fonctions utilitaires
+        function getSelectedCheckboxes(className) {
+            const checkboxes = document.querySelectorAll(`.${className}:checked`);
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            displayProducts();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetFilters() {
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            document.getElementById('rank-all').checked = true;
+            document.getElementById('stock-available').checked = true;
+            document.getElementById('priceMin').value = '';
+            document.getElementById('priceMax').value = '';
+            document.getElementById('searchInput').value = '';
+            applyFilters();
+        }
+
+        function resetFiltersAndSearch() {
+            resetFilters();
+            document.getElementById('searchInput').focus();
+        }
+
+        function addToCart(productId) {
+            // Implémentation simplifiée - à connecter avec le système de panier
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                window.location.href = '/login.html';
+                return;
+            }
+            
+            // Ajouter au panier local
+            let cart = JSON.parse(localStorage.getItem('tradefy_cart') || '[]');
+            const existingItem = cart.find(item => item.product_id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ product_id: productId, quantity: 1 });
+            }
+            
+            localStorage.setItem('tradefy_cart', JSON.stringify(cart));
+            
+            // Notification
+            showNotification('Produit ajouté au panier!', 'success');
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} position-fixed top-0 end-0 m-3`;
+            notification.style.zIndex = '1060';
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check' : 'info'}-circle me-2"></i>
+                ${message}
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function showLoadingState() {
+            document.getElementById('productsGrid').innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-accent" role="status">
+                        <span class="visually-hidden">Chargement...</span>
+                    </div>
+                    <p class="text-muted mt-3">Chargement des produits...</p>
+                </div>
+            `;
+        }
+
+        function showErrorState(message) {
+            document.getElementById('productsGrid').innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <h4 class="text-muted">Erreur de chargement</h4>
+                    <p class="text-muted">${message}</p>
+                    <button class="btn btn-accent mt-2" onclick="loadProducts()">
+                        <i class="fas fa-redo"></i> Réessayer
+                    </button>
+                </div>
+            `;
+        }
+
+        function checkAuthStatus() {
+            const token = localStorage.getItem('auth_token');
+            if (token) {
+                document.getElementById('profileLink').style.display = 'block';
+                document.getElementById('authLink').innerHTML = '<i class="fas fa-sign-out-alt"></i> Déconnexion';
+                document.getElementById('authLink').onclick = logout;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('refresh_token');
+            window.location.href = '/';
+        }
+    </script>
+
+    <style>
+        .product-card {
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: var(--accent-gold);
+        }
+        
+        .product-image {
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+        
+        .product-badges {
+            z-index: 1;
+        }
+        
+        .filters-card, .featured-vendors {
+            position: sticky;
+            top: 20px;
+        }
+        
+        .avatar-placeholder {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto;
+            color: var(--bg-primary);
+        }
+        
+        .avatar-placeholder.profane { background: var(--profane-gradient); }
+        .avatar-placeholder.debutant { background: var(--debutant-gradient); }
+        .avatar-placeholder.marchand { background: var(--marchand-gradient); }
+        .avatar-placeholder.negociant { background: var(--negociant-gradient); }
+        .avatar-placeholder.courtier { background: var(--courtier-gradient); }
+        .avatar-placeholder.magnat { background: var(--magnat-gradient); }
+        .avatar-placeholder.senior { background: var(--senior-gradient); }
+        
+        .page-item.active .page-link {
+            background: var(--accent-gradient);
+            border-color: var(--accent-gold);
+            color: var(--bg-primary);
+        }
+        
+        .page-link:hover {
+            background: var(--surface-2);
+            border-color: var(--accent-gold);
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+        
+        .recommended-vendor {
+            transition: all 0.3s ease;
+        }
+        
+        .recommended-vendor:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .featured-vendor {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .featured-vendor:hover {
+            border-color: var(--accent-gold);
+            background: var(--surface-1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .filters-card {
+                position: static;
+                margin-bottom: 1rem;
+            }
+            
+            .view-toggle {
+                display: none;
+            }
+        }
+    </style>
+</body>
+</html>

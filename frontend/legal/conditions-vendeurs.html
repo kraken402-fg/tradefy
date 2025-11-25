@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditions des Vendeurs - Tradefy</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+</head>
+<body class="dark-theme">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-surface-1 border-bottom border-accent fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-accent" href="">
+                 Tradefy
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../support/contact.html">Contact</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="../register.html">Inscription</a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link" href="../profile.html" id="profileLink" style="display: '';">
+                        <i class="fas fa-user"></i> Mon Profil
+                    </a>
+                    <a class="nav-link" href="../login.html" id="authLink">
+                        <i class="fas fa-sign-in-alt"></i> Connexion
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>  <!-- Navigation -->
+
+    <main class="legal-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <article class="legal-content">
+                        <h1>Conditions Générales des Vendeurs</h1>
+                        <p class="last-updated">Dernière mise à jour : <time datetime="2025-11-18">18 Novembre 2025</time></p>
+
+                        <section class="legal-section">
+                            <h2>1. Acceptation des Conditions</h2>
+                            <p>En créant un compte vendeur sur Tradefy, vous acceptez sans réserve les présentes conditions générales.</p>
+                        </section>
+
+                        <section class="legal-section">
+                            <h2>2. Éligibilité au Statut de Vendeur</h2>
+                            <ul>
+                                <li>Être âgé d'au moins 18 ans</li>
+                                <li>Disposer d'une pièce d'identité valide</li>
+                                <li>Accepter le système de commissions progressives</li>
+                                <li>Respecter les lois en vigueur concernant la vente en ligne</li>
+                            </ul>
+                        </section>
+
+                        <section class="legal-section">
+                            <h2>3. Système de Rangs et Commissions</h2>
+                            <h3>3.1. Échelle des Commissions</h3>
+                            <div class="commission-table">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rang</th>
+                                            <th>Ventes Requises</th>
+                                            <th>Commission</th>
+                                            <th>Commission Quête</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="vendor-name profane">Profane</span></td>
+                                            <td>0-24</td>
+                                            <td>4.50%</td>
+                                            <td>5.00%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="vendor-name debutant">Débutant</span></td>
+                                            <td>25-74</td>
+                                            <td>4.25%</td>
+                                            <td>6.00%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="vendor-name marchand">Marchand</span></td>
+                                            <td>75-227</td>
+                                            <td>4.00%</td>
+                                            <td>7.00%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="vendor-name negociant">Négociant</span></td>
+                                            <td>228-554</td>
+                                            <td>3.75%</td>
+                                            <td>8.00%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="vendor-name courtier">Courtier</span></td>
+                                            <td>555-1004</td>
+                                            <td>3.50%</td>
+                                            <td>9.00%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="vendor-name magnat">Magnat</span></td>
+                                            <td>1005-2849</td>
+                                            <td>3.25%</td>
+                                            <td>10.00%</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="vendor-name senior">Senior</span></td>
+                                            <td>2850+</td>
+                                            <td>3.00%</td>
+                                            <td>-</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>3.2. Quêtes de Passage</h3>
+                            <p>À chaque transition de rang, une quête est activée offrant une commission bonus temporaire. La durée de la quête est calculée comme suit :</p>
+                            <p><strong>Nombre de ventes en quête = Arrondi inférieur(max_sales / 5)</strong></p>
+                            <p><strong><i> <u>Exemple</u> : Jordan est Profane et à faire 24 ventes avec 4.50% de commission par vente, sa quête de niveau couvrera du 25ème au 30ème ventes, où la commission sera de 5%. 
+                                À l'issue de cette quête, il deviendra Débutant et sa commission passera à 4.25% par vente, dû à son nouveau rang de Débutant.
+                            </i></strong></p>
+                        </section>
+
+                        <section class="legal-section">
+                            <h2>4. Obligations du Vendeur</h2>
+                            <h3>4.1. Description des Produits</h3>
+                            <ul>
+                                <li>Descriptions précises et véridiques</li>
+                                <li>Photos de qualité représentant fidèlement le produit</li>
+                                <li>Indication claire de l'état du produit (neuf, comme neuf, bon état, acceptable)</li>
+                                <li>Prix incluant toutes les taxes applicables</li>
+                            </ul>
+
+                            <h3>4.2. Gestion des Stocks</h3>
+                            <ul>
+                                <li>Maintenir les stocks à jour</li>
+                                <li>Indiquer les délais de livraison réalistes</li>
+                                <li>Annuler immédiatement les commandes si stock insuffisant</li>
+                            </ul>
+
+                            <h3>4.3. Service Client</h3>
+                            <ul>
+                                <li>Répondre aux messages sous 48 heures</li>
+                                <li>Gérer les retours conformément à la politique de la plateforme</li>
+                                <li>Respecter les délais de livraison annoncés</li>
+                            </ul>
+                        </section>
+
+                        <section class="legal-section">
+                            <h2>5. Paiements et Paiouts</h2>
+                            <h3>5.1. Modalités de Paiement</h3>
+                            <ul>
+                                <li>Paiements sécurisés via Moneroo</li>
+                                <li>Délai de reversement : 2-5 jours ouvrables après livraison confirmée</li>
+                                <li>Seuils de paiout minimum : 10€</li>
+                            </ul>
+
+                            <h3>5.2. Commissions et Frais</h3>
+                            <ul>
+                                <li>Commission prélevée sur le montant total de la vente</li>
+                                <li>Frais de transaction Moneroo inclus dans la commission affichée</li>
+                                <li>Pas de frais cachés supplémentaires</li>
+                            </ul>
+                        </section>
+
+                        <section class="legal-section">
+                            <h2>6. Contenu Interdit</h2>
+                            <p>Il est strictement interdit de vendre :</p>
+                            <ul>
+                                <li>Produits contrefaits ou illégaux</li>
+                                <li>Armes, drogues et substances réglementées</li>
+                                <li>Produits dangereux ou réglementés</li>
+                                <li>Contenu à caractère pornographique ou violent</li>
+                                <li>Données personnelles</li>
+                                <li>Produits enfreignant les droits d'auteur</li>
+                            </ul>
+                        </section>
+
+                        <section class="legal-section">
+                            <h2>7. Suspension et Résiliation</h2>
+                            <h3>7.1. Motifs de Suspension</h3>
+                            <ul>
+                                <li>Non-respect répété des conditions</li>
+                                <li>Fraude ou tentative de fraude</li>
+                                <li>Comportement abusif envers les acheteurs</li>
+                                <li>Vente de produits interdits</li>
+                                <li>Tentative de contournement du système de commissions</li>
+                            </ul>
+
+                            <h3>7.2. Conséquences</h3>
+                            <ul>
+                                <li>Suspension temporaire ou permanente du compte</li>
+                                <li>Retention des fonds en cas de litige</li>
+                                <li>Suppression des produits non conformes</li>
+                            </ul>
+                        </section>
+
+                        <section class="legal-section">
+                            <h2>8. Propriété Intellectuelle</h2>
+                            <p>Le vendeur garantit détenir les droits nécessaires sur tous les contenus qu'il publie (photos, descriptions, marques).</p>
+                        </section>
+
+                        <section class="legal-section">
+                            <h2>9. Responsabilité</h2>
+                            <p>Tradefy agit en tant qu'intermédiaire technique. La responsabilité du vendeur est engagée pour :</p>
+                            <ul>
+                                <li>La conformité des produits aux descriptions</li>
+                                <li>Le respect des délais de livraison</li>
+                                <li>La qualité du service client</li>
+                                <li>Le respect des lois applicables</li>
+                            </ul>
+                        </section>
+
+                        <section class="legal-section">
+                            <h2>10. Modifications des Conditions</h2>
+                            <p>Tradefy se réserve le droit de modifier ces conditions. Les vendeurs seront informés par email 30 jours avant l'entrée en vigueur des modifications.</p>
+                        </section>
+
+                        <section class="legal-section">
+                            <h2>11. Contact</h2>
+                            <p>Pour toute question concernant ces conditions :</p>
+                            <p>Email : <a href="mailto:tradefy241@gmail.com">vendeurs@tradefy.com</a></p>
+                            <p>Réponse sous 72 heures ouvrables</p>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-surface-3 text-secondary py-4 mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 <strong class="text-accent">By Charbelus</strong></p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="politique-confidentialite.html" class="text-secondary text-decoration-none me-3">
+                        <i class="fas fa-shield-alt me-1"></i>Politique de Confidentialité  
+                    </a>
+                    <a href="conditions-utilisation.html" class="text-secondary text-decoration-none me-3">
+                        <i class="fas fa-question-circle me-1"></i>Conditions d'utilisations
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

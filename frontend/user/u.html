@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Vendeur - Tradefy</title>
+    
+    <!-- CSS -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
+    <link href="../assets/css/colors.css" rel="stylesheet">
+</head>
+<body class="dark-theme">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-surface-1 border-bottom border-accent fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-accent" href="">
+                 Tradefy
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../support/contact.html">Contact</a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link" href="../profile.html" id="profileLink" style="display: '';">
+                        <i class="fas fa-user"></i> Mon Profil
+                    </a>
+                    <a class="nav-link" href="../login.html" id="authLink">
+                        <i class="fas fa-sign-in-alt"></i> Connexion
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>  <!-- Navigation -->
+
+    <!-- En-tête du profil -->
+    <section class="vendor-profile-header bg-surface-2 py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="vendor-avatar me-4">
+                            <div id="vendorAvatar" class="avatar-placeholder">
+                                <!-- Chargé dynamiquement -->
+                            </div>
+                        </div>
+                        <div>
+                            <h1 class="vendor-name h2 mb-1" id="vendorUsername">
+                                <!-- Chargé dynamiquement -->
+                            </h1>
+                            <div class="d-flex align-items-center gap-3 flex-wrap">
+                                <span id="vendorRankBadge" class="rank-badge">
+                                    <!-- Chargé dynamiquement -->
+                                </span>
+                                <span class="text-muted" id="vendorSince">
+                                    <!-- Chargé dynamiquement -->
+                                </span>
+                                <div class="vendor-verification">
+                                    <i class="fas fa-check-circle text-success me-1"></i>
+                                    <small class="text-muted">Vendeur vérifié</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="lead text-muted mb-3" id="vendorDescription">
+                        <!-- Chargé dynamiquement -->
+                    </p>
+                    
+                    <div class="vendor-meta d-flex gap-4 flex-wrap">
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt text-muted me-2"></i>
+                            <span id="vendorLocation">Non spécifié</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-globe text-muted me-2"></i>
+                            <span id="vendorLanguage">Français</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock text-muted me-2"></i>
+                            <span id="vendorResponseTime">Réponse rapide</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="vendor-stats-card card bg-surface-1 border-accent">
+                        <div class="card-body text-center">
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="stat-item">
+                                        <div class="stat-number text-primary fw-bold h4" id="vendorSales">0</div>
+                                        <div class="stat-label text-muted small">Ventes</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-item">
+                                        <div class="stat-number text-success fw-bold h4" id="vendorRating">0.0</div>
+                                        <div class="stat-label text-muted small">Évaluation</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-item">
+                                        <div class="stat-number text-info fw-bold h4" id="vendorProducts">0</div>
+                                        <div class="stat-label text-muted small">Produits</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-item">
+                                        <div class="stat-number text-warning fw-bold h4" id="vendorSuccess">0%</div>
+                                        <div class="stat-label text-muted small">Taux de réussite</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="vendor-actions mt-4">
+                                <button class="btn btn-accent w-100 mb-2" onclick="followVendor()">
+                                    <i class="fas fa-plus me-2"></i>Suivre ce vendeur
+                                </button>
+                                <button class="btn btn-outline-accent w-100" onclick="contactVendor()">
+                                    <i class="fas fa-envelope me-2"></i>Contacter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation secondaire -->
+    <section class="vendor-nav bg-surface-1 border-bottom border-border">
+        <div class="container">
+            <ul class="nav nav-pills nav-fill" id="vendorTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button" role="tab">
+                        🛍️ Produits
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">
+                        ⭐ Avis
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab">
+                        ℹ️ À Propos
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="badges-tab" data-bs-toggle="tab" data-bs-target="#badges" type="button" role="tab">
+                        🏆 Badges
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contenu du profil -->
+    <section class="vendor-content py-5">
+        <div class="container">
+            <div class="tab-content" id="vendorTabContent">
+                
+                <!-- Onglet Produits -->
+                <div class="tab-pane fade show active" id="products" role="tabpanel">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="mb-0">Produits en vente</h3>
+                                <div class="d-flex gap-2">
+                                    <select class="form-select form-select-sm bg-surface-2 border-border text-primary" id="productsSort">
+                                        <option value="newest">Plus récents</option>
+                                        <option value="popular">Plus populaires</option>
+                                        <option value="price_asc">Prix croissant</option>
+                                        <option value="price_desc">Prix décroissant</option>
+                                    </select>
+                                    <select class="form-select form-select-sm bg-surface-2 border-border text-primary" id="productsCategory">
+                                        <option value="all">Toutes catégories</option>
+                                        <option value="electronics">Électronique</option>
+                                        <option value="fashion">Mode</option>
+                                        <option value="home">Maison</option>
+                                        <option value="sports">Sports</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4" id="vendorProductsGrid">
+                        <!-- Produits chargés dynamiquement -->
+                        <div class="col-12 text-center py-5">
+                            <div class="spinner-border text-accent" role="status"></div>
+                            <p class="text-muted mt-3">Chargement des produits...</p>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12 text-center">
+                            <button class="btn btn-outline-accent" id="loadMoreProducts" style="display: none;">
+                                <i class="fas fa-plus me-2"></i>Charger plus de produits
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onglet Avis -->
+                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    <div class="row">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card bg-surface-1 border-border">
+                                <div class="card-body text-center">
+                                    <div class="rating-overview mb-3">
+                                        <div class="average-rating h1 text-warning mb-2" id="averageRating">0.0</div>
+                                        <div class="stars mb-2">
+                                            <span class="text-warning h4" id="starRating">★★★★★</span>
+                                        </div>
+                                        <div class="text-muted" id="totalReviews">0 avis</div>
+                                    </div>
+                                    
+                                    <div class="rating-breakdown">
+                                        <div class="rating-bar mb-2">
+                                            <div class="d-flex justify-content-between small mb-1">
+                                                <span>5 étoiles</span>
+                                                <span id="rating5Count">0</span>
+                                            </div>
+                                            <div class="progress bg-surface-2" style="height: 6px;">
+                                                <div class="progress-bar bg-warning" id="rating5Bar" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rating-bar mb-2">
+                                            <div class="d-flex justify-content-between small mb-1">
+                                                <span>4 étoiles</span>
+                                                <span id="rating4Count">0</span>
+                                            </div>
+                                            <div class="progress bg-surface-2" style="height: 6px;">
+                                                <div class="progress-bar bg-warning" id="rating4Bar" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rating-bar mb-2">
+                                            <div class="d-flex justify-content-between small mb-1">
+                                                <span>3 étoiles</span>
+                                                <span id="rating3Count">0</span>
+                                            </div>
+                                            <div class="progress bg-surface-2" style="height: 6px;">
+                                                <div class="progress-bar bg-warning" id="rating3Bar" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rating-bar mb-2">
+                                            <div class="d-flex justify-content-between small mb-1">
+                                                <span>2 étoiles</span>
+                                                <span id="rating2Count">0</span>
+                                            </div>
+                                            <div class="progress bg-surface-2" style="height: 6px;">
+                                                <div class="progress-bar bg-warning" id="rating2Bar" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rating-bar">
+                                            <div class="d-flex justify-content-between small mb-1">
+                                                <span>1 étoile</span>
+                                                <span id="rating1Count">0</span>
+                                            </div>
+                                            <div class="progress bg-surface-2" style="height: 6px;">
+                                                <div class="progress-bar bg-warning" id="rating1Bar" style="width: 0%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Statistiques de confiance -->
+                            <div class="card bg-surface-1 border-border mt-4">
+                                <div class="card-body">
+                                    <h6 class="text-accent mb-3">📊 Indicateurs de Confiance</h6>
+                                    <div class="trust-indicators">
+                                        <div class="indicator-item d-flex justify-content-between mb-2">
+                                            <span class="small">Temps de réponse</span>
+                                            <span class="small text-success" id="responseRate">-</span>
+                                        </div>
+                                        <div class="indicator-item d-flex justify-content-between mb-2">
+                                            <span class="small">Commandes honorées</span>
+                                            <span class="small text-success" id="orderCompletion">-</span>
+                                        </div>
+                                        <div class="indicator-item d-flex justify-content-between mb-2">
+                                            <span class="small">Délai d'expédition</span>
+                                            <span class="small text-success" id="shippingTime">-</span>
+                                        </div>
+                                        <div class="indicator-item d-flex justify-content-between">
+                                            <span class="small">Support client</span>
+                                            <span class="small text-success" id="supportQuality">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-8">
+                            <div class="reviews-list">
+                                <h4 class="mb-4">Avis des clients</h4>
+                                
+                                <!-- Filtres avis -->
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <select class="form-select bg-surface-2 border-border text-primary" id="reviewsSort">
+                                            <option value="newest">Plus récents</option>
+                                            <option value="highest">Note la plus haute</option>
+                                            <option value="lowest">Note la plus basse</option>
+                                            <option value="most_helpful">Plus utiles</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-select bg-surface-2 border-border text-primary" id="reviewsFilter">
+                                            <option value="all">Tous les avis</option>
+                                            <option value="5">5 étoiles seulement</option>
+                                            <option value="4">4 étoiles et plus</option>
+                                            <option value="3">3 étoiles et plus</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div id="reviewsList">
+                                    <!-- Avis chargés dynamiquement -->
+                                    <div class="text-center py-5">
+                                        <div class="spinner-border text-accent" role="status"></div>
+                                        <p class="text-muted mt-3">Chargement des avis...</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center mt-4">
+                                    <button class="btn btn-outline-accent" id="loadMoreReviews" style="display: none;">
+                                        <i class="fas fa-plus me-2"></i>Charger plus d'avis
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onglet À Propos -->
+                <div class="tab-pane fade" id="about" role="tabpanel">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="card bg-surface-1 border-border mb-4">
+                                <div class="card-header bg-surface-2">
+                                    <h5 class="mb-0">📖 Présentation du Vendeur</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="vendorAboutContent">
+                                        <!-- Contenu chargé dynamiquement -->
+                                        <div class="text-center py-4">
+                                            <div class="spinner-border text-accent spinner-border-sm" role="status"></div>
+                                            <p class="text-muted mt-2">Chargement de la présentation...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Historique d'activité -->
+                            <div class="card bg-surface-1 border-border">
+                                <div class="card-header bg-surface-2">
+                                    <h5 class="mb-0">📈 Historique d'Activité</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="activity-timeline" id="vendorActivity">
+                                        <!-- Activité chargée dynamiquement -->
+                                        <div class="text-center py-3">
+                                            <div class="spinner-border text-accent spinner-border-sm" role="status"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <!-- Informations de contact -->
+                            <div class="card bg-surface-1 border-border mb-4">
+                                <div class="card-header bg-surface-2">
+                                    <h5 class="mb-0">📞 Informations de Contact</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="contact-info">
+                                        <div class="contact-item d-flex align-items-center mb-3">
+                                            <i class="fas fa-envelope text-muted me-3"></i>
+                                            <div>
+                                                <small class="text-muted d-block">Email</small>
+                                                <span class="text-primary" id="contactEmail">Contact via Tradefy</span>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item d-flex align-items-center mb-3">
+                                            <i class="fas fa-clock text-muted me-3"></i>
+                                            <div>
+                                                <small class="text-muted d-block">Temps de réponse</small>
+                                                <span class="text-success" id="contactResponse">Moins de 2 heures</span>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item d-flex align-items-center">
+                                            <i class="fas fa-language text-muted me-3"></i>
+                                            <div>
+                                                <small class="text-muted d-block">Langues</small>
+                                                <span class="text-primary" id="contactLanguages">Français, Anglais</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="contact-actions mt-4">
+                                        <button class="btn btn-accent w-100 mb-2" onclick="contactVendor()">
+                                            <i class="fas fa-envelope me-2"></i>Envoyer un message
+                                        </button>
+                                        <button class="btn btn-outline-accent w-100" onclick="reportVendor()">
+                                            <i class="fas fa-flag me-2"></i>Signaler un problème
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Politiques du vendeur -->
+                            <div class="card bg-surface-1 border-border">
+                                <div class="card-header bg-surface-2">
+                                    <h5 class="mb-0">📋 Politiques</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="policies-list">
+                                        <div class="policy-item mb-3">
+                                            <h6 class="text-accent small mb-1">🚚 Livraison</h6>
+                                            <p class="text-muted small mb-0" id="shippingPolicy">Délai standard 2-5 jours</p>
+                                        </div>
+                                        <div class="policy-item mb-3">
+                                            <h6 class="text-accent small mb-1">↩️ Retours</h6>
+                                            <p class="text-muted small mb-0" id="returnPolicy">30 jours pour changer d'avis</p>
+                                        </div>
+                                        <div class="policy-item">
+                                            <h6 class="text-accent small mb-1">💳 Paiements</h6>
+                                            <p class="text-muted small mb-0" id="paymentPolicy">Paiements sécurisés Tradefy</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onglet Badges -->
+                <div class="tab-pane fade" id="badges" role="tabpanel">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 class="mb-4">🏆 Badges et Récompenses</h3>
+                            <p class="text-muted mb-4">
+                                Les réalisations et reconnaissances obtenues par ce vendeur sur la plateforme Tradefy.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Badges de performance -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-surface-1 border-border h-100">
+                                <div class="card-header bg-surface-2">
+                                    <h5 class="mb-0">⭐ Performance</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="badges-grid" id="performanceBadges">
+                                        <!-- Badges chargés dynamiquement -->
+                                        <div class="text-center py-4">
+                                            <div class="spinner-border text-accent spinner-border-sm" role="status"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Badges d'événements -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-surface-1 border-border h-100">
+                                <div class="card-header bg-surface-2">
+                                    <h5 class="mb-0">🎯 Événements</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="badges-grid" id="eventBadges">
+                                        <!-- Badges chargés dynamiquement -->
+                                        <div class="text-center py-4">
+                                            <div class="spinner-border text-accent spinner-border-sm" role="status"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Badges de spécialisation -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-surface-1 border-border h-100">
+                                <div class="card-header bg-surface-2">
+                                    <h5 class="mb-0">🎨 Spécialisation</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="badges-grid" id="specializationBadges">
+                                        <!-- Badges chargés dynamiquement -->
+                                        <div class="text-center py-4">
+                                            <div class="spinner-border text-accent spinner-border-sm" role="status"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Badges de communauté -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-surface-1 border-border h-100">
+                                <div class="card-header bg-surface-2">
+                                    <h5 class="mb-0">👥 Communauté</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="badges-grid" id="communityBadges">
+                                        <!-- Badges chargés dynamiquement -->
+                                        <div class="text-center py-4">
+                                            <div class="spinner-border text-accent spinner-border-sm" role="status"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistiques des badges -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card bg-surface-1 border-border">
+                                <div class="card-header bg-surface-2">
+                                    <h5 class="mb-0">📊 Progression des Badges</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row text-center">
+                                        <div class="col-md-3 mb-3">
+                                            <div class="h3 text-accent mb-1" id="totalBadges">0</div>
+                                            <small class="text-muted">Badges obtenus</small>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="h3 text-warning mb-1" id="rareBadges">0</div>
+                                            <small class="text-muted">Badges rares</small>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="h3 text-info mb-1" id="epicBadges">0</div>
+                                            <small class="text-muted">Badges épiques</small>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="h3 text-success mb-1" id="legendaryBadges">0</div>
+                                            <small class="text-muted">Badges légendaires</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Vendeurs Similaires -->
+    <section class="similar-vendors bg-surface-2 py-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h3 class="mb-0">👥 Vendeurs Similaires</h3>
+                    <p class="text-muted">Découvrez d'autres vendeurs exceptionnels dans la même catégorie</p>
+                </div>
+            </div>
+            
+            <div class="row g-4" id="similarVendors">
+                <!-- Vendeurs chargés dynamiquement -->
+                <div class="col-12 text-center py-3">
+                    <div class="spinner-border text-accent" role="status"></div>
+                    <p class="text-muted mt-3">Chargement des vendeurs similaires...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-3 text-secondary py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 <strong class="text-accent">By Charbelus</strong></p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-secondary text-decoration-none me-3" onclick="shareProfile()">
+                        <i class="fas fa-share-alt"></i> Partager
+                    </a>
+                    <a href="#" class="text-secondary text-decoration-none" onclick="reportVendor()">
+                        <i class="fas fa-flag"></i> Signaler
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/gamification/rankColors.js"></script>
+    
+    <script>
+        // Variables globales
+        let currentVendor = null;
+        let currentVendorUsername = null;
+        let productsPage = 1;
+        let reviewsPage = 1;
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            currentVendorUsername = getVendorUsernameFromURL();
+            if (currentVendorUsername) {
+                loadVendorProfile();
+                setupEventListeners();
+            } else {
+                showErrorState('Vendeur non trouvé');
+            }
+            checkAuthStatus();
+        });
+
+        // Obtenir le nom d'utilisateur depuis l'URL
+        function getVendorUsernameFromURL() {
+            const path = window.location.pathname;
+            const match = path.match(/\/user\/(.+)/);
+            return match ? match[1] : null;
+        }
+
+        // Charger le profil du vendeur
+        async function loadVendorProfile() {
+            try {
+                showLoadingState();
+                
+                const response = await fetch(`/api/user/${currentVendorUsername}`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    currentVendor = data.data;
+                    displayVendorProfile();
+                    loadVendorProducts();
+                    loadVendorReviews();
+                    loadVendorBadges();
+                    loadSimilarVendors();
+                } else {
+                    throw new Error('Vendeur non trouvé');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                showErrorState('Impossible de charger le profil');
+                loadDemoData();
+            }
+        }
+
+        // Afficher le profil du vendeur
+        function displayVendorProfile() {
+            if (!currentVendor) return;
+
+            // Informations de base
+            document.getElementById('vendorUsername').textContent = currentVendor.username;
+            document.getElementById('vendorUsername').className = `vendor-name h2 mb-1 ${currentVendor.rank_class}`;
+            document.title = `${currentVendor.username} - Vendeur Tradefy`;
+            
+            // Avatar
+            const avatar = document.getElementById('vendorAvatar');
+            avatar.textContent = currentVendor.username.charAt(0).toUpperCase();
+            avatar.className = `avatar-placeholder ${currentVendor.rank_class}`;
+            
+            // Badge de rang
+            const rankBadge = document.getElementById('vendorRankBadge');
+            rankBadge.textContent = currentVendor.rank_name;
+            rankBadge.className = `rank-badge ${currentVendor.rank_class}`;
+            
+            // Date d'inscription
+            const joinDate = new Date(currentVendor.created_at).toLocaleDateString('fr-FR');
+            document.getElementById('vendorSince').textContent = `Membre depuis ${joinDate}`;
+            
+            // Description
+            document.getElementById('vendorDescription').textContent = 
+                currentVendor.description || 'Ce vendeur n\'a pas encore de description.';
+            
+            // Localisation
+            document.getElementById('vendorLocation').textContent = currentVendor.location || 'Non spécifié';
+            
+            // Statistiques
+            document.getElementById('vendorSales').textContent = currentVendor.sales_count?.toLocaleString() || '0';
+            document.getElementById('vendorRating').textContent = currentVendor.rating?.toFixed(1) || '0.0';
+            document.getElementById('vendorProducts').textContent = currentVendor.products_count || '0';
+            document.getElementById('vendorSuccess').textContent = currentVendor.success_rate || '100%';
+        }
+
+        // Charger les produits du vendeur
+        async function loadVendorProducts() {
+            try {
+                const response = await fetch(`/api/products?vendor=${currentVendorUsername}&page=${productsPage}`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayVendorProducts(data.data);
+                    updateLoadMoreButton('loadMoreProducts', data.has_more);
+                }
+            } catch (error) {
+                console.error('Erreur chargement produits:', error);
+            }
+        }
+
+        // Afficher les produits du vendeur
+        function displayVendorProducts(products) {
+            const grid = document.getElementById('vendorProductsGrid');
+            
+            if (productsPage === 1) {
+                grid.innerHTML = '';
+            }
+            
+            if (products.length === 0 && productsPage === 1) {
+                grid.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">Aucun produit en vente</h4>
+                        <p class="text-muted">Ce vendeur n'a pas encore publié de produits.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let productsHTML = '';
+            products.forEach(product => {
+                const price = (product.price_cents / 100).toFixed(2);
+                const inStock = product.stock > 0;
+                const stockClass = inStock ? 'text-success' : 'text-danger';
+                const stockText = inStock ? `${product.stock} en stock` : 'Rupture';
+                
+                productsHTML += `
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="product-card card bg-surface-1 border-border h-100">
+                            <div class="product-image position-relative">
+                                <img src="${product.image_url || '/assets/images/placeholder-product.jpg'}" 
+                                     class="card-img-top" alt="${product.title}"
+                                     style="height: 200px; object-fit: cover;">
+                                ${!inStock ? '<div class="position-absolute top-0 start-0 m-2"><span class="badge bg-danger">Rupture</span></div>' : ''}
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h6 class="card-title text-primary mb-2">${product.title}</h6>
+                                <p class="card-text text-muted small flex-grow-1">${product.description.substring(0, 80)}...</p>
+                                <div class="product-meta d-flex justify-content-between align-items-center mt-auto">
+                                    <div>
+                                        <span class="text-accent fw-bold h5 mb-0">${price}€</span>
+                                        <small class="d-block ${stockClass}">${stockText}</small>
+                                    </div>
+                                    <button class="btn btn-accent btn-sm" ${!inStock ? 'disabled' : ''} 
+                                            onclick="addToCart(${product.id})">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            if (productsPage === 1) {
+                grid.innerHTML = productsHTML;
+            } else {
+                grid.innerHTML += productsHTML;
+            }
+        }
+
+        // Charger les avis du vendeur
+        async function loadVendorReviews() {
+            try {
+                const response = await fetch(`/api/user/${currentVendorUsername}/reviews?page=${reviewsPage}`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayVendorReviews(data.data);
+                    updateRatingStats(data.stats);
+                    updateLoadMoreButton('loadMoreReviews', data.has_more);
+                }
+            } catch (error) {
+                console.error('Erreur chargement avis:', error);
+            }
+        }
+
+        // Afficher les avis
+        function displayVendorReviews(reviews) {
+            const reviewsList = document.getElementById('reviewsList');
+            
+            if (reviewsPage === 1) {
+                reviewsList.innerHTML = '';
+            }
+            
+            if (reviews.length === 0 && reviewsPage === 1) {
+                reviewsList.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">Aucun avis pour le moment</h4>
+                        <p class="text-muted">Soyez le premier à laisser un avis pour ce vendeur.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let reviewsHTML = '';
+            reviews.forEach(review => {
+                const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                
+                reviewsHTML += `
+                    <div class="review-item mb-4 p-4 rounded bg-surface-1 border-border">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h6 class="mb-1">${review.author_name}</h6>
+                                <div class="text-warning small">
+                                    ${stars}
+                                </div>
+                            </div>
+                            <small class="text-muted">${new Date(review.created_at).toLocaleDateString('fr-FR')}</small>
+                        </div>
+                        <p class="text-primary mb-3">${review.comment}</p>
+                        
+                        ${review.product_title ? `
+                            <div class="review-product">
+                                <small class="text-muted">
+                                    Achat : <strong>${review.product_title}</strong>
+                                </small>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="review-actions mt-3">
+                            <button class="btn btn-sm btn-outline-accent me-2" onclick="likeReview(${review.id})">
+                                <i class="fas fa-thumbs-up me-1"></i>Utile (${review.helpful_count || 0})
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="reportReview(${review.id})">
+                                <i class="fas fa-flag me-1"></i>Signaler
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            if (reviewsPage === 1) {
+                reviewsList.innerHTML = reviewsHTML;
+            } else {
+                reviewsList.innerHTML += reviewsHTML;
+            }
+        }
+
+        // Mettre à jour les statistiques d'évaluation
+        function updateRatingStats(stats) {
+            if (!stats) return;
+            
+            document.getElementById('averageRating').textContent = stats.average_rating.toFixed(1);
+            document.getElementById('totalReviews').textContent = `${stats.total_reviews} avis`;
+            
+            // Mettre à jour les barres de progression
+            for (let i = 1; i <= 5; i++) {
+                const count = stats[`rating_${i}_count`] || 0;
+                const percentage = stats.total_reviews > 0 ? (count / stats.total_reviews) * 100 : 0;
+                
+                document.getElementById(`rating${i}Count`).textContent = count;
+                document.getElementById(`rating${i}Bar`).style.width = `${percentage}%`;
+            }
+            
+            // Mettre à jour les étoiles
+            const rating = stats.average_rating;
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            
+            document.getElementById('starRating').textContent = 
+                '★'.repeat(fullStars) + (hasHalfStar ? '½' : '') + '☆'.repeat(emptyStars);
+        }
+
+        // Charger les badges du vendeur
+        async function loadVendorBadges() {
+            try {
+                const response = await fetch(`/api/user/${currentVendorUsername}/achievements`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displayVendorBadges(data.data);
+                }
+            } catch (error) {
+                console.error('Erreur chargement badges:', error);
+            }
+        }
+
+        // Afficher les badges
+        function displayVendorBadges(badges) {
+            const categories = {
+                performanceBadges: badges.performance || [],
+                eventBadges: badges.events || [],
+                specializationBadges: badges.specialization || [],
+                communityBadges: badges.community || []
+            };
+
+            for (const [containerId, badgeList] of Object.entries(categories)) {
+                const container = document.getElementById(containerId);
+                let badgesHTML = '<div class="row g-2">';
+                
+                badgeList.forEach(badge => {
+                    badgesHTML += `
+                        <div class="col-6 col-sm-4">
+                            <div class="badge-card text-center p-3 rounded bg-surface-2">
+                                <div class="badge-icon ${badge.rarity} mb-2" style="font-size: 2rem;">
+                                    ${badge.icon || '🏆'}
+                                </div>
+                                <h6 class="text-primary small mb-1">${badge.name}</h6>
+                                <small class="text-muted">${badge.description}</small>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                badgesHTML += '</div>';
+                container.innerHTML = badgeList.length > 0 ? badgesHTML : '<p class="text-muted text-center">Aucun badge</p>';
+            }
+
+            // Statistiques des badges
+            document.getElementById('totalBadges').textContent = badges.total_count || 0;
+            document.getElementById('rareBadges').textContent = badges.rare_count || 0;
+            document.getElementById('epicBadges').textContent = badges.epic_count || 0;
+            document.getElementById('legendaryBadges').textContent = badges.legendary_count || 0;
+        }
+
+        // Charger les vendeurs similaires
+        async function loadSimilarVendors() {
+            try {
+                const response = await fetch(`/api/user/${currentVendorUsername}/similar`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    displaySimilarVendors(data.data);
+                }
+            } catch (error) {
+                console.error('Erreur chargement vendeurs similaires:', error);
+            }
+        }
+
+        // Afficher les vendeurs similaires
+        function displaySimilarVendors(vendors) {
+            const container = document.getElementById('similarVendors');
+            
+            if (!vendors || vendors.length === 0) {
+                container.innerHTML = '<p class="text-muted text-center">Aucun vendeur similaire trouvé</p>';
+                return;
+            }
+            
+            let vendorsHTML = '';
+            vendors.forEach(vendor => {
+                vendorsHTML += `
+                    <div class="col-md-6 col-lg-3">
+                        <div class="similar-vendor-card card bg-surface-1 border-border text-center h-100">
+                            <div class="card-body">
+                                <div class="vendor-avatar mb-3">
+                                    <div class="avatar-placeholder ${vendor.rank_class} mx-auto">
+                                        ${vendor.username.charAt(0).toUpperCase()}
+                                    </div>
+                                </div>
+                                <h5 class="vendor-name ${vendor.rank_class} mb-2">${vendor.username}</h5>
+                                <span class="rank-badge ${vendor.rank_class} mb-3">${vendor.rank_name}</span>
+                                <div class="vendor-stats small text-muted mb-3">
+                                    <div class="mb-1">${vendor.sales_count?.toLocaleString() || '0'} ventes</div>
+                                    <div class="text-success">${vendor.rating || '0.0'} ★ Évaluation</div>
+                                </div>
+                                <a href="u.html?username=${vendor.username}" class="btn btn-outline-accent btn-sm">
+                                    Voir le profil
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = vendorsHTML;
+        }
+
+        // Données de démonstration
+        function loadDemoData() {
+            const demoVendor = {
+                username: "Tech_Expert",
+                rank_class: "negociant",
+                rank_name: "Négociant",
+                sales_count: 854,
+                rating: 4.8,
+                products_count: 47,
+                success_rate: "98%",
+                description: "Spécialiste en électronique et high-tech avec 5 ans d'expérience. Produits testés et garantis.",
+                location: "Paris, France",
+                created_at: "2023-03-15"
+            };
+            
+            currentVendor = demoVendor;
+            displayVendorProfile();
+            
+            // Produits de démo
+            const demoProducts = [
+                {
+                    id: 1,
+                    title: "Smartphone Android Premium",
+                    description: "Smartphone haut de gamme avec écran AMOLED 120Hz et triple caméra",
+                    price_cents: 69900,
+                    stock: 15,
+                    image_url: "/assets/images/phone.jpg"
+                },
+                {
+                    id: 2, 
+                    title: "Casque Audio Sans Fil",
+                    description: "Casque Bluetooth avec réduction de bruit active et autonomie 30h",
+                    price_cents: 19900,
+                    stock: 8,
+                    image_url: "/assets/images/headphones.jpg"
+                },
+                {
+                    id: 3,
+                    title: "Montre Connectée Sport",
+                    description: "Montre intelligente avec GPS intégré et monitoring cardiaque",
+                    price_cents: 29900,
+                    stock: 0,
+                    image_url: "/assets/images/smartwatch.jpg"
+                }
+            ];
+            
+            displayVendorProducts(demoProducts);
+            
+            // Avis de démo
+            const demoReviews = {
+                data: [
+                    {
+                        id: 1,
+                        author_name: "Marie L.",
+                        rating: 5,
+                        comment: "Produit de qualité et livraison rapide. Vendeur très professionnel !",
+                        created_at: "2024-12-15",
+                        product_title: "Smartphone Android Premium",
+                        helpful_count: 12
+                    },
+                    {
+                        id: 2,
+                        author_name: "Pierre D.",
+                        rating: 4,
+                        comment: "Bon rapport qualité-prix. Emballage soigné et produit conforme.",
+                        created_at: "2024-12-10",
+                        product_title: "Casque Audio Sans Fil", 
+                        helpful_count: 8
+                    }
+                ],
+                stats: {
+                    average_rating: 4.8,
+                    total_reviews: 247,
+                    rating_5_count: 198,
+                    rating_4_count: 42,
+                    rating_3_count: 5,
+                    rating_2_count: 1,
+                    rating_1_count: 1
+                }
+            };
+            
+            displayVendorReviews(demoReviews.data);
+            updateRatingStats(demoReviews.stats);
+            
+            // Badges de démo
+            const demoBadges = {
+                performance: [
+                    { name: "Vendeur Étoile", description: "50 ventes réussies", rarity: "rare", icon: "⭐" },
+                    { name: "Expert Qualité", description: "95% d'avis positifs", rarity: "epic", icon: "🎯" }
+                ],
+                events: [
+                    { name: "Roi de la Semaine", description: "Meilleur vendeur hebdo", rarity: "legendary", icon: "👑" }
+                ],
+                specialization: [
+                    { name: "Maître Électronique", description: "Expert catégorie tech", rarity: "epic", icon: "📱" }
+                ],
+                community: [
+                    { name: "Ambassadeur", description: "100 followers", rarity: "rare", icon: "👥" }
+                ],
+                total_count: 5,
+                rare_count: 2,
+                epic_count: 2, 
+                legendary_count: 1
+            };
+            
+            displayVendorBadges(demoBadges);
+        }
+
+        // Configuration des écouteurs d'événements
+        function setupEventListeners() {
+            // Charger plus de produits
+            document.getElementById('loadMoreProducts').addEventListener('click', function() {
+                productsPage++;
+                loadVendorProducts();
+            });
+
+            // Charger plus d'avis
+            document.getElementById('loadMoreReviews').addEventListener('click', function() {
+                reviewsPage++;
+                loadVendorReviews();
+            });
+
+            // Tri des produits
+            document.getElementById('productsSort').addEventListener('change', function() {
+                productsPage = 1;
+                loadVendorProducts();
+            });
+
+            // Filtre catégorie produits
+            document.getElementById('productsCategory').addEventListener('change', function() {
+                productsPage = 1;
+                loadVendorProducts();
+            });
+
+            // Tri des avis
+            document.getElementById('reviewsSort').addEventListener('change', function() {
+                reviewsPage = 1;
+                loadVendorReviews();
+            });
+
+            // Filtre étoiles avis
+            document.getElementById('reviewsFilter').addEventListener('change', function() {
+                reviewsPage = 1;
+                loadVendorReviews();
+            });
+        }
+
+        // Fonctions d'interaction
+        function followVendor() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                alert('Veuillez vous connecter pour suivre ce vendeur');
+                window.location.href = '../login.html';
+                return;
+            }
+            alert(`Vous suivez maintenant ${currentVendor.username}`);
+        }
+
+        function contactVendor() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                alert('Veuillez vous connecter pour contacter ce vendeur');
+                window.location.href = '../login.html';
+                return;
+            }
+            // Ouvrir modal de contact
+            alert(`Ouverture de la messagerie avec ${currentVendor.username}`);
+        }
+
+        function reportVendor() {
+            alert('Ouverture du formulaire de signalement');
+        }
+
+        function shareProfile() {
+            const profileUrl = window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: `Profil de ${currentVendor.username} sur Tradefy`,
+                    text: `Découvrez le profil de ${currentVendor.username} - ${currentVendor.rank_name} sur Tradefy`,
+                    url: profileUrl
+                });
+            } else {
+                navigator.clipboard.writeText(profileUrl).then(() => {
+                    alert('Lien copié dans le presse-papier !');
+                });
+            }
+        }
+
+        function addToCart(productId) {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                alert('Veuillez vous connecter pour ajouter des articles au panier');
+                window.location.href = '../login.html';
+                return;
+            }
+            alert('Produit ajouté au panier !');
+        }
+
+        function likeReview(reviewId) {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                alert('Veuillez vous connecter pour voter');
+                return;
+            }
+            alert('Merci pour votre vote !');
+        }
+
+        function reportReview(reviewId) {
+            alert('Signalement envoyé aux modérateurs');
+        }
+
+        // Fonctions utilitaires
+        function updateLoadMoreButton(buttonId, hasMore) {
+            const button = document.getElementById(buttonId);
+            button.style.display = hasMore ? 'block' : 'none';
+        }
+
+        function showLoadingState() {
+            document.getElementById('vendorProductsGrid').innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-accent" role="status"></div>
+                    <p class="text-muted mt-3">Chargement du profil...</p>
+                </div>
+            `;
+        }
+
+        function showErrorState(message) {
+            document.getElementById('vendorProductsGrid').innerHTML = `
+                <div class="col-12 text-center py-5">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <h4 class="text-muted">Erreur</h4>
+                    <p class="text-muted">${message}</p>
+                    <button class="btn btn-accent mt-2" onclick="window.location.href='../index.html'">
+                        Retour à l'accueil
+                    </button>
+                </div>
+            `;
+        }
+
+        function checkAuthStatus() {
+            const token = localStorage.getItem('auth_token');
+            if (token) {
+                document.getElementById('profileLink').style.display = 'block';
+                document.getElementById('authLink').innerHTML = '<i class="fas fa-sign-out-alt"></i> Déconnexion';
+                document.getElementById('authLink').onclick = () => {
+                    localStorage.removeItem('auth_token');
+                    window.location.href = '../login.html';
+                };
+            }
+        }
+    </script>
+
+    <style>
+        .vendor-profile-header {
+            background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-1) 100%);
+        }
+        
+        .vendor-avatar .avatar-placeholder {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--bg-primary);
+        }
+        
+        .vendor-stats-card {
+            border: 2px solid var(--accent-gold);
+        }
+        
+        .nav-pills .nav-link.active {
+            background: var(--accent-gradient);
+            color: var(--bg-primary);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        /* Produits */
+        .product-card {
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: var(--accent-gold);
+        }
+        
+        .product-image {
+            position: relative;
+        }
+        
+        /* Avis */
+        .review-item {
+            border-left: 4px solid var(--accent-gold);
+        }
+        
+        .rating-bar .progress {
+            border-radius: 3px;
+        }
+        
+        /* Badges */
+        .badge-card {
+            transition: all 0.3s ease;
+        }
+        
+        .badge-card:hover {
+            transform: scale(1.05);
+            background: var(--surface-1);
+        }
+        
+        .badge-icon.rare { color: var(--accent-gold); }
+        .badge-icon.epic { color: var(--negociant-color); }
+        .badge-icon.legendary { color: var(--senior-color); }
+        
+        /* Vendeurs similaires */
+        .similar-vendor-card {
+            transition: all 0.3s ease;
+        }
+        
+        .similar-vendor-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: var(--accent-gold);
+        }
+        
+        .similar-vendor-card .avatar-placeholder {
+            width: 60px;
+            height: 60px;
+            font-size: 1.2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .vendor-profile-header .row {
+                text-align: center;
+            }
+            
+            .vendor-avatar {
+                margin: 0 auto 1rem !important;
+            }
+            
+            .vendor-avatar .avatar-placeholder {
+                width: 80px;
+                height: 80px;
+                font-size: 1.5rem;
+            }
+            
+            .vendor-meta {
+                justify-content: center;
+            }
+        }
+    </style>
+</body>
+</html>

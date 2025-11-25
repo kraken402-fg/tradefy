@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Tradefy</title>
+    
+    <!-- CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/colors.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-theme">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-surface-1 border-bottom border-accent fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-accent" href="">Tradefy</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Boutique</a></li>
+                    <li class="nav-item"><a class="nav-link" href="leaderboard.html">Classement</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html">Événements</a></li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link" href="register.html">
+                        <i class="fas fa-user-plus"></i> Créer un compte
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Connexion -->
+    <section class="auth-section py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-5">
+                    <!-- Carte de connexion -->
+                    <div class="auth-card card bg-surface-1 border-accent">
+                        <div class="card-header bg-surface-2 text-center py-4 border-bottom border-accent">
+                            <h2 class="text-accent mb-0">
+                                <i class="fas fa-sign-in-alt me-2"></i>Connexion
+                            </h2>
+                            <p class="text-muted mb-0 mt-2">Accédez à votre compte Tradefy</p>
+                        </div>
+                        
+                        <div class="card-body p-4">
+                            <!-- Formulaire de connexion -->
+                            <form id="loginForm">
+                                <!-- Email -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label text-primary">
+                                        <i class="fas fa-envelope me-2"></i>Adresse email
+                                    </label>
+                                    <input 
+                                        type="email" 
+                                        class="form-control bg-surface-2 border-surface-3 text-primary" 
+                                        id="email" 
+                                        placeholder="votre@email.com"
+                                        required
+                                    >
+                                    <div class="form-text text-muted">
+                                        L'adresse email utilisée lors de l'inscription
+                                    </div>
+                                </div>
+
+                                <!-- Mot de passe -->
+                                <div class="mb-4">
+                                    <label for="password" class="form-label text-primary">
+                                        <i class="fas fa-lock me-2"></i>Mot de passe
+                                    </label>
+                                    <div class="input-group">
+                                        <input 
+                                            type="password" 
+                                            class="form-control bg-surface-2 border-surface-3 text-primary" 
+                                            id="password" 
+                                            placeholder="Votre mot de passe"
+                                            required
+                                        >
+                                        <button type="button" class="btn btn-outline-accent" id="togglePassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-text text-muted">
+                                        <a href="forgot-password.html" class="text-accent text-decoration-none">
+                                            Mot de passe oublié ?
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Rappeler la session -->
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                                        <label class="form-check-label text-primary" for="rememberMe">
+                                            Se souvenir de moi
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Bouton de connexion -->
+                                <button type="submit" class="btn btn-accent w-100 py-2 mb-3" id="loginBtn">
+                                    <span class="spinner-border spinner-border-sm me-2 d-none" role="status"></span>
+                                    <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                                </button>
+
+                                <!-- Séparateur -->
+                                <div class="text-center mb-3">
+                                    <span class="text-muted">ou</span>
+                                </div>
+
+                                <!-- Lien d'inscription -->
+                                <div class="text-center">
+                                    <p class="text-muted mb-0">
+                                        Nouveau sur Tradefy ? 
+                                        <a href="register.html" class="text-accent text-decoration-none fw-bold">
+                                            Créer un compte
+                                        </a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Bénéfices rapides -->
+                    <div class="benefits-card mt-4 p-4 rounded bg-surface-2">
+                        <h6 class="text-accent mb-3">
+                            <i class="fas fa-rocket me-2"></i>Rejoignez l'aventure Tradefy
+                        </h6>
+                        <div class="benefits-list">
+                            <div class="benefit-item d-flex align-items-center mb-2">
+                                <i class="fas fa-chart-line text-success me-2"></i>
+                                <small class="text-muted">Système de commissions compétitif</small>
+                            </div>
+                            <div class="benefit-item d-flex align-items-center mb-2">
+                                <i class="fas fa-trophy text-warning me-2"></i>
+                                <small class="text-muted">Événements et récompenses</small>
+                            </div>
+                            <div class="benefit-item d-flex align-items-center">
+                                <i class="fas fa-shield-alt text-info me-2"></i>
+                                <small class="text-muted">Paiements sécurisés</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-5">
+                    <!-- Section informations -->
+                    <div class="info-section">
+                        <div class="feature-card p-4 rounded bg-surface-1 mb-4">
+                            <div class="feature-icon mb-3 text-center">
+                                <i class="fas fa-gem fa-3x text-accent"></i>
+                            </div>
+                            <h5 class="text-primary text-center mb-3">Plateforme Gamifiée</h5>
+                            <p class="text-muted text-center mb-0">
+                                Montez en niveau, débloquez des commissions bonus et devenez un vendeur d'élite dans notre écosystème compétitif.
+                            </p>
+                        </div>
+
+                        <div class="stats-card p-4 rounded bg-surface-1">
+                            <h6 class="text-accent mb-3">📈 Tradefy en Chiffres</h6>
+                            <div class="stats-grid">
+                                <div class="stat-item text-center mb-3">
+                                    <div class="h4 text-success mb-1">2,847+</div>
+                                    <small class="text-muted">Vendeurs actifs</small>
+                                </div>
+                                <div class="stat-item text-center mb-3">
+                                    <div class="h4 text-warning mb-1">156K€+</div>
+                                    <small class="text-muted">Commissions distribuées</small>
+                                </div>
+                                <div class="stat-item text-center">
+                                    <div class="h4 text-info mb-1">98%</div>
+                                    <small class="text-muted">Transactions réussies</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Témoignages -->
+                        <div class="testimonials-card mt-4 p-4 rounded bg-surface-1">
+                            <h6 class="text-accent mb-3">
+                                <i class="fas fa-star me-2"></i>Ils recommandent Tradefy
+                            </h6>
+                            <div class="testimonial-item mb-3">
+                                <div class="d-flex align-items-start">
+                                    <div class="avatar-placeholder senior me-3" style="width: 40px; height: 40px; font-size: 0.9rem;">S</div>
+                                    <div>
+                                        <p class="text-primary small mb-1">
+                                            "Passé Senior en 6 mois grâce au système de quêtes. Une plateforme qui récompense vraiment les efforts !"
+                                        </p>
+                                        <small class="text-muted">- Sarah_Pro, Vendeuse Senior</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-item">
+                                <div class="d-flex align-items-start">
+                                    <div class="avatar-placeholder negociant me-3" style="width: 40px; height: 40px; font-size: 0.9rem;">T</div>
+                                    <div>
+                                        <p class="text-primary small mb-1">
+                                            "Les couleurs de rang donnent une vraie identité à notre profil. Mes clients adorent !"
+                                        </p>
+                                        <small class="text-muted">- Tech_Master, Négociant</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Mot de passe oublié (modal) -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-surface-1 border-accent">
+                <div class="modal-header bg-surface-2 border-surface-3">
+                    <h5 class="modal-title text-accent">
+                        <i class="fas fa-key me-2"></i>Réinitialisation du mot de passe
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-primary mb-3">
+                        Entrez votre adresse email pour recevoir un lien de réinitialisation.
+                    </p>
+                    <form id="forgotPasswordForm">
+                        <div class="mb-3">
+                            <label for="resetEmail" class="form-label text-primary">Email</label>
+                            <input 
+                                type="email" 
+                                class="form-control bg-surface-2 border-surface-3 text-primary" 
+                                id="resetEmail" 
+                                placeholder="votre@email.com"
+                                required
+                            >
+                        </div>
+                        <button type="submit" class="btn btn-accent w-100">
+                            <i class="fas fa-paper-plane me-2"></i>Envoyer le lien
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-surface-3 text-secondary py-4 mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 <strong class="text-accent">By Charbelus</strong></p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="../frontend/legal/politique-confidentialite.html" class="text-secondary text-decoration-none me-3">
+                        <i class="fas fa-shield-alt me-1"></i>Sécurité
+                    </a>
+                    <a href="../frontend/support/help.html" class="text-secondary text-decoration-none me-3">
+                        <i class="fas fa-question-circle me-1"></i>Aide
+                    </a>
+                    <a href="../frontend/legal/conditions-utilisation.html" class="text-secondary text-decoration-none">
+                        <i class="fas fa-file-contract me-1"></i>CGU
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginBtn = document.getElementById('loginBtn');
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const forgotPasswordLinks = document.querySelectorAll('a[href="#forgot-password"]');
+            const forgotPasswordModal = new bootstrap.Modal(document.getElementById('forgotPasswordModal'));
+
+            // Basculer la visibilité du mot de passe
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+
+            // Gérer la soumission du formulaire
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const rememberMe = document.getElementById('rememberMe').checked;
+                
+                // Afficher le spinner
+                const spinner = loginBtn.querySelector('.spinner-border');
+                const icon = loginBtn.querySelector('.fa-sign-in-alt');
+                spinner.classList.remove('d-none');
+                icon.classList.add('d-none');
+                loginBtn.disabled = true;
+                
+                try {
+                    // Simulation d'appel API
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    // Ici, vous intégrerez l'appel à votre API réelle
+                    const response = await fetch('/api/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: password,
+                            remember_me: rememberMe
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        
+                        // Stocker le token
+                        localStorage.setItem('auth_token', data.access_token);
+                        if (data.refresh_token) {
+                            localStorage.setItem('refresh_token', data.refresh_token);
+                        }
+                        
+                        // Redirection vers la page précédente ou l'accueil
+                        const returnUrl = new URLSearchParams(window.location.search).get('return') || '../index.html';
+                        window.location.href = returnUrl;
+                        
+                    } else {
+                        throw new Error('Identifiants incorrects');
+                    }
+                    
+                } catch (error) {
+                    // Afficher l'erreur
+                    showAlert('error', error.message || 'Erreur de connexion. Veuillez réessayer.');
+                } finally {
+                    // Cacher le spinner
+                    spinner.classList.add('d-none');
+                    icon.classList.remove('d-none');
+                    loginBtn.disabled = false;
+                }
+            });
+
+            // Ouvrir le modal mot de passe oublié
+            forgotPasswordLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    forgotPasswordModal.show();
+                });
+            });
+
+            // Gérer le formulaire mot de passe oublié
+            document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('resetEmail').value;
+                
+                // Simulation d'envoi d'email
+                showAlert('success', `Un lien de réinitialisation a été envoyé à ${email}`);
+                forgotPasswordModal.hide();
+            });
+
+            // Fonction d'affichage des alertes
+            function showAlert(type, message) {
+                const alertClass = type === 'error' ? 'alert-danger' : 'alert-success';
+                const alertHtml = `
+                    <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+                        <i class="fas fa-${type === 'error' ? 'exclamation-triangle' : 'check-circle'} me-2"></i>
+                        ${message}
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                    </div>
+                `;
+                
+                // Insérer l'alerte après le header de la carte
+                const cardHeader = document.querySelector('.auth-card .card-header');
+                cardHeader.insertAdjacentHTML('afterend', alertHtml);
+                
+                // Supprimer automatiquement après 5 secondes
+                setTimeout(() => {
+                    const alert = document.querySelector('.alert');
+                    if (alert) {
+                        alert.remove();
+                    }
+                }, 5000);
+            }
+
+            // Vérifier si l'utilisateur est déjà connecté
+            if (localStorage.getItem('auth_token')) {
+                window.location.href = '../index.html';
+            }
+        });
+    </script>
+
+    <style>
+        .auth-section {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+        }
+        
+        .auth-card {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid var(--accent-gold);
+        }
+        
+        .auth-card .card-header {
+            background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-1) 100%);
+        }
+        
+        .benefits-card, .feature-card, .stats-card, .testimonials-card {
+            border: 1px solid var(--surface-3);
+            transition: all 0.3s ease;
+        }
+        
+        .benefits-card:hover, .feature-card:hover, .stats-card:hover, .testimonials-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .feature-icon {
+            opacity: 0.9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            padding: 0.5rem;
+        }
+        
+        .testimonial-item {
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: var(--surface-2);
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 0.2rem rgba(200, 169, 81, 0.25);
+        }
+        
+        .btn-accent {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--bg-primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background: #b39742;
+            border-color: #b39742;
+            transform: translateY(-1px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .auth-section {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+</body>
+</html>
