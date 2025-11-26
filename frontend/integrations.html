@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intégrations - Tradefy</title>
+    
+    <!-- CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/colors.css" rel="stylesheet">
+    
+    <!-- Meta SEO -->
+    <meta name="description" content="Gérez vos intégrations Tradefy - Paiements, API et services connectés">
+</head>
+<body class="dark-theme">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-surface-1 border-bottom border-accent fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-accent" href="">
+                 Tradefy
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Boutique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="leaderboard.html">Classement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Événements</a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link" href="profile.html" id="profileLink">
+                        <i class="fas fa-user"></i> Mon Profil
+                    </a>
+                    <a class="nav-link active" href="integrations.html">
+                        <i class="fas fa-cog"></i> Intégrations
+                    </a>
+                    <a class="nav-link" href="#" id="logoutLink">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Vérification authentification -->
+    <div id="authRequired" style="display: none;">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <i class="fas fa-lock fa-4x text-muted mb-4"></i>
+                    <h3 class="text-muted mb-3">Accès requis</h3>
+                    <p class="text-muted mb-4">Vous devez être connecté pour accéder aux intégrations.</p>
+                    <a href="login.html" class="btn btn-accent btn-lg">
+                        <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenu des intégrations (visible seulement si connecté) -->
+    <div id="integrationsContent" style="display: none;">
+        <!-- En-tête -->
+        <section class="integrations-header bg-surface-2 py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="display-5 fw-bold text-primary mb-3">
+                            ⚙️ Intégrations & API
+                        </h1>
+                        <p class="lead text-muted mb-4">
+                            Connectez vos services préférés et personnalisez votre expérience Tradefy avec nos intégrations puissantes.
+                        </p>
+                        <div class="integration-stats d-flex gap-4">
+                            <div class="stat">
+                                <span class="h4 text-accent mb-1" id="connectedServices">0</span>
+                                <small class="text-muted">Services connectés</small>
+                            </div>
+                            <div class="stat">
+                                <span class="h4 text-success mb-1" id="activeIntegrations">0</span>
+                                <small class="text-muted">Intégrations actives</small>
+                            </div>
+                            <div class="stat">
+                                <span class="h4 text-info mb-1" id="apiCalls">0</span>
+                                <small class="text-muted">Appels API/mois</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="integration-illustration">
+                            <i class="fas fa-puzzle-piece fa-6x text-accent"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation secondaire -->
+        <section class="integrations-nav bg-surface-1 border-bottom border-border">
+            <div class="container">
+                <ul class="nav nav-pills nav-fill" id="integrationsTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="payments-tab" data-bs-toggle="tab" 
+                                data-bs-target="#payments" type="button" role="tab">
+                            💰 Paiements
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" 
+                                data-bs-target="#shipping" type="button" role="tab">
+                            🚚 Livraison
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="analytics-tab" data-bs-toggle="tab" 
+                                data-bs-target="#analytics" type="button" role="tab">
+                            📊 Analytics
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="api-tab" data-bs-toggle="tab" 
+                                data-bs-target="#api" type="button" role="tab">
+                            🔌 API
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="webhooks-tab" data-bs-toggle="tab" 
+                                data-bs-target="#webhooks" type="button" role="tab">
+                            🌐 Webhooks
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contenu des onglets -->
+        <section class="integrations-content py-5">
+            <div class="container">
+                <div class="tab-content" id="integrationsTabContent">
+                    
+                    <!-- Onglet Paiements -->
+                    <div class="tab-pane fade show active" id="payments" role="tabpanel">
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <h3 class="mb-4">💳 Solutions de Paiement</h3>
+                                <p class="text-muted mb-4">
+                                    Configurez vos passerelles de paiement pour accepter les transactions en toute sécurité.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Moneroo -->
+                            <div class="col-lg-6">
+                                <div class="integration-card card bg-surface-1 border-border h-100">
+                                    <div class="card-header bg-surface-2 d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">
+                                            <i class="fas fa-wallet text-primary me-2"></i>
+                                            Moneroo
+                                        </h5>
+                                        <span class="badge bg-success" id="monerooStatus">Connecté</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted mb-4">
+                                            Solution de paiement cryptographique sécurisée avec commissions optimisées pour les marketplaces.
+                                        </p>
+                                        
+                                        <div class="integration-info mb-4">
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Commissions</span>
+                                                <span class="fw-bold text-success" id="monerooFees">1.5%</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Paiements traités</span>
+                                                <span class="fw-bold text-accent" id="monerooProcessed">1,247</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between">
+                                                <span class="text-primary">Délai de versement</span>
+                                                <span class="fw-bold text-info">24-48h</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="integration-config">
+                                            <h6 class="text-accent mb-3">🔧 Configuration</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label text-primary small">Clé API</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control bg-surface-2 border-border text-primary" 
+                                                           id="monerooApiKey" value="sk_live_••••••••••••••••" readonly>
+                                                    <button class="btn btn-outline-accent" type="button" onclick="toggleApiKey('monerooApiKey')">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label text-primary small">Secret</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control bg-surface-2 border-border text-primary" 
+                                                           id="monerooSecret" value="••••••••••••••••" readonly>
+                                                    <button class="btn btn-outline-accent" type="button" onclick="toggleApiKey('monerooSecret')">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="integration-actions mt-4">
+                                            <button class="btn btn-outline-accent btn-sm me-2" onclick="testMonerooConnection()">
+                                                <i class="fas fa-bolt me-1"></i>Tester la connexion
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm" onclick="disconnectMoneroo()">
+                                                <i class="fas fa-unlink me-1"></i>Déconnecter
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PayPal -->
+                            <div class="col-lg-6">
+                                <div class="integration-card card bg-surface-1 border-border h-100">
+                                    <div class="card-header bg-surface-2 d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">
+                                            <i class="fab fa-paypal text-primary me-2"></i>
+                                            PayPal
+                                        </h5>
+                                        <span class="badge bg-success" id="paypalStatus">Connecté</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted mb-4">
+                                            Acceptez les paiements PayPal pour toucher une audience internationale avec une solution de confiance.
+                                        </p>
+                                        
+                                        <div class="integration-info mb-4">
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Commissions</span>
+                                                <span class="fw-bold text-success">2.9% + 0.30€</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Paiements traités</span>
+                                                <span class="fw-bold text-accent">892</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between">
+                                                <span class="text-primary">Délai de versement</span>
+                                                <span class="fw-bold text-info">1-2 jours</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="integration-config">
+                                            <h6 class="text-accent mb-3">🔧 Configuration</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label text-primary small">Client ID</label>
+                                                <input type="text" class="form-control bg-surface-2 border-border text-primary" 
+                                                       value="AeA7Q4S••••••••••••••" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label text-primary small">Secret</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control bg-surface-2 border-border text-primary" 
+                                                           value="••••••••••••••••" readonly>
+                                                    <button class="btn btn-outline-accent" type="button">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="integration-actions mt-4">
+                                            <button class="btn btn-outline-accent btn-sm me-2">
+                                                <i class="fas fa-sync me-1"></i>Rafraîchir
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm">
+                                                <i class="fas fa-cog me-1"></i>Reconfigurer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Stripe -->
+                            <div class="col-lg-6">
+                                <div class="integration-card card bg-surface-1 border-border h-100">
+                                    <div class="card-header bg-surface-2 d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">
+                                            <i class="fab fa-stripe text-primary me-2"></i>
+                                            Stripe
+                                        </h5>
+                                        <span class="badge bg-secondary" id="stripeStatus">Non connecté</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted mb-4">
+                                            Solution de paiement moderne avec support des cartes, Apple Pay et Google Pay.
+                                        </p>
+                                        
+                                        <div class="integration-info mb-4">
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Commissions</span>
+                                                <span class="fw-bold text-success">2.7% + 0.30€</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Devises supportées</span>
+                                                <span class="fw-bold text-accent">20+</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between">
+                                                <span class="text-primary">Délai de versement</span>
+                                                <span class="fw-bold text-info">2-7 jours</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="integration-actions mt-4">
+                                            <button class="btn btn-accent w-100" onclick="connectStripe()">
+                                                <i class="fab fa-stripe me-2"></i>Connecter Stripe
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cryptomonnaies -->
+                            <div class="col-lg-6">
+                                <div class="integration-card card bg-surface-1 border-border h-100">
+                                    <div class="card-header bg-surface-2 d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">
+                                            <i class="fas fa-coins text-primary me-2"></i>
+                                            Cryptomonnaies
+                                        </h5>
+                                        <span class="badge bg-warning" id="cryptoStatus">En attente</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted mb-4">
+                                            Acceptez les paiements en Bitcoin, Ethereum et autres cryptomonnaies majeures.
+                                        </p>
+                                        
+                                        <div class="integration-info mb-4">
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Commissions</span>
+                                                <span class="fw-bold text-success">0.8%</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Devises supportées</span>
+                                                <span class="fw-bold text-accent">15+</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between">
+                                                <span class="text-primary">Confirmation</span>
+                                                <span class="fw-bold text-info">1-3 blocs</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="integration-config">
+                                            <h6 class="text-accent mb-3">⚡ Configuration requise</h6>
+                                            <div class="alert alert-warning">
+                                                <small>
+                                                    <i class="fas fa-info-circle me-2"></i>
+                                                    Vérification manuelle requise pour l'activation des paiements crypto.
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="integration-actions mt-4">
+                                            <button class="btn btn-outline-accent w-100" onclick="requestCryptoActivation()">
+                                                <i class="fas fa-paper-plane me-2"></i>Demander l'activation
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Paramètres de paiement avancés -->
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <div class="card bg-surface-1 border-border">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🎛️ Paramètres de Paiement Avancés</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row g-4">
+                                            <div class="col-md-6">
+                                                <div class="form-check form-switch mb-3">
+                                                    <input class="form-check-input" type="checkbox" id="autoConvertCurrency" checked>
+                                                    <label class="form-check-label text-primary" for="autoConvertCurrency">
+                                                        Conversion automatique des devises
+                                                    </label>
+                                                    <small class="text-muted d-block">Convertir automatiquement les paiements dans votre devise principale</small>
+                                                </div>
+                                                <div class="form-check form-switch mb-3">
+                                                    <input class="form-check-input" type="checkbox" id="splitPayments" checked>
+                                                    <label class="form-check-label text-primary" for="splitPayments">
+                                                        Paiements fractionnés
+                                                    </label>
+                                                    <small class="text-muted d-block">Répartir automatiquement les commissions Tradefy</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check form-switch mb-3">
+                                                    <input class="form-check-input" type="checkbox" id="paymentNotifications" checked>
+                                                    <label class="form-check-label text-primary" for="paymentNotifications">
+                                                        Notifications de paiement
+                                                    </label>
+                                                    <small class="text-muted d-block">Recevoir des notifications pour chaque transaction</small>
+                                                </div>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="refundProtection">
+                                                    <label class="form-check-label text-primary" for="refundProtection">
+                                                        Protection contre les remboursements
+                                                    </label>
+                                                    <small class="text-muted d-block">Analyser automatiquement les risques de remboursement</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <button class="btn btn-accent">
+                                                <i class="fas fa-save me-2"></i>Enregistrer les paramètres
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Livraison -->
+                    <div class="tab-pane fade" id="shipping" role="tabpanel">
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <h3 class="mb-4">🚚 Services de Livraison</h3>
+                                <p class="text-muted mb-4">
+                                    Connectez vos services d'expédition pour automatiser la gestion des commandes et du suivi.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Chronopost -->
+                            <div class="col-lg-6">
+                                <div class="integration-card card bg-surface-1 border-border h-100">
+                                    <div class="card-header bg-surface-2 d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">
+                                            <i class="fas fa-shipping-fast text-primary me-2"></i>
+                                            Chronopost
+                                        </h5>
+                                        <span class="badge bg-success">Connecté</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted mb-4">
+                                            Service d'expédition express avec suivi en temps réel et assurance incluse.
+                                        </p>
+                                        
+                                        <div class="integration-info mb-4">
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Commandes expédiées</span>
+                                                <span class="fw-bold text-accent">543</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Délai moyen</span>
+                                                <span class="fw-bold text-success">24h</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between">
+                                                <span class="text-primary">Taux de satisfaction</span>
+                                                <span class="fw-bold text-info">98.2%</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="integration-actions mt-4">
+                                            <button class="btn btn-outline-accent btn-sm me-2">
+                                                <i class="fas fa-sync me-1"></i>Synchroniser
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm">
+                                                <i class="fas fa-cog me-1"></i>Paramètres
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- DHL -->
+                            <div class="col-lg-6">
+                                <div class="integration-card card bg-surface-1 border-border h-100">
+                                    <div class="card-header bg-surface-2 d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">
+                                            <i class="fas fa-globe text-primary me-2"></i>
+                                            DHL Express
+                                        </h5>
+                                        <span class="badge bg-secondary">Non connecté</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted mb-4">
+                                            Service de livraison internationale avec couverture mondiale et douane incluse.
+                                        </p>
+                                        
+                                        <div class="integration-info mb-4">
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Pays desservis</span>
+                                                <span class="fw-bold text-accent">220+</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Délai international</span>
+                                                <span class="fw-bold text-success">2-5 jours</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between">
+                                                <span class="text-primary">Tarif de base</span>
+                                                <span class="fw-bold text-info">À partir de 15€</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="integration-actions mt-4">
+                                            <button class="btn btn-accent w-100">
+                                                <i class="fas fa-plus me-2"></i>Activer DHL
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Analytics -->
+                    <div class="tab-pane fade" id="analytics" role="tabpanel">
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <h3 class="mb-4">📊 Analytics & Données</h3>
+                                <p class="text-muted mb-4">
+                                    Connectez vos outils d'analyse pour suivre vos performances et optimiser vos ventes.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Google Analytics -->
+                            <div class="col-lg-6">
+                                <div class="integration-card card bg-surface-1 border-border h-100">
+                                    <div class="card-header bg-surface-2 d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">
+                                            <i class="fab fa-google text-primary me-2"></i>
+                                            Google Analytics
+                                        </h5>
+                                        <span class="badge bg-success">Connecté</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted mb-4">
+                                            Suivez le comportement de vos visiteurs et mesurez vos performances de vente.
+                                        </p>
+                                        
+                                        <div class="integration-info mb-4">
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Property ID</span>
+                                                <span class="fw-bold text-accent">GA-123456789</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between mb-2">
+                                                <span class="text-primary">Dernière synchro</span>
+                                                <span class="fw-bold text-success">2 min</span>
+                                            </div>
+                                            <div class="info-item d-flex justify-content-between">
+                                                <span class="text-primary">Événements trackés</span>
+                                                <span class="fw-bold text-info">12,847</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="integration-actions mt-4">
+                                            <button class="btn btn-outline-accent btn-sm me-2">
+                                                <i class="fas fa-chart-bar me-1"></i>Voir rapports
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm">
+                                                <i class="fas fa-cog me-1"></i>Reconfigurer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Facebook Pixel -->
+                            <div class="col-lg-6">
+                                <div class="integration-card card bg-surface-1 border-border h-100">
+                                    <div class="card-header bg-surface-2 d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">
+                                            <i class="fab fa-facebook text-primary me-2"></i>
+                                            Facebook Pixel
+                                        </h5>
+                                        <span class="badge bg-warning">Configuration requise</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted mb-4">
+                                            Mesurez l'efficacité de vos publicités et créez des audiences de remarketing.
+                                        </p>
+                                        
+                                        <div class="integration-config">
+                                            <h6 class="text-accent mb-3">🔧 Configuration</h6>
+                                            <div class="mb-3">
+                                                <label class="form-label text-primary small">Pixel ID</label>
+                                                <input type="text" class="form-control bg-surface-2 border-border text-primary" 
+                                                       placeholder="Entrez votre Pixel ID">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label text-primary small">Token d'accès</label>
+                                                <input type="password" class="form-control bg-surface-2 border-border text-primary" 
+                                                       placeholder="Entrez votre token">
+                                            </div>
+                                        </div>
+
+                                        <div class="integration-actions mt-4">
+                                            <button class="btn btn-accent w-100">
+                                                <i class="fas fa-check me-2"></i>Activer le Pixel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet API -->
+                    <div class="tab-pane fade" id="api" role="tabpanel">
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <h3 class="mb-4">🔌 API Developer</h3>
+                                <p class="text-muted mb-4">
+                                    Accédez à l'API Tradefy pour développer des applications personnalisées et automatiser vos processus.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <!-- Clés API -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2 d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">🔑 Clés API</h5>
+                                        <button class="btn btn-accent btn-sm" onclick="generateApiKey()">
+                                            <i class="fas fa-plus me-1"></i>Nouvelle clé
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="api-keys-list">
+                                            <div class="api-key-item p-3 rounded bg-surface-2 mb-3">
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <div>
+                                                        <h6 class="text-primary mb-1">Application Principale</h6>
+                                                        <small class="text-muted">Créée le 15 Jan 2025</small>
+                                                    </div>
+                                                    <span class="badge bg-success">Active</span>
+                                                </div>
+                                                <div class="api-key-preview mb-3">
+                                                    <code class="text-muted">sk_live_••••••••••••••••</code>
+                                                    <button class="btn btn-outline-accent btn-sm ms-2" onclick="revealApiKey(this)">
+                                                        <i class="fas fa-eye me-1"></i>Révéler
+                                                    </button>
+                                                </div>
+                                                <div class="api-key-actions">
+                                                    <button class="btn btn-outline-warning btn-sm me-2">
+                                                        <i class="fas fa-copy me-1"></i>Copier
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm">
+                                                        <i class="fas fa-trash me-1"></i>Révoquer
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="api-key-item p-3 rounded bg-surface-2">
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <div>
+                                                        <h6 class="text-primary mb-1">Script d'automatisation</h6>
+                                                        <small class="text-muted">Créée le 20 Fév 2025</small>
+                                                    </div>
+                                                    <span class="badge bg-success">Active</span>
+                                                </div>
+                                                <div class="api-key-preview mb-3">
+                                                    <code class="text-muted">sk_test_••••••••••••••••</code>
+                                                    <button class="btn btn-outline-accent btn-sm ms-2" onclick="revealApiKey(this)">
+                                                        <i class="fas fa-eye me-1"></i>Révéler
+                                                    </button>
+                                                </div>
+                                                <div class="api-key-actions">
+                                                    <button class="btn btn-outline-warning btn-sm me-2">
+                                                        <i class="fas fa-copy me-1"></i>Copier
+                                                    </button>
+                                                    <button class="btn btn-outline-danger btn-sm">
+                                                        <i class="fas fa-trash me-1"></i>Révoquer
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Documentation API -->
+                                <div class="card bg-surface-1 border-border">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">📚 Documentation</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="documentation-links">
+                                            <div class="doc-item mb-3">
+                                                <a href="#" class="text-accent text-decoration-none">
+                                                    <i class="fas fa-book me-2"></i>
+                                                    Guide de démarrage API
+                                                </a>
+                                                <small class="text-muted d-block ms-4">Apprenez à utiliser l'API Tradefy</small>
+                                            </div>
+                                            <div class="doc-item mb-3">
+                                                <a href="#" class="text-accent text-decoration-none">
+                                                    <i class="fas fa-code me-2"></i>
+                                                    Référence des endpoints
+                                                </a>
+                                                <small class="text-muted d-block ms-4">Documentation complète de l'API</small>
+                                            </div>
+                                            <div class="doc-item mb-3">
+                                                <a href="#" class="text-accent text-decoration-none">
+                                                    <i class="fas fa-shield-alt me-2"></i>
+                                                    Bonnes pratiques de sécurité
+                                                </a>
+                                                <small class="text-muted d-block ms-4">Sécurisez votre implémentation</small>
+                                            </div>
+                                            <div class="doc-item">
+                                                <a href="#" class="text-accent text-decoration-none">
+                                                    <i class="fab fa-github me-2"></i>
+                                                    Exemples sur GitHub
+                                                </a>
+                                                <small class="text-muted d-block ms-4">Code source et exemples</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <!-- Statistiques API -->
+                                <div class="card bg-surface-1 border-border mb-4">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">📈 Utilisation API</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="api-usage-stats">
+                                            <div class="usage-item mb-3">
+                                                <div class="d-flex justify-content-between mb-1">
+                                                    <span class="text-primary">Requêtes ce mois</span>
+                                                    <span class="fw-bold text-accent">12,847</span>
+                                                </div>
+                                                <div class="progress bg-surface-2" style="height: 6px;">
+                                                    <div class="progress-bar bg-success" style="width: 64%"></div>
+                                                </div>
+                                                <small class="text-muted">64% de votre limite</small>
+                                            </div>
+                                            <div class="usage-item mb-3">
+                                                <div class="d-flex justify-content-between mb-1">
+                                                    <span class="text-primary">Taux de réussite</span>
+                                                    <span class="fw-bold text-success">99.8%</span>
+                                                </div>
+                                                <div class="progress bg-surface-2" style="height: 6px;">
+                                                    <div class="progress-bar bg-info" style="width: 99.8%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="usage-item">
+                                                <div class="d-flex justify-content-between mb-1">
+                                                    <span class="text-primary">Latence moyenne</span>
+                                                    <span class="fw-bold text-warning">142ms</span>
+                                                </div>
+                                                <div class="progress bg-surface-2" style="height: 6px;">
+                                                    <div class="progress-bar bg-warning" style="width: 71%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Webhooks -->
+                                <div class="card bg-surface-1 border-border">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">🌐 Webhooks Actifs</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="webhooks-list">
+                                            <div class="webhook-item mb-3 p-3 rounded bg-surface-2">
+                                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                                    <h6 class="text-primary mb-0">Notifications de vente</h6>
+                                                    <span class="badge bg-success">Actif</span>
+                                                </div>
+                                                <small class="text-muted d-block mb-2">https://api.monapp.com/webhooks/sales</small>
+                                                <small class="text-success">
+                                                    <i class="fas fa-check-circle me-1"></i>
+                                                    Dernier appel: 2 min
+                                                </small>
+                                            </div>
+                                            <div class="webhook-item p-3 rounded bg-surface-2">
+                                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                                    <h6 class="text-primary mb-0">Mise à jour stock</h6>
+                                                    <span class="badge bg-warning">Erreur</span>
+                                                </div>
+                                                <small class="text-muted d-block mb-2">https://api.monapp.com/webhooks/inventory</small>
+                                                <small class="text-danger">
+                                                    <i class="fas fa-exclamation-triangle me-1"></i>
+                                                    Dernière erreur: 15 min
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <button class="btn btn-outline-accent btn-sm" onclick="switchToTab('webhooks')">
+                                                Gérer les webhooks
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Webhooks -->
+                    <div class="tab-pane fade" id="webhooks" role="tabpanel">
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <h3 class="mb-4">🌐 Configuration des Webhooks</h3>
+                                <p class="text-muted mb-4">
+                                    Configurez les webhooks pour recevoir des notifications en temps réel sur les événements de votre boutique.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card bg-surface-1 border-border">
+                                    <div class="card-header bg-surface-2 d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">➕ Ajouter un Webhook</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="webhookForm">
+                                            <div class="row g-3">
+                                                <div class="col-12">
+                                                    <label class="form-label text-primary">URL du webhook</label>
+                                                    <input type="url" class="form-control bg-surface-2 border-border text-primary" 
+                                                           placeholder="https://votre-domaine.com/webhook" required>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label text-primary">Événements à écouter</label>
+                                                    <div class="row g-2">
+                                                        <div class="col-md-6">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="event_sale" checked>
+                                                                <label class="form-check-label text-primary small" for="event_sale">
+                                                                    Nouvelle vente
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="event_payment">
+                                                                <label class="form-check-label text-primary small" for="event_payment">
+                                                                    Paiement confirmé
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="event_refund">
+                                                                <label class="form-check-label text-primary small" for="event_refund">
+                                                                    Remboursement
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="event_inventory">
+                                                                <label class="form-check-label text-primary small" for="event_inventory">
+                                                                    Changement stock
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="event_rank">
+                                                                <label class="form-check-label text-primary small" for="event_rank">
+                                                                    Changement de rang
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="event_quest">
+                                                                <label class="form-check-label text-primary small" for="event_quest">
+                                                                    Quête complétée
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label text-primary">Secret de signature</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control bg-surface-2 border-border text-primary" 
+                                                               value="whsec_••••••••••••••••" readonly>
+                                                        <button class="btn btn-outline-accent" type="button" onclick="generateWebhookSecret()">
+                                                            <i class="fas fa-redo me-1"></i>Regénérer
+                                                        </button>
+                                                    </div>
+                                                    <small class="text-muted">
+                                                        Utilisez ce secret pour vérifier la signature des webhooks
+                                                    </small>
+                                                </div>
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-accent">
+                                                        <i class="fas fa-plus me-2"></i>Créer le webhook
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card bg-surface-1 border-border">
+                                    <div class="card-header bg-surface-2">
+                                        <h5 class="mb-0">ℹ️ Guide des Webhooks</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="webhook-guide">
+                                            <div class="guide-item mb-3">
+                                                <h6 class="text-accent small">📨 Format des données</h6>
+                                                <p class="text-muted small mb-0">
+                                                    Les webhooks envoient des données au format JSON avec une signature HMAC.
+                                                </p>
+                                            </div>
+                                            <div class="guide-item mb-3">
+                                                <h6 class="text-accent small">🔒 Sécurité</h6>
+                                                <p class="text-muted small mb-0">
+                                                    Vérifiez toujours la signature pour authentifier les requêtes.
+                                                </p>
+                                            </div>
+                                            <div class="guide-item">
+                                                <h6 class="text-accent small">⚡ Bonnes pratiques</h6>
+                                                <p class="text-muted small mb-0">
+                                                    Répondez rapidement (200 OK) pour confirmer la réception.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-surface-3 text-secondary py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">
+                        &copy; 2025 <strong class="text-accent">By Charbelus</strong>. Conçu avec passion pour votre succès.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="profile.html" class="text-secondary text-decoration-none me-3">
+                        <i class="fas fa-user"></i> Profil
+                    </a>
+                    <a href="#" class="text-secondary text-decoration-none">
+                        <i class="fas fa-question-circle"></i> Support
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        // Variables globales
+        let integrationsData = null;
+
+        // Initialisation de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+            setupEventListeners();
+        });
+
+        // Vérifier l'authentification avec cookies HttpOnly
+        async function checkAuthentication() {
+            try {
+                const response = await fetch('/api/verify-auth', {
+                    credentials: 'include' // Important pour envoyer les cookies
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    document.getElementById('authRequired').style.display = 'none';
+                    document.getElementById('integrationsContent').style.display = 'block';
+                    loadIntegrationsData();
+                } else {
+                    showAuthRequired();
+                }
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                showAuthRequired();
+            }
+        }
+
+        function showAuthRequired() {
+            document.getElementById('authRequired').style.display = 'block';
+            document.getElementById('integrationsContent').style.display = 'none';
+        }
+
+        // Charger les données d'intégration avec cookies
+        async function loadIntegrationsData() {
+            try {
+                const response = await fetch('/api/admin/integrations', {
+                    credentials: 'include' // Important pour envoyer les cookies
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    integrationsData = data.data;
+                    displayIntegrationsData();
+                } else {
+                    throw new Error('Erreur de chargement des intégrations');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                loadDemoData();
+            }
+        }
+
+        // Afficher les données d'intégration
+        function displayIntegrationsData() {
+            if (!integrationsData) return;
+
+            // Statistiques générales
+            document.getElementById('connectedServices').textContent = integrationsData.connected_services || '3';
+            document.getElementById('activeIntegrations').textContent = integrationsData.active_integrations || '5';
+            document.getElementById('apiCalls').textContent = integrationsData.api_calls_this_month?.toLocaleString() || '12,847';
+
+            // Statut Moneroo
+            if (integrationsData.moneroo) {
+                document.getElementById('monerooFees').textContent = integrationsData.moneroo.fees + '%';
+                document.getElementById('monerooProcessed').textContent = 
+                    integrationsData.moneroo.processed_payments?.toLocaleString() || '1,247';
+            }
+        }
+
+        // Charger des données de démonstration
+        function loadDemoData() {
+            document.getElementById('connectedServices').textContent = '3';
+            document.getElementById('activeIntegrations').textContent = '5';
+            document.getElementById('apiCalls').textContent = '12,847';
+        }
+
+        // Configuration des écouteurs d'événements
+        function setupEventListeners() {
+            // Déconnexion avec cookies
+            document.getElementById('logoutLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                logout();
+            });
+            
+            // Formulaires
+            document.getElementById('webhookForm').addEventListener('submit', createWebhook);
+        }
+
+        // Déconnexion avec suppression du cookie
+        async function logout() {
+            try {
+                const response = await fetch('/api/logout', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                
+                if (response.ok) {
+                    window.location.href = '/login.html';
+                } else {
+                    throw new Error('Logout failed');
+                }
+            } catch (error) {
+                console.error('Logout error:', error);
+                // Redirection même en cas d'erreur
+                window.location.href = '/login.html';
+            }
+        }
+
+        // Fonctions d'intégration (restent identiques)
+        function toggleApiKey(inputId) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+            } else {
+                input.type = 'password';
+            }
+        }
+
+        function testMonerooConnection() {
+            showNotification('Test de connexion Moneroo en cours...', 'info');
+            
+            // Simulation de test
+            setTimeout(() => {
+                showNotification('✅ Connexion Moneroo réussie!', 'success');
+            }, 2000);
+        }
+
+        function disconnectMoneroo() {
+            if (confirm('Êtes-vous sûr de vouloir déconnecter Moneroo ? Les paiements ne pourront plus être traités.')) {
+                showNotification('Moneroo déconnecté avec succès', 'warning');
+                document.getElementById('monerooStatus').className = 'badge bg-secondary';
+                document.getElementById('monerooStatus').textContent = 'Non connecté';
+            }
+        }
+
+        function connectStripe() {
+            showNotification('Redirection vers Stripe...', 'info');
+            // Implémentation de la connexion OAuth à Stripe
+        }
+
+        function requestCryptoActivation() {
+            showNotification('Demande d\'activation crypto envoyée!', 'success');
+            document.getElementById('cryptoStatus').className = 'badge bg-info';
+            document.getElementById('cryptoStatus').textContent = 'En revue';
+        }
+
+        function generateApiKey() {
+            if (confirm('Générer une nouvelle clé API ? L\'ancienne clé sera révoquée.')) {
+                showNotification('Nouvelle clé API générée!', 'success');
+            }
+        }
+
+        function revealApiKey(button) {
+            const preview = button.parentElement;
+            const code = preview.querySelector('code');
+            code.textContent = 'sk_live_••••••••••••••••';
+            button.innerHTML = '<i class="fas fa-eye-slash me-1"></i>Masquer';
+            button.onclick = function() { hideApiKey(this); };
+        }
+
+        function hideApiKey(button) {
+            const preview = button.parentElement;
+            const code = preview.querySelector('code');
+            code.textContent = 'sk_live_••••••••••••••••';
+            button.innerHTML = '<i class="fas fa-eye me-1"></i>Révéler';
+            button.onclick = function() { revealApiKey(this); };
+        }
+
+        function generateWebhookSecret() {
+            const secret = 'whsec_' + Math.random().toString(36).substring(2, 15);
+            document.querySelector('#webhookForm input[type="text"]').value = secret;
+            showNotification('Nouveau secret généré!', 'success');
+        }
+
+        function createWebhook(e) {
+            e.preventDefault();
+            showNotification('Webhook créé avec succès!', 'success');
+            // Implémentation de la création réelle du webhook
+        }
+
+        function switchToTab(tabName) {
+            const tab = document.querySelector(`[data-bs-target="#${tabName}"]`);
+            if (tab) {
+                new bootstrap.Tab(tab).show();
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} position-fixed top-0 end-0 m-3`;
+            notification.style.zIndex = '1060';
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check' : 'info'}-circle me-2"></i>
+                ${message}
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+
+    <style>
+        .integrations-header {
+            background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-1) 100%);
+        }
+        
+        .integration-stats .stat {
+            text-align: center;
+        }
+        
+        .integration-illustration {
+            opacity: 0.8;
+        }
+        
+        .nav-pills .nav-link.active {
+            background: var(--accent-gradient);
+            border: none;
+            color: var(--bg-primary);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            margin: 0 2px;
+        }
+        
+        .nav-pills .nav-link:hover {
+            background: var(--surface-2);
+            border-color: var(--accent-gold);
+        }
+        
+        .integration-card {
+            transition: all 0.3s ease;
+        }
+        
+        .integration-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: var(--accent-gold);
+        }
+        
+        .integration-info .info-item {
+            border-bottom: 1px solid var(--border-light);
+            padding: 0.5rem 0;
+        }
+        
+        .integration-info .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .api-key-item {
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent-gold);
+        }
+        
+        .api-key-item:hover {
+            background: var(--surface-1);
+        }
+        
+        .api-key-preview code {
+            font-family: 'Courier New', monospace;
+            background: var(--surface-3);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .webhook-item {
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--success);
+        }
+        
+        .webhook-item:last-child {
+            border-left-color: var(--error);
+        }
+        
+        .webhook-item:hover {
+            background: var(--surface-1);
+        }
+        
+        .usage-item .progress {
+            border-radius: 10px;
+        }
+        
+        .progress-bar {
+            border-radius: 10px;
+        }
+        
+        .doc-item, .guide-item {
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+        
+        .doc-item:hover, .guide-item:hover {
+            background: var(--surface-2);
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .integration-stats {
+                justify-content: center;
+                gap: 2rem;
+            }
+            
+            .integration-actions .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</body>
+</html>
