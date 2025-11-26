@@ -52,7 +52,7 @@ body {
     overflow-x: hidden;
     background: var(--bg-primary);
     color: var(--text-primary);
-    padding-top: 45px; /* Pour compenser la navbar fixe */
+    padding-top: 55px; /* Pour compenser la navbar fixe */
 
 }
 
