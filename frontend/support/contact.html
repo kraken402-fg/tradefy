@@ -1,163 +1,317 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Tradefy</title>
-    <meta name="description" content="Contactez l'équipe Tradefy - Support, partenariats, presse et questions générales">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact - Tradefy</title>
+<meta name="description" content="Contactez l'équipe Tradefy - Support, partenariats, presse et questions générales">
+
+<!-- CSS -->
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/colors.css">
+<link rel="stylesheet" href="../assets/css/main.css">
+
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<!-- CSS personnalisé pour les améliorations -->
+<style>
+    /* Améliorations d'accessibilité */
+    .btn:focus, .form-control:focus, .form-select:focus {
+        box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.25);
+        border-color: #ffc107;
+    }
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/colors.css">
-    <link rel="stylesheet" href="../assets/css/main.css">
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    /* Améliorations UX */
+    .loading {
+        display: none;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255,255,255,.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    .contact-method {
+        transition: transform 0.3s ease;
+    }
+    
+    .contact-method:hover {
+        transform: translateY(-5px);
+    }
+    
+    .success-message {
+        display: none;
+        background-color: #d4edda;
+        color: #155724;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+    
+    /* Améliorations responsive */
+    @media (max-width: 768px) {
+        .contact-icon {
+            font-size: 2rem;
+        }
+    }
+</style>
 </head>
 <body class="dark-theme">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-surface-1 border-bottom border-accent fixed-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-accent" href="">Tradefy</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="/index.html">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../entreprise/about.html">À propos</a></li>
-                </ul>
-                <div class="navbar-nav">
-                    <a class="nav-link" href="../profile.html" id="profileLink"><i class="fas fa-user"></i> Mon Profil</a>
-                    <a class="nav-link" href="../login.html" id="authLink"><i class="fas fa-sign-in-alt"></i> Connexion</a>
+<!-- Navigation améliorée -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-surface-1 border-bottom border-accent fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-accent" href="" aria-label="Tradefy - Retour à l'accueil">Tradefy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-controls="navbarNav" aria-label="Basculer la navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="../entreprise/about.html">À propos</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#" aria-current="page">Contact</a></li>
+            </ul>
+            <div class="navbar-nav">
+                <a class="nav-link" href="../profile.html" id="profileLink" aria-label="Mon profil">
+                    <i class="fas fa-user" aria-hidden="true"></i> 
+                    <span class="d-lg-none d-xl-inline">Mon Profil</span>
+                </a>
+                <a class="nav-link" href="../login.html" id="authLink" aria-label="Connexion">
+                    <i class="fas fa-sign-in-alt" aria-hidden="true"></i> 
+                    <span class="d-lg-none d-xl-inline">Connexion</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="container py-5 mt-5">
+    <h1 class="text-center mb-4">Contactez-nous</h1>
+    <p class="lead text-center mb-5">Nous sommes là pour répondre à toutes vos questions et vous accompagner dans votre succès.</p>
+
+    <div class="row">
+        <!-- Formulaire amélioré -->
+        <div class="col-lg-6 mb-5">
+            <div class="success-message" id="successMessage" role="alert">
+                <i class="fas fa-check-circle me-2" aria-hidden="true"></i>
+                Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.
+            </div>
+            
+            <form id="contactForm" class="contact-form needs-validation" novalidate>
+                <!-- Champ anti-spam caché (honeypot) -->
+                <div class="visually-hidden">
+                    <label for="website">Ne remplissez pas ce champ</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName" class="form-label">Prénom <span class="text-accent">*</span></label>
+                        <input type="text" class="form-control custom-input" id="firstName" required aria-required="true">
+                        <div class="invalid-feedback">Veuillez entrer votre prénom.</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName" class="form-label">Nom <span class="text-accent">*</span></label>
+                        <input type="text" class="form-control custom-input" id="lastName" required aria-required="true">
+                        <div class="invalid-feedback">Veuillez entrer votre nom.</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email <span class="text-accent">*</span></label>
+                    <input type="email" class="form-control custom-input" id="email" required aria-required="true">
+                    <div class="invalid-feedback">Veuillez entrer un email valide.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Sujet <span class="text-accent">*</span></label>
+                    <select class="form-select custom-input" id="subject" required aria-required="true">
+                        <option value="">Choisissez un sujet</option>
+                        <option value="support">Support technique</option>
+                        <option value="partnership">Partenariat</option>
+                        <option value="press">Presse/Médias</option>
+                        <option value="careers">Carrières</option>
+                        <option value="other">Autre</option>
+                    </select>
+                    <div class="invalid-feedback">Veuillez sélectionner un sujet.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message <span class="text-accent">*</span></label>
+                    <textarea class="form-control custom-input" id="message" rows="5" required aria-required="true"></textarea>
+                    <div class="invalid-feedback">Veuillez écrire votre message.</div>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-gold btn-lg" id="submitButton">
+                        <div class="loading" id="loadingSpinner"></div>
+                        <span id="buttonText">Envoyer le message</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- WhatsApp & Infos -->
+        <div class="col-lg-6">
+            <div class="mb-4 text-center">
+                <h2>Rejoignez notre WhatsApp</h2>
+                <p>Vous avez des questions, suggestions ou besoin d'aide ? Échangez directement avec nous :</p>
+                <a href="https://chat.whatsapp.com/Bgrcv4W8UUS4J3iJqXo7zl?mode=hqrt3" target="_blank" class="btn btn-success btn-lg" aria-label="Rejoindre notre groupe WhatsApp (nouvelle fenêtre)">
+                    <i class="fab fa-whatsapp me-2" aria-hidden="true"></i>
+                    Rejoindre notre groupe WhatsApp
+                </a>
+            </div>
+
+            <div class="contact-info">
+                <div class="row text-center">
+                    <div class="col-md-4 mb-4">
+                        <div class="contact-method">
+                            <div class="contact-icon" aria-hidden="true">📧</div>
+                            <h5>Email</h5>
+                            <p><a href="mailto:contact@tradefy.com" aria-label="Envoyer un email à contact@tradefy.com">contact@tradefy.com</a></p>
+                            <small>Réponse sous 24h</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="contact-method">
+                            <div class="contact-icon" aria-hidden="true">🆘</div>
+                            <h5>Support</h5>
+                            <p><a href="mailto:support@tradefy.com" aria-label="Envoyer un email à support@tradefy.com">support@tradefy.com</a></p>
+                            <small>Support 7j/7</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="contact-method">
+                            <div class="contact-icon" aria-hidden="true">💼</div>
+                            <h5>Partenariats</h5>
+                            <p><a href="mailto:partenariats@tradefy.com" aria-label="Envoyer un email à partenariats@tradefy.com">partenariats@tradefy.com</a></p>
+                            <small>Opportunités business</small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
+</main>
 
-    <!-- Contenu principal -->
-    <main class="container py-5 mt-5">
-        <h1 class="text-center mb-4">Contactez-nous</h1>
-        <p class="lead text-center mb-5">Nous sommes là pour répondre à toutes vos questions et vous accompagner dans votre succès.</p>
-
+<!-- Footer -->
+<footer class="bg-surface-3 text-secondary py-5">
+    <div class="container">
         <div class="row">
-            <!-- Formulaire de contact -->
-            <div class="col-lg-6 mb-5">
-                <form id="contactForm" class="contact-form">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="firstName" class="form-label">Prénom *</label>
-                            <input type="text" class="form-control custom-input" id="firstName" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="lastName" class="form-label">Nom *</label>
-                            <input type="text" class="form-control custom-input" id="lastName" required>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email *</label>
-                        <input type="email" class="form-control custom-input" id="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="subject" class="form-label">Sujet *</label>
-                        <select class="form-control custom-input" id="subject" required>
-                            <option value="">Choisissez un sujet</option>
-                            <option value="support">Support technique</option>
-                            <option value="partnership">Partenariat</option>
-                            <option value="press">Presse/Médias</option>
-                            <option value="careers">Carrières</option>
-                            <option value="other">Autre</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Message *</label>
-                        <textarea class="form-control custom-input" id="message" rows="5" required></textarea>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-gold btn-lg">Envoyer le message</button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Informations et WhatsApp -->
-            <div class="col-lg-6">
-                <div class="mb-4 text-center">
-                    <h2>Rejoignez notre WhatsApp</h2>
-                    <p>Vous avez des questions, suggestions ou besoin d'aide ? Échangez directement avec nous :</p>
-                    <a href="https://chat.whatsapp.com/Bgrcv4W8UUS4J3iJqXo7zl?mode=hqrt3" target="_blank" class="btn btn-success btn-lg">
-                        Rejoindre notre groupe WhatsApp
-                    </a>
-                </div>
-
-                <div class="contact-info">
-                    <div class="row text-center">
-                        <div class="col-md-4 mb-4">
-                            <div class="contact-method">
-                                <div class="contact-icon">📧</div>
-                                <h5>Email</h5>
-                                <p><a href="mailto:contact@tradefy.com">contact@tradefy.com</a></p>
-                                <small>Réponse sous 24h</small>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="contact-method">
-                                <div class="contact-icon">🆘</div>
-                                <h5>Support</h5>
-                                <p><a href="mailto:support@tradefy.com">support@tradefy.com</a></p>
-                                <small>Support 7j/7</small>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="contact-method">
-                                <div class="contact-icon">💼</div>
-                                <h5>Partenariats</h5>
-                                <p><a href="mailto:partenariats@tradefy.com">partenariats@tradefy.com</a></p>
-                                <small>Opportunités business</small>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-lg-4 mb-4">
+                <h5 class="text-accent mb-3">Tradefy</h5>
+                <p class="text-muted">La marketplace gamifiée qui redéfinit l'expérience de vente en ligne. Progression, reconnaissance et succès pour tous.</p>
+                <div class="social-links">
+                    <a href="#" class="text-secondary me-3" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-secondary me-3" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-secondary me-3" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-surface-3 text-secondary py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <h5 class="text-accent mb-3">Tradefy</h5>
-                    <p class="text-muted">
-                        La marketplace gamifiée qui redéfinit l'expérience de vente en ligne. 
-                        Progression, reconnaissance et succès pour tous.
-                    </p>
-                    <div class="social-links">
-                        <a href="#" class="text-secondary me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-secondary me-3"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="text-secondary me-3"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
+        <hr class="border-secondary my-4">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <p class="mb-0 text-muted">
+                    &copy; 2025 <strong class="text-accent">By Charbelus</strong> Conçu avec passion pour votre succès.
+                </p>
             </div>
-            <hr class="border-secondary my-4">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="mb-0 text-muted">
-                        &copy; 2025 <strong class="text-accent">By Charbelus</strong> Conçu avec passion pour votre succès.
-                    </p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <span class="text-muted small">🚀 Fait pour les visionnaires, par des visionnaires</span>
-                </div>
+            <div class="col-md-6 text-md-end">
+                <a href="#" class="text-secondary text-decoration-none me-3">
+                    <i class="fas fa-cog"></i> Retour en haut de la page
+                </a>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.');
-            this.reset();
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Validation améliorée avec feedback visuel
+(function() {
+    'use strict'
+    const form = document.getElementById('contactForm');
+    const submitButton = document.getElementById('submitButton');
+    const buttonText = document.getElementById('buttonText');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const successMessage = document.getElementById('successMessage');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Vérification du champ honeypot anti-spam
+        const honeypot = document.getElementById('website');
+        if (honeypot.value !== '') {
+            // C'est probablement un bot, on ne traite pas la demande
+            console.log('Spam détecté');
+            return;
+        }
+        
+        if (!form.checkValidity()) {
+            e.stopPropagation();
+            form.classList.add('was-validated');
+            return;
+        }
+        
+        // Simulation d'envoi avec feedback visuel
+        submitButton.disabled = true;
+        buttonText.textContent = 'Envoi en cours...';
+        loadingSpinner.style.display = 'inline-block';
+        
+        // Simulation d'une requête asynchrone
+        setTimeout(function() {
+            // Réinitialiser le formulaire
+            form.reset();
+            form.classList.remove('was-validated');
+            
+            // Afficher le message de succès
+            successMessage.style.display = 'block';
+            
+            // Réinitialiser le bouton
+            submitButton.disabled = false;
+            buttonText.textContent = 'Envoyer le message';
+            loadingSpinner.style.display = 'none';
+            
+            // Faire défiler vers le message de succès
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Masquer le message après 5 secondes
+            setTimeout(function() {
+                successMessage.style.display = 'none';
+            }, 5000);
+        }, 1500);
+    }, false);
+    
+    // Validation en temps réel pour améliorer l'UX
+    const inputs = form.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (this.checkValidity()) {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+            } else {
+                this.classList.remove('is-valid');
+                this.classList.add('is-invalid');
+            }
         });
-    </script>
+    });
+})();
+</script>
 </body>
 </html>
