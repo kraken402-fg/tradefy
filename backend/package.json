@@ -1,0 +1,33 @@
+{
+  "name": "tradefy-api",
+  "version": "3.0.0",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "helmet": "^7.0.0",
+    "pg": "^8.11.0",
+    "jsonwebtoken": "^9.0.0",
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "joi": "^17.9.0",
+    "compression": "^1.7.4",
+    "@sentry/node": "^7.57.0"
+  },
+  "devDependencies": {
+    "jest": "^29.6.0",
+    "supertest": "^6.3.0",
+    "nodemon": "^3.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "echo 'Linting not configured yet'",
+    "security:check": "npm audit"
+  }
+}

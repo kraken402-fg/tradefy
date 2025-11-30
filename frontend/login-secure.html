@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Tradefy</title>
+    
+    <!-- CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/colors.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Sécurité -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta name="csrf-token" content="">
+</head>
+<body class="dark-theme">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-surface-1 border-bottom border-accent fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-accent" href="index.html">Tradefy</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Boutique</a></li>
+                    <li class="nav-item"><a class="nav-link" href="leaderboard.html">Classement</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html">Événements</a></li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <a class="nav-link" href="register.html">
+                        <i class="fas fa-user-plus"></i> Créer un compte
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Connexion -->
+    <section class="auth-section py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-5">
+                    <!-- Carte de connexion -->
+                    <div class="auth-card card bg-surface-1 border-accent">
+                        <div class="card-header bg-surface-2 text-center py-4 border-bottom border-accent">
+                            <h2 class="text-accent mb-0">
+                                <i class="fas fa-sign-in-alt me-2"></i>Connexion
+                            </h2>
+                            <p class="text-muted mb-0 mt-2">Accédez à votre espace vendeur</p>
+                        </div>
+                        
+                        <div class="card-body p-4">
+                            <!-- Formulaire de connexion -->
+                            <form id="loginForm" novalidate>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label text-accent">
+                                        <i class="fas fa-envelope me-2"></i>Email
+                                    </label>
+                                    <input type="email" class="form-control bg-surface-2 text-light border-accent" 
+                                           id="email" name="email" required
+                                           placeholder="votre@email.com"
+                                           autocomplete="email">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="password" class="form-label text-accent">
+                                        <i class="fas fa-lock me-2"></i>Mot de passe
+                                    </label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control bg-surface-2 text-light border-accent" 
+                                               id="password" name="password" required
+                                               placeholder="••••••••"
+                                               autocomplete="current-password">
+                                        <button class="btn btn-outline-accent" type="button" id="togglePassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label text-light" for="rememberMe">
+                                        Se souvenir de moi
+                                    </label>
+                                </div>
+                                
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-accent btn-lg" id="loginBtn">
+                                        <span class="spinner-border spinner-border-sm d-none me-2" role="status"></span>
+                                        <i class="fas fa-sign-in-alt me-2"></i>
+                                        Se connecter
+                                    </button>
+                                </div>
+                            </form>
+                            
+                            <div class="text-center mt-4">
+                                <a href="#" class="text-accent text-decoration-none" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
+                                    <i class="fas fa-question-circle me-1"></i>Mot de passe oublié?
+                                </a>
+                            </div>
+                            
+                            <hr class="border-accent my-4">
+                            
+                            <div class="text-center">
+                                <p class="text-light mb-0">Pas encore de compte?</p>
+                                <a href="register.html" class="btn btn-outline-accent mt-2">
+                                    <i class="fas fa-user-plus me-2"></i>Créer un compte
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Carte de sécurité -->
+                    <div class="card bg-surface-1 border-accent mt-3">
+                        <div class="card-body p-3">
+                            <h6 class="text-accent mb-2">
+                                <i class="fas fa-shield-alt me-2"></i>Sécurité
+                            </h6>
+                            <ul class="small text-light mb-0">
+                                <li>Connexion sécurisée avec chiffrement SSL</li>
+                                <li>Protection contre les tentatives de connexion</li>
+                                <li>Session automatique après 2h d'inactivité</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Mot de passe oublié -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content bg-surface-1 border-accent">
+                <div class="modal-header bg-surface-2 border-bottom border-accent">
+                    <h5 class="modal-title text-accent">
+                        <i class="fas fa-key me-2"></i>Mot de passe oublié
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="forgotPasswordForm">
+                        <div class="mb-3">
+                            <label for="resetEmail" class="form-label text-accent">Email</label>
+                            <input type="email" class="form-control bg-surface-2 text-light border-accent" 
+                                   id="resetEmail" required placeholder="votre@email.com">
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-accent" id="resetBtn">
+                                <span class="spinner-border spinner-border-sm d-none me-2"></span>
+                                Envoyer le lien
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/security.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginBtn = document.getElementById('loginBtn');
+            const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+            const resetBtn = document.getElementById('resetBtn');
+            const togglePasswordBtn = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            // Toggle mot de passe
+            togglePasswordBtn.addEventListener('click', function() {
+                const type = passwordInput.type === 'password' ? 'text' : 'password';
+                passwordInput.type = type;
+                
+                const icon = this.querySelector('i');
+                icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+            });
+            
+            // Gérer la soumission du formulaire
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Validation du formulaire
+                const validation = UIManager.validateForm('loginForm', {
+                    email: { required: true, label: 'Email', email: true },
+                    password: { required: true, label: 'Mot de passe', minLength: 1 }
+                });
+                
+                if (!validation.valid) {
+                    UIManager.showAlert('error', validation.errors[0]);
+                    return;
+                }
+                
+                const formData = new FormData(loginForm);
+                const email = formData.get('email');
+                const password = formData.get('password');
+                const rememberMe = document.getElementById('rememberMe').checked;
+                
+                // Afficher l'état de chargement
+                UIManager.setButtonLoading('loginBtn', true);
+                
+                try {
+                    const authManager = new AuthManager();
+                    const result = await authManager.login(email, password, rememberMe);
+                    
+                    UIManager.showAlert('success', 'Connexion réussie! Redirection...');
+                    
+                    // Redirection vers la page précédente ou l'accueil
+                    const returnUrl = new URLSearchParams(window.location.search).get('return') || 'index.html';
+                    setTimeout(() => {
+                        window.location.href = returnUrl;
+                    }, 1500);
+                    
+                } catch (error) {
+                    console.error('Login error:', error);
+                    UIManager.showAlert('error', error.message || 'Erreur de connexion. Veuillez réessayer.');
+                } finally {
+                    UIManager.setButtonLoading('loginBtn', false);
+                }
+            });
+            
+            // Gérer le formulaire mot de passe oublié
+            forgotPasswordForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('resetEmail').value;
+                
+                if (!SecurityManager.isValidEmail(email)) {
+                    UIManager.showAlert('error', 'Email invalide');
+                    return;
+                }
+                
+                UIManager.setButtonLoading('resetBtn', true);
+                
+                try {
+                    const api = new APIManager();
+                    await api.post('/auth/forgot-password', { email: email });
+                    
+                    UIManager.showAlert('success', `Un lien de réinitialisation a été envoyé à ${email}`);
+                    
+                    // Fermer le modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('forgotPasswordModal'));
+                    modal.hide();
+                    
+                    // Réinitialiser le formulaire
+                    forgotPasswordForm.reset();
+                    
+                } catch (error) {
+                    console.error('Forgot password error:', error);
+                    UIManager.showAlert('error', error.message || 'Erreur lors de l\'envoi du lien de réinitialisation');
+                } finally {
+                    UIManager.setButtonLoading('resetBtn', false);
+                }
+            });
+            
+            // Validation en temps réel
+            document.getElementById('email').addEventListener('blur', function() {
+                const email = this.value;
+                if (email && !SecurityManager.isValidEmail(email)) {
+                    this.classList.add('is-invalid');
+                    this.nextElementSibling.textContent = 'Email invalide';
+                } else {
+                    this.classList.remove('is-invalid');
+                }
+            });
+            
+            document.getElementById('password').addEventListener('blur', function() {
+                const password = this.value;
+                if (password && password.length < 8) {
+                    this.classList.add('is-invalid');
+                    this.nextElementSibling.textContent = 'Le mot de passe doit contenir au moins 8 caractères';
+                } else {
+                    this.classList.remove('is-invalid');
+                }
+            });
+            
+            // Empêcher la soumission automatique avec Enter
+            loginForm.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
+                    e.preventDefault();
+                    loginForm.dispatchEvent(new Event('submit'));
+                }
+            });
+        });
+    </script>
+
+    <style>
+        .auth-section {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+        }
+        
+        .auth-card {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid var(--accent-gold);
+        }
+        
+        .auth-card .card-header {
+            background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-1) 100%);
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 0.2rem rgba(200, 169, 81, 0.25);
+            background-color: var(--surface-2);
+        }
+        
+        .btn-accent {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--bg-primary);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background: #b39742;
+            border-color: #b39742;
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline-accent {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+        
+        .btn-outline-accent:hover {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--bg-primary);
+        }
+        
+        .input-group .btn-outline-accent {
+            border-left: none;
+        }
+        
+        .invalid-feedback {
+            display: block;
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .auth-section {
+                padding: 2rem 0;
+            }
+            
+            .auth-card {
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</body>
+</html>
